@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./src/client/**/*.{html,php}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }
