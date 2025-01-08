@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html>
 <body>
-    <div id="result"></div>
-    <script>
-        fetch('http://localhost/OrgSync-Website/src/Server/api/read.php')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('result').innerHTML = 
-                    `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-            })
-            .catch(error => console.error('Error:', error));
-    </script>
+    
 </body>
 </html>
