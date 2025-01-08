@@ -15,6 +15,16 @@
     </div>
     <nav class="flex justify-center">
       <ul class="grid grid-cols-3 gap-4">
+        <div id="result"></div>
+    <script>
+        fetch('http://localhost/OrgSync-Website/src/Server/api/read.php')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerHTML = 
+                    `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
         <li><a href="./index.html">Home</a></li>
         <li><a href="./about.html">About</a></li>
         <li><a href="./contact.html">Contact</a></li>
