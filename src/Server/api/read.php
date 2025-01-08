@@ -26,7 +26,7 @@ if ($num > 0) {
             'lastname' => $lastname,
             'email' => $email,
             'orgtype' => $orgtype,
-            'accounttype' => $accounttype
+            'account_type' => $account_type
         );
 
         array_push($user_arr['data'], $user_item);

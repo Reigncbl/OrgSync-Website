@@ -15,12 +15,12 @@ class Post {
     public $orgtype;
     public $accounttype;
 
-    // Constructor with database connection
+
     public function __construct($db) {
         $this->conn = $db;
     }
 
-    // Retrieve users from the database
+ // Retrieve users from the database
     public function read() {
         $query = 'SELECT 
             idusers,
@@ -28,14 +28,36 @@ class Post {
             lastname,
             email,
             orgtype,
-            accounttype
+            account_type
         FROM ' . $this->table . ' 
         ORDER BY idusers ASC';
 
-        // Prepare and execute the statement
+     
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
 
         return $stmt;
+    }
+
+    public function read_single(){
+        $query = 'SELECT 
+        idusers,
+        firstname,
+        lastname,
+        email,
+        orgtype,
+        account_type
+    FROM ' . $this->table . ' 
+        WHERE idusers = ? LIMIT 1';
+
+        $stmt = $this->conn->prepare($query);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this ->firstname =$row['firstname'];
+        $this ->lastname =$row['lastname'];
+        $this ->email =$row['email'];
+        $this ->orgtype =$row['orgtype'];
+        $this ->firstname =$row['firstname'];
+
     }
 }

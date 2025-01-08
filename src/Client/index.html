@@ -1,13 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="./output.css" rel="stylesheet">
-</head>
 <body>
-  <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
+    <div id="result"></div>
+    <script>
+        fetch('http://localhost/OrgSync-Website/src/Server/api/read.php')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerHTML = 
+                    `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
 </body>
 </html>
