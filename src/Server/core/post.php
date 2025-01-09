@@ -13,7 +13,7 @@ class Post {
     public $email;
     public $password;
     public $orgtype;
-    public $accounttype;
+    public $account_type;
 
 
     public function __construct($db) {
@@ -62,7 +62,7 @@ class Post {
         $this ->email =$row['email'];
         $this ->password =$row['password'];
         $this ->orgtype =$row['orgtype'];
-        $this ->accounttype = $row['account_type'];
+        $this ->account_type = $row['account_type'];
 
     }
     
@@ -78,14 +78,14 @@ class Post {
          $this->email = htmlspecialchars(strip_tags($this->email));
          $this->password = htmlspecialchars(strip_tags($this->password));
          $this->orgtype = htmlspecialchars(strip_tags($this->orgtype));
-         $this->accounttype = htmlspecialchars(strip_tags($this->accounttype));
+         $this->account_type = htmlspecialchars(strip_tags($this->account_type));
 
          $stmt->bindParam(':firstname',$this->firstname);
          $stmt->bindParam(':lastname',$this->lastname);
          $stmt->bindParam(':email',$this->email);
          $stmt->bindParam(':password',$this->password);
          $stmt->bindParam(':orgtype',$this->orgtype);
-         $stmt->bindParam(':account_type',$this->accounttype);
+         $stmt->bindParam(':account_type',$this->account_type);
 
          if($stmt->execute()){
             return true;

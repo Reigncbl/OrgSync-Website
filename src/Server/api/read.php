@@ -25,9 +25,10 @@ if ($num > 0) {
             'firstname' => $firstname,
             'lastname' => $lastname,
             'email' => $email,
+            'account_type' => $account_type,
             'orgtype' => $orgtype,
-            'password' => $password,
-            'account_type' => $account_type
+            'password' => $password
+          
         );
 
         array_push($user_arr['data'], $user_item);

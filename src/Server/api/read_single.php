@@ -20,7 +20,7 @@ $post_arr = array(
     'email' => $post-> email,
     'orgtype' => $post-> orgtype,
     'password' => $post-> password,
-    'account_type' => $post-> accounttype,
+    'account_type' => $post-> account_type,
 );
 
 //create json

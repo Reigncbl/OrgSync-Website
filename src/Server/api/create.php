@@ -13,10 +13,11 @@ $post = new Post($db);
 $data = json_decode(file_get_contents("php://input"));
 
 $post->firstname = $data->firstname;
-$post->firstname = $data->firstname;
-$post->firstname = $data->firstname;
-$post->firstname = $data->firstname;
-$post->firstname = $data->firstname;
+$post->lastname = $data->lastname;
+$post->email = $data->email;
+$post->password = $data->password;
+$post->orgtype = $data->orgtype;
+$post->account_type = $data->account_type;
 
 
 
