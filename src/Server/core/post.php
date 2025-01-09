@@ -51,13 +51,42 @@ class Post {
         WHERE idusers = ? LIMIT 1';
 
         $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->idusers);
+        $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         $this ->firstname =$row['firstname'];
         $this ->lastname =$row['lastname'];
         $this ->email =$row['email'];
         $this ->orgtype =$row['orgtype'];
-        $this ->firstname =$row['firstname'];
+        $this ->accounttype = $row['account_type'];
 
+    }
+    
+    public function create(){
+
+        $query = ' INSERT INTO'. $this->table.'SET firstname = : firstname, lastname = :lastname,
+         email = :email, orgtype = :orgtype, account_type = :account_type';
+
+         $stmt = $this ->conn->prepare($query);
+
+         $this->firstname = htmlspecialchars(strip_tags($this->firstname));
+         $this->lastname = htmlspecialchars(strip_tags($this->lastname));
+         $this->email = htmlspecialchars(strip_tags($this->email));
+         $this->orgtype = htmlspecialchars(strip_tags($this->orgtype));
+         $this->accounttype = htmlspecialchars(strip_tags($this->accounttype));
+
+         $stmt->bindParam(':firstname',$this->firstname);
+         $stmt->bindParam(':lastname',$this->lastname);
+         $stmt->bindParam(':email',$this->email);
+         $stmt->bindParam(':orgtype',$this->orgtype);
+         $stmt->bindParam(':account_type',$this->accounttype);
+
+         if($stmt->execute()){
+            return true;
+         };
+
+         echo "Error %s. \n", $stmt->error;
+         return false;
     }
 }
