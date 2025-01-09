@@ -10,5 +10,13 @@ require_once(dirname(__FILE__) . '/../core/initialize.php');
 // User instance
 $post = new Post($db);
 
+$data = json_decode(file_get_contents("php://input"));
+
+$post->firstname = $data->firstname;
+$post->firstname = $data->firstname;
+$post->firstname = $data->firstname;
+$post->firstname = $data->firstname;
+$post->firstname = $data->firstname;
+
 
 

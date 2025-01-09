@@ -19,6 +19,7 @@ $post_arr = array(
     'lastname' => $post-> lastname,
     'email' => $post-> email,
     'orgtype' => $post-> orgtype,
+    'password' => $post-> password,
     'account_type' => $post-> accounttype,
 );
 

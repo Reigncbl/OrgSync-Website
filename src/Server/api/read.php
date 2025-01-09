@@ -26,6 +26,7 @@ if ($num > 0) {
             'lastname' => $lastname,
             'email' => $email,
             'orgtype' => $orgtype,
+            'password' => $password,
             'account_type' => $account_type
         );
 
