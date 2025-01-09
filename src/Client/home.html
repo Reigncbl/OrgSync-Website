@@ -3,33 +3,176 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="./styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./transition.css">
+  <script src="../script.js"></script>
   <title>OrgSync</title>
 </head>
 
-<body>
-  <header class="">
-    <div class="flex justify-between items-center bg-slate-400 h-16 px-4">
-      <h1>OrgSync</h1>
-      <button href="#">Login</button>
+<body class="font-monserrat overflow-y-scroll">
+  <header class="fixed top-0 w-full z-10 shadow-lg">
+    <div class="flex justify-between items-center bg-[url('./img/header.png')] bg-cover bg-center h-16 px-4">
+      <!-- Logo -->
+      <img src="./img/logo.png" alt="Logo" class="h-10 pl-4">
+
+      <!-- Navigation -->
+      <nav class="flex justify-center">
+        <ul class="flex space-x-16 text-white">
+          <li><a href="#home" class="hover:text-gray-300">Home</a></li>
+          <li><a href="#events" class="hover:text-gray-300">Events</a></li>
+          <li><a href="#organization" class="hover:text-gray-300">Organization</a></li>
+          <li><a href="#about" class="hover:text-gray-300">About Us</a></li>
+        </ul>
+      </nav>
+
+      <!-- Login Button -->
+      <a href="#" class="button text-white bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded">
+        Login
+      </a>
     </div>
-    <nav class="flex justify-center">
-      <ul class="grid grid-cols-3 gap-4">
-        <div id="result"></div>
-    <script>
-        fetch('http://localhost/OrgSync-Website/src/Server/api/read.php')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('result').innerHTML = 
-                    `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-            })
-            .catch(error => console.error('Error:', error));
-    </script>
-        <li><a href="./index.html">Home</a></li>
-        <li><a href="./about.html">About</a></li>
-        <li><a href="./contact.html">Contact</a></li>
-      </ul>
-    </nav>
   </header>
+  <section id="home" class="flex h-screen pt-16 px-16">
+    <div class="flex flex-col justify-center items-start py-16 pl-24 space-y-12">
+      <div class="flex flex-col justify-center items-start space-y-4">
+        <h2 class="text-2xl font-bold text-[#58070E] pb-4">WELCOME TO PUP ORGSYNC</h2>
+        <h1 class="text-7xl font-bold">Sync,</h1>
+        <h1 class="text-7xl font-bold">Organize,</h1>
+        <h1 class="text-7xl font-bold">Succeed</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor non augue ut eleifend.</p>
+      </div>
+      <button class="button">Join Event</button>
+    </div>
+    <img src="./img/pylon.png" alt="pylon" class="">
+  </section>
+  <section id="events">
+    <div class="flex justify-between items-center p-24 pb-2 space-x-16">
+      <ul class="flex space-x-8 font-semibold text-xl">
+        <li><a href="#all">All</a></li>
+        <li><a href="#">For You</a></li>
+        <li><a href="#">Following</a></li>
+      </ul>
+      <form action="/search" method="GET" class="flex items-center">
+        <!-- Search Input -->
+        <input 
+            type="text" 
+            name="query" 
+            placeholder="Search events..." 
+            class=" p-3 border border-gray-300 rounded-l-lg"
+        />
+        <!-- Submit Button -->
+        <button 
+            type="submit" 
+            class="bg-red-500 text-white px-4 py-3 rounded-r-lg hover:bg-red-300">
+            Search
+        </button>
+      </form>
+    </div>
+    <div class="w-Auto h-auto mx-32 my-16 p-8 bg-[#F0C9C9] flex flex-col justify-center space-y-8 rounded-3xl">
+      <div class="w-full h-auto rounded-xl bg-[#FBF2F2] p-6 flex">
+        <img src="#" alt="#" class="w-64 h-40 rounded-lg bg-white">
+        <div class="flex flex-col items-start space-y-4 pl-8">
+          <h3 class="text-[#900000] font-medium">
+            <span>date</span>
+            <span>/time</span>
+          </h3>
+          <h1 class="text-3xl font-semibold">title</h1>
+          <p>description</p>
+        </div>
+      </div>
+      <div class="w-full h-auto rounded-xl bg-[#FBF2F2] p-6 flex">
+        <img src="#" alt="#" class="w-64 h-40 rounded-lg bg-white">
+        <div class="flex flex-col items-start space-y-4 pl-8">
+          <h3 class="text-[#900000] font-medium">
+            <span>date</span>
+            <span>/time</span>
+          </h3>
+          <h1 class="text-3xl font-semibold">title</h1>
+          <p>description</p>
+        </div>
+      </div>
+      <div class="w-full h-auto rounded-xl bg-[#FBF2F2] p-6 flex">
+        <img src="#" alt="#" class="w-64 h-40 rounded-lg bg-white">
+        <div class="flex flex-col items-start space-y-4 pl-8">
+          <h3 class="text-[#900000] font-medium">
+            <span>date</span>
+            <span>/time</span>
+          </h3>
+          <h1 class="text-3xl font-semibold">title</h1>
+          <p>description</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="organization" class="flex flex-col items-center p-24">
+    <div class="flex justify-between items-center w-full">
+      <h2 class="text-4xl font-bold pb-8">Campus Clubs and Organizations</h2>
+    <form action="/search" method="GET" class="flex items-center">
+      <!-- Search Input -->
+      <input 
+          type="text" 
+          name="query" 
+          placeholder="Search events..." 
+          class=" p-3 border border-gray-300 rounded-l-lg"
+      />
+      <!-- Submit Button -->
+      <button 
+          type="submit" 
+          class="bg-red-500 text-white px-4 py-3 rounded-r-lg hover:bg-red-300">
+          Search
+      </button>
+    </form>
+    </div>
+    <div class="grid grid-cols-4 gap-8 my-8">
+      <div class="w-64 h-max p-4 bg-[#FBF2F2] rounded-3xl flex flex-col items-center space-y-4 shadow-md">
+        <img src="#" alt="#" class="w-full h-48 rounded-3xl bg-white">
+        <h3 class="text-2xl font-semibold">Organization Name</h3>
+        <button class="w-full p-4 bg-[#F0C9C9] rounded-xl">Learn More</button>
+      </div>
+      <div class="w-64 h-max p-4 bg-[#FBF2F2] rounded-3xl flex flex-col items-center space-y-4 shadow-md">
+        <img src="#" alt="#" class="w-full h-48 rounded-3xl bg-white">
+        <h3 class="text-2xl font-semibold">Organization Name</h3>
+        <button class="w-full p-4 bg-[#F0C9C9] rounded-xl">Learn More</button>
+      </div>
+      <div class="w-64 h-max p-4 bg-[#FBF2F2] rounded-3xl flex flex-col items-center space-y-4 shadow-md">
+        <img src="#" alt="#" class="w-full h-48 rounded-3xl bg-white">
+        <h3 class="text-2xl font-semibold">Organization Name</h3>
+        <button class="w-full p-4 bg-[#F0C9C9] rounded-xl">Learn More</button>
+      </div>
+      <div class="w-64 h-max p-4 bg-[#FBF2F2] rounded-3xl flex flex-col items-center space-y-4 shadow-md">
+        <img src="#" alt="#" class="w-full h-48 rounded-3xl bg-white">
+        <h3 class="text-2xl font-semibold">Organization Name</h3>
+        <button class="w-full p-4 bg-[#F0C9C9] rounded-xl">Learn More</button>
+      </div>
+    </div>
+
+  </section>
+  <section id="about" class="flex flex-col items-center p-24">
+    <div class="flex justify-between items-center w-full">
+      <h2 class="text-4xl font-bold pb-8">Our Story</h2>
+    </div>
+    <div class="flex flex-col items-end space-y-8">
+      <div class="flex flex-col items-start space-y-4 w-1/2">
+        <img src="./img/logo.png" alt="logo">
+      <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Duis tincidunt quis erat id pretium. Cras faucibus a dui eu congue. Donec erat nulla, 
+        dignissim id vulputate quis, cursus luctus tortor. Donec efficitur, est ut viverra 
+        vestibulum, velit metus aliquet massa, at auctor metus felis sed sapien. Ut at quam 
+        eget arcu convallis rhoncus vitae ac mi. Nam elit elit, placerat et erat vitae, laoreet 
+        tempus tellus.</p>
+      </div>
+  </section>
+  <footer id="footer" class="px-32 py-8 bg-[#3d1317] text-white">
+    <div class="flex flex-row md:flex-row justify-center items-center">
+            <ul class="flex flex-col justify-center items-center space-y-4">
+              <li><a href="#home" class="hover:text-gray-300">Home</a></li>
+              <li><a href="#events" class="hover:text-gray-300">Events</a></li>
+              <li><a href="#organization" class="hover:text-gray-300">Organization</a></li>
+              <li><a href="#about" class="hover:text-gray-300">About Us</a></li>
+            </ul>
+    </div>
+    <div class="text-center mt-8">
+        <p>&copy; 2025 Business Insights. All rights reserved.</p>
+    </div>
+  </footer>
 </body>
 </html>
