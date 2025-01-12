@@ -6,6 +6,7 @@ module.exports = {
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
         monserrat: ['Montserrat, sans-serif'],
+        playfair: ['Playfair Display, serif'],
       },
     },
   },
