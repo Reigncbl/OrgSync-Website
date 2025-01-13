@@ -8,7 +8,11 @@
 @tailwind utilities;
 
 @layer components{
-    .button{
-        @apply bg-gradient-to-t from-[#900000] to-[#B29191] rounded-full inline-flex justify-center items-center px-5 h-8 text-white font-medium hover:shadow-md active:ring-2 active:ring-slate-400;
-    }
+    .button {
+        @apply bg-gradient-to-t from-[#302F2F] to-[#E80A0A] rounded-full inline-flex justify-center items-center px-5 h-8 text-white font-medium active:ring-2 active:ring-slate-400;
+      }
+      
+      .button:hover {
+        @apply bg-gradient-to-t from-red-600 to-red-400; /* Inverts the gradient on hover */
+      }
 }
