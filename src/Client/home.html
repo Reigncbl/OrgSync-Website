@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./styles.css">
-  <script src="./script/script.js"></script>
-  <script></script>
+  <script src="./script/script.js" defer></script>
+
   <title>OrgSync</title>
 </head>
 
@@ -26,7 +26,7 @@
       </nav>
 
       <!-- Login Button -->
-      <button id="loginBtn" class="button bg-gradient-to-t from-[#900000] to-[#B29191]">Login</button>
+      <button class="loginBtn button bg-gradient-to-t from-[#900000] to-[#B29191]">Login</button>
     </div>
   </header>
 
@@ -41,7 +41,7 @@
         <h1 class="text-7xl font-bold">Succeed</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor non augue ut eleifend.</p>
       </div>
-      <button class="button text-xl font-semibold p-6">Join Event</button>
+      <button class="loginBtn button text-xl font-semibold p-6">Join Event</button>
     </div>
     
     <img src="./img/pylon.png" alt="pylon" class="">
@@ -52,7 +52,7 @@
   <section id="events" class="flex flex-col items-center h-screen">
     <div class="flex justify-between items-center p-24 pb-2 space-x-16 w-full">
       <ul class="flex space-x-8 font-semibold text-xl">
-        <li class="button"><a href="#all">All</a></li>
+        <li class="button"><a href="#">All</a></li>
         <li class="button"><a href="#">For You</a></li>
         <li class="button"><a href="#">Following</a></li>
       </ul>
@@ -79,12 +79,31 @@
   </section>
 
 
-  <section id="organization" class="flex flex-col items-center p-24 bg-[#FBF2F2] h-screen">
-    <h2 class="text-4xl font-bold mb-16">Campus Clubs and Organizations</h2>
-    <div id="organization-list" class="flex gap-6 p-6 h-full">
+  <section id="organization" class="flex flex-col items-center bg-[#FBF2F2] h-screen">
+    <div class="flex justify-between items-center py-8 w-full">
+      <h1 class="p-4 pl-32 pr-24 bg-[#F0C9C9] w-fit rounded-r-full text-end text-2xl font-bold text-[#6A252B]">
+        Campus Clubs and Organizations
+      </h1>
+      <form action="/search" method="GET" class="flex items-center mr-52">
+        <input type="text" placeholder="Search" class="p-3 pl-8 border border-gray-300 bg-[#D9D9D9] placeholder-[#595858] font-medium rounded-full"/>
+        <button type="submit" class="bg-[#880000] text-white p-3 ml-4 rounded-xl hover:bg-red-300">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+    </div>
+    <div id="organization-list" class="flex gap-6 p-6 h-3/5">
       <!-- Organization cards will be injected here -->
     </div>
-</section>
+  
+    <!-- Hidden detailed view will be shown upon clicking a card -->
+    <div id="organization-detail" class="hidden flex space-y-8 px-64 p-12 h-full">
+      <div class="bg-white p-8 rounded-2xl shadow-md h-auto flex items-start">
+        <button id="backBtn" class="text-[#6A252B] text-3xl"><i class="fa-solid fa-circle-left"></i></button>
+        <div id="orgDetailContent"></div>
+      </div>
+    </div>
+  </section>
+  
 
   <section id="about" class="flex flex-col items-center p-24">
     <div class="flex justify-between items-center w-full">

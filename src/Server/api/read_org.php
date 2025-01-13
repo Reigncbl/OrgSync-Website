@@ -25,14 +25,14 @@ if ($num > 0) {
 
         $org_item = array(
             'id' => $id,
-            'name' => $title,  // 'title' from the table
-            'logo' => $logo,   // 'logo' from the table
-            'description' => $description,  // 'description' from the table
-            'email' => $email,  // 'email' from the table
-            'facebook' => $facebook,  // 'facebook' from the table
-            'instagram' => $instagram,  // 'instagram' from the table
-            'linkedin' => $linkedin,  // 'linkedin' from the table
-            'website' => $website  // 'website' from the table
+            'name' => $title, 
+            'logo' => $logo, 
+            'description' => $description,
+            'email' => $email,
+            'facebook' => $facebook,
+            'instagram' => $instagram,
+            'linkedin' => $linkedin,
+            'website' => $website
         );
 
         array_push($org_arr['data'], $org_item);
