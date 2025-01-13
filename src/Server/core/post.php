@@ -94,4 +94,22 @@ class Post {
          echo "Error %s. \n", $stmt->error;
          return false;
     }
+
+    public function login($email, $password) {
+        $query = "SELECT idusers, firstname, lastname, account_type 
+                  FROM users 
+                  WHERE email = :email AND password = :password";
+    
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $password); // Use hashed passwords in production
+        $stmt->execute();
+    
+        if ($stmt->rowCount() > 0) {
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+    
+        return false;
+    }
+    
 }
