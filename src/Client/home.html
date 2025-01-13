@@ -4,14 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./styles.css">
-  <link rel="stylesheet" href="./transition.css">
-  <script src="../script.js"></script>
   <title>OrgSync</title>
 </head>
 
-<body class="font-monserrat overflow-y-scroll">
+<body class="font-monserrat overflow-y-scroll bg-white">
+
   <header class="fixed top-0 w-full z-10 shadow-lg">
-    <div class="flex justify-between items-center bg-[url('./img/header.png')] bg-cover bg-center h-16 px-4 media">
+    <div class="flex justify-between items-center bg-cover bg-center bg-[url('./img/header.png')] h-16 px-4">
       <!-- Logo -->
       <img src="./img/logo.png" alt="Logo" class="h-10 pl-4">
 
@@ -26,10 +25,13 @@
       </nav>
 
       <!-- Login Button -->
-      <a href="#" class="button">Login</a>
+      <a href="#" class="button bg-gradient-to-t from-[#900000] to-[#B29191]">Login</a>
     </div>
   </header>
-  <section id="home" class="flex h-screen pt-16 px-16">
+
+  <section id="home" class="relative flex h-screen pt-16 px-16 bg-[#FBF2F2]">
+    <!-- Gradient fade at the bottom -->
+    <div class="absolute bottom-0 left-0 right-0 h-1/6 bg-gradient-to-t from-white to-transparent"></div>
     <div class="flex flex-col justify-center items-start py-16 pl-24 space-y-12">
       <div class="flex flex-col justify-center items-start space-y-4">
         <h2 class="text-2xl font-bold text-[#58070E] pb-4">WELCOME TO PUP ORGSYNC</h2>
@@ -38,16 +40,20 @@
         <h1 class="text-7xl font-bold">Succeed</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor non augue ut eleifend.</p>
       </div>
-      <button class="button bg-gradient-to-t from-[#302F2F] to-[#E80A0A]">Join Event</button>
+      <button class="button text-xl font-semibold p-6 hover:bg-white">Join Event</button>
     </div>
+    
     <img src="./img/pylon.png" alt="pylon" class="">
   </section>
-  <section id="events">
-    <div class="flex justify-between items-center p-24 pb-2 space-x-16 ">
+  
+
+
+  <section id="events" class="flex flex-col items-center">
+    <div class="flex justify-between items-center p-24 pb-2 space-x-16 w-full">
       <ul class="flex space-x-8 font-semibold text-xl">
-        <li><a href="#all">All</a></li>
-        <li><a href="#">For You</a></li>
-        <li><a href="#">Following</a></li>
+        <li class="button"><a href="#all">All</a></li>
+        <li class="button"><a href="#">For You</a></li>
+        <li class="button"><a href="#">Following</a></li>
       </ul>
       <form action="/search" method="GET" class="flex items-center">
         <!-- Search Input -->
@@ -56,29 +62,7 @@
         <button type="submit" class="bg-[#880000] text-white p-3 ml-4 rounded-xl hover:bg-red-300"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
     </div>
-    <div class="w-Auto h-auto mx-32 my-16 p-8 bg-[#F0C9C9] flex flex-col justify-center space-y-8 rounded-3xl">
-      <div class="w-full h-auto rounded-xl bg-[#FBF2F2] p-6 flex">
-        <img src="#" alt="#" class="w-64 h-40 rounded-lg bg-white">
-        <div class="flex flex-col items-start space-y-4 pl-8">
-          <h3 class="text-[#900000] font-medium">
-            <span>date</span>
-            <span>/time</span>
-          </h3>
-          <h1 class="text-3xl font-semibold">title</h1>
-          <p>description</p>
-        </div>
-      </div>
-      <div class="w-full h-auto rounded-xl bg-[#FBF2F2] p-6 flex">
-        <img src="#" alt="#" class="w-64 h-40 rounded-lg bg-white">
-        <div class="flex flex-col items-start space-y-4 pl-8">
-          <h3 class="text-[#900000] font-medium">
-            <span>date</span>
-            <span>/time</span>
-          </h3>
-          <h1 class="text-3xl font-semibold">title</h1>
-          <p>description</p>
-        </div>
-      </div>
+    <div class="flex flex-col justify-center space-y-8 rounded-3xl w-1/2 h-auto my-16 p-8 bg-[#F0C9C9] ">
       <div class="w-full h-auto rounded-xl bg-[#FBF2F2] p-6 flex">
         <img src="#" alt="#" class="w-64 h-40 rounded-lg bg-white">
         <div class="flex flex-col items-start space-y-4 pl-8">
@@ -92,7 +76,10 @@
       </div>
     </div>
   </section>
+
+
   <section id="organization" class="flex flex-col items-center p-24">
+
     <div class="flex justify-between items-center w-full">
       <h2 class="text-4xl font-bold pb-8">Campus Clubs and Organizations</h2>
       <form action="/search" method="GET" class="flex items-center">
@@ -102,22 +89,8 @@
         <button type="submit" class="bg-[#880000] text-white p-3 ml-4 rounded-xl hover:bg-red-300"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
     </div>
+
     <div class="grid grid-cols-4 gap-8 my-8">
-      <div class="w-64 h-max p-4 bg-[#FBF2F2] rounded-3xl flex flex-col items-center space-y-4 shadow-md">
-        <img src="#" alt="#" class="w-full h-48 rounded-3xl bg-white">
-        <h3 class="text-2xl font-semibold">Organization Name</h3>
-        <button class="w-full p-4 bg-[#F0C9C9] rounded-xl">Learn More</button>
-      </div>
-      <div class="w-64 h-max p-4 bg-[#FBF2F2] rounded-3xl flex flex-col items-center space-y-4 shadow-md">
-        <img src="#" alt="#" class="w-full h-48 rounded-3xl bg-white">
-        <h3 class="text-2xl font-semibold">Organization Name</h3>
-        <button class="w-full p-4 bg-[#F0C9C9] rounded-xl">Learn More</button>
-      </div>
-      <div class="w-64 h-max p-4 bg-[#FBF2F2] rounded-3xl flex flex-col items-center space-y-4 shadow-md">
-        <img src="#" alt="#" class="w-full h-48 rounded-3xl bg-white">
-        <h3 class="text-2xl font-semibold">Organization Name</h3>
-        <button class="w-full p-4 bg-[#F0C9C9] rounded-xl">Learn More</button>
-      </div>
       <div class="w-64 h-max p-4 bg-[#FBF2F2] rounded-3xl flex flex-col items-center space-y-4 shadow-md">
         <img src="#" alt="#" class="w-full h-48 rounded-3xl bg-white">
         <h3 class="text-2xl font-semibold">Organization Name</h3>
@@ -126,6 +99,8 @@
     </div>
 
   </section>
+
+
   <section id="about" class="flex flex-col items-center p-24">
     <div class="flex justify-between items-center w-full">
       <h2 class="text-4xl font-bold pb-8">Our Story</h2>
@@ -141,6 +116,8 @@
         tempus tellus.</p>
       </div>
   </section>
+
+
   <footer id="footer" class="px-32 py-8 bg-[#3d1317] text-white">
     <div class="flex flex-row md:flex-row justify-center items-center">
             <ul class="flex flex-col justify-center items-center space-y-4">
