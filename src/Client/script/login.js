@@ -20,7 +20,7 @@ async function handleLogin(event) {
             alert(data.message);
         }
     } catch (error) {
-        alert('An error occurred. Please try again.');
+        alert('An error occurred. Please tr1231qweqwe3y again.');
         console.error(error);
     }
 }
