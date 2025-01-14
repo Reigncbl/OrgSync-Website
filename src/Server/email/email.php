@@ -87,7 +87,7 @@ HTML;
 // Add HTML content to the email
 $email->addContent("text/html", $htmlContent);
 
-$sendgrid = new \SendGrid('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'); // Replace with your API key
+$sendgrid = new \SendGrid(''); // Replace with your API key
 
 try {
     $response = $sendgrid->send($email); 
