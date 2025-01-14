@@ -4,9 +4,9 @@ require __DIR__ . '/../../../vendor/autoload.php';
 use SendGrid\Mail\Mail;
 
 $email = new \SendGrid\Mail\Mail(); 
-$email->setFrom("johncarlo.lorieta@gmail.com", "John Carlo Lorieta");
+$email->setFrom("m", "J");
 $email->setSubject("Welcome to Our Service!");
-$email->addTo("jcbarv@gmail.com", "JC Barv");
+$email->addTo("j", "J");
 
 // HTML layout for the email
 $htmlContent = <<<HTML
