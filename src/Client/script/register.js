@@ -21,7 +21,7 @@ async function handleRegister(event) {
 
         if (response.status === 200) {
             alert('Registration successful!');
-            window.location.href = 'C:\laragon\www\OrgSync-Website\src\Client\scripts\login.html';
+            window.location.href = '/src/Client/home.html';
         } else {
             alert(data.message);
         }
