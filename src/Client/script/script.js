@@ -10,10 +10,10 @@ fetch('/src/Server/api/read_org.php')
       // Create organization cards dynamically
       const orgCards = data.data.map(org => {
         return `
-          <div class="w-64 p-4 bg-white rounded-3xl flex flex-col items-center justify-between space-y-4 shadow-md">
-            <div class="flex flex-col space-y-4">
+          <div class="w-64 p-4 h-full bg-white rounded-3xl flex flex-col justify-between items-center space-y-4 shadow-md">
+            <div class="flex flex-col space-y-4 w-full">
               <img src="/src/Client/img/${org.logo}" alt="${org.name}" 
-                   class="w-full h-48 rounded-2xl bg-gray-200 object-cover">
+                  class="w-full h-48 rounded-2xl bg-gray-200 object-cover">
               <h3 class="text-2xl font-semibold text-center">${org.name}</h3>
             </div>
             <button class="w-full p-4 bg-[#F0C9C9] rounded-xl hover:bg-[#ce5a5a] font-semibold" data-org-id="${org.id}">Learn More</button>
@@ -33,19 +33,20 @@ fetch('/src/Server/api/read_org.php')
           document.getElementById('organization-list').classList.add('hidden');
           const orgDetailContent = document.getElementById('orgDetailContent');
           orgDetailContent.innerHTML = `
-            <div class="flex space-x-8 justify-center p-8">
-                <img src="/src/Client/img/${orgDetails.logo}" alt="${orgDetails.name}" class="h-40 w-48 object-cover">
-                <div class="flex flex-col space-y-4">
-                    <h1 class="text-5xl font-bold">${orgDetails.name}</h1>
-                    <div class="flex justify-between items-center">
-                        <button class="button bg-gradient-to-t from-[#F0C9C9] to-[#D9D9D9] text-black font-semibold text-lg p-5 px-7">Follow</button>
-                        <div class="flex space-x-6 items-center justify-center">
-                            <a href="${orgDetails.facebook}"><i class="fa-brands fa-facebook text-4xl"></i></a>
-                            <a href="${orgDetails.instagram}"><i class="fa-brands fa-instagram text-4xl"></i></a>
-                            <a href="${orgDetails.linkedin}"><i class="fa-brands fa-linkedin text-4xl"></i></a>
+            <div class="rounded-2xl shadow-md h-96 flex items-start bg-cover bg-center" style="background-image: url('/src/Client/img/${orgDetails.logo}'); background-color: rgba(255, 255, 255, 0.1);">
+                <div class="flex flex-col space-y-8 p-8 h-full justify-center w-full">
+                    <div class="flex flex-col space-y-4">
+                        <h1 class="text-5xl font-bold text-white">${orgDetails.name}</h1>
+                        <div class="flex justify-between items-center space-x-4">
+                            <button class="button bg-gradient-to-t from-[#F0C9C9] to-[#D9D9D9] text-black font-semibold text-lg p-5 px-7">Follow</button>
+                            <div class="flex space-x-6 items-center justify-center">
+                                <a href="${orgDetails.facebook}"><i class="fa-brands fa-facebook text-4xl text-white"></i></a>
+                                <a href="${orgDetails.instagram}"><i class="fa-brands fa-instagram text-4xl text-white"></i></a>
+                                <a href="${orgDetails.linkedin}"><i class="fa-brands fa-linkedin text-4xl text-white"></i></a>
+                            </div>
                         </div>
+                        <p class="text-md font-medium bg-[#FBF2F2] rounded-2xl p-6">${orgDetails.description}</p>
                     </div>
-                    <p class="text-md font-medium bg-[#FBF2F2] rounded-2xl p-6">${orgDetails.description}</p>
                 </div>
             </div>
           `;

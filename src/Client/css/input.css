@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -9,10 +9,27 @@
 
 @layer components{
     .button {
-        @apply bg-gradient-to-t from-[#302F2F] to-[#E80A0A] rounded-full inline-flex justify-center items-center px-5 h-8 text-white font-medium active:ring-2 active:ring-slate-400;
+        @apply rounded-full inline-flex justify-center items-center px-5 h-8 text-white shadow-lg font-medium active:ring-2 active:ring-slate-400;
       }
       
       .button:hover {
-        @apply bg-gradient-to-t from-red-600 to-red-400; /* Inverts the gradient on hover */
+        @apply bg-red-600;
+      }
+      .button-events {
+        @apply rounded-full inline-flex justify-center items-center px-5 h-8 shadow-lg font-medium active:ring-2 active:ring-slate-400 border-2 border-[#800000] text-[#800000] hover:bg-[#800000] hover:text-white;
+      }
+      .nav-link {
+        @apply flex items-center w-auto h-14 px-6 text-white hover:bg-[#F5F6FB] hover:ml-4 rounded-l-2xl hover:text-gray-900;
+      }
+      .nav-text {
+        @apply text-xl font-medium flex space-x-4 items-center;
+      }
+
+      .button-dash {
+        @apply inline-flex justify-center items-center px-5 h-8 text-black text-lg hover:bg-[#800000] hover:rounded-full hover:text-white font-medium active:ring-2 active:ring-[#361919];
+      }
+
+      .date {
+        @apply flex items-center space-x-4 shadow-lg w-1/2 h-full p-2 border border-slate-300;
       }
 }
