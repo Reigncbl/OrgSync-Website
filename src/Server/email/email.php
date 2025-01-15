@@ -86,7 +86,7 @@ HTML;
 
 // Add HTML content to the email
 $email->addContent("text/html", $htmlContent);
-
+$sendgrid = new \SendGrid('');
 
 try {
     $response = $sendgrid->send($email); 
