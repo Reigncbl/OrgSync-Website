@@ -7,7 +7,7 @@ header('Content-Type: application/json');
 require_once(dirname(__FILE__) . '/../core/initialize.php');
 
 // User instance
-$user = new Post($db);
+$user = new UserHandler($db);
 
 $result = $user->read();
 
