@@ -15,7 +15,7 @@ try {
         // Validate input
         if (!empty($data->email) && !empty($data->password)) {
             // User instance
-            $user = new Post($db);
+            $user = new UserHandler($db);
 
             // Verify user credentials
             $result = $user->login($data->email, $data->password);

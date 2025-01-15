@@ -7,18 +7,17 @@ header('Content-Type: application/json');
 require_once(dirname(__FILE__) . '/../core/initialize.php');
 
 // User instance
-$post = new Post($db);
+$post = new UserHandler($db);
 
-$post->idusers = isset($_GET['idusers'])? $_GET['idusers'] : die();
+$post->student_id = isset($_GET['student_id'])? $_GET['student_id'] : die();
 
 $post->read_single();
 
 $post_arr = array(
-    'idusers' => $post-> idusers,
+    'idusers' => $post-> student_id,
     'firstname' => $post-> firstname,
     'lastname' => $post-> lastname,
     'email' => $post-> email,
-    'orgtype' => $post-> orgtype,
     'password' => $post-> password,
     'account_type' => $post-> account_type,
 );
