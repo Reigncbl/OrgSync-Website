@@ -21,7 +21,7 @@ async function handleRegister(event) {
 
         if (response.status === 200) {
             alert('Registration successful!');
-            window.location.href = '/src/Client/home.html';
+            window.location.href = '/src/Client/scripts/login.html';
         } else {
             alert(data.message);
         }

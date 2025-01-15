@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./styles.css">
-  <script src="./script/script.js" defer></script>
+  <link rel="stylesheet" href="/src/Client/styles.css">
+  <script src="/src/Client/script/script.js" defer></script>
   <title>OrgSync</title>
 </head>
 
@@ -14,7 +14,8 @@
       <!-- logo -->
       <img src="./img/logo.png" alt="Logo" class="h-12">
       <!-- Login button -->
-      <button id="login-btn" class="loginBtn button bg-[#800000]">Login</button> 
+      <button id="login-btn" class="loginBtn button bg-[#800000]" onclick="window.location.href='/src/Client/scripts/login.html'">Login</button>
+ 
     </div>
     <div class="flex justify-between items-center bg-gradient-to-l from-[#800000] to-[#E73030] h-16 pl-52">
       <!-- Navigation -->
@@ -35,7 +36,8 @@
     </div>
   </header>
 
-  <div id="login-container" class="fixed inset-0 bg-black bg-opacity-70 hidden z-50 flex items-center justify-center h-full"></div>
+  <!-- <div id="login-container" class="fixed inset-0 bg-black bg-opacity-70 hidden z-50 flex items-center justify-center h-full"></div>
+  <div id="register-container" class="fixed inset-0 bg-black bg-opacity-70 hidden z-50 flex items-center justify-center h-full"></div> -->
 
   <section id="home" class="relative flex px-24 pb-24 scroll-mt-36 h-screen justify-center items-center">
     <div class="absolute bottom-24 w-full h-32 bg-gradient-to-t from-white to-transparent"></div>

@@ -66,22 +66,27 @@ fetch('/src/Server/api/read_org.php')
 
 
 
-// login overlay
-document.getElementById('login-btn').addEventListener('click', function() {
-    document.getElementById('login-container').classList.remove('hidden'); // Show the overlay
-    // Load the login form
-    fetch('./scripts/login.html')
-        .then(response => response.text())
-        .then(html => {
-            document.getElementById('login-container').innerHTML = html;
-        })
-        .catch(error => console.error('Error loading the login page:', error));
-});
 
-// Close the overlay when clicked outside the login modal
-document.getElementById('login-container').addEventListener('click', function(e) {
-    if (e.target === this) { // Clicked on the background overlay
-        document.getElementById('login-container').classList.add('hidden'); // Hide the overlay
-    }
-});
+// document.getElementById('login-btn').addEventListener('click', function() {
+//     document.getElementById('login-container').classList.remove('hidden'); 
+
+//     fetch('./scripts/login.html')
+//         .then(response => response.text())
+//         .then(html => {
+//             document.getElementById('login-container').innerHTML = html;
+//         })
+//         .catch(error => console.error('Error loading the login page:', error));
+// });
+
+
+// document.getElementById('login-container').addEventListener('click', function(e) {
+//     if (e.target === this) { 
+//         document.getElementById('login-container').classList.add('hidden'); 
+//     }
+// });
+
+
+
+
+
 
