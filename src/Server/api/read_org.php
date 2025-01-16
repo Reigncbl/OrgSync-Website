@@ -24,15 +24,11 @@ if ($num > 0) {
         extract($row);
 
         $org_item = array(
-            'id' => $id,
-            'name' => $title, 
-            'logo' => $logo, 
-            'description' => $description,
-            'email' => $email,
-            'facebook' => $facebook,
-            'instagram' => $instagram,
-            'linkedin' => $linkedin,
-            'website' => $website
+            'org_id' => $org_id,
+            'org_name' => $org_name, 
+            'org_logo' => $org_logo, 
+            'org_desc' => $org_desc,
+
         );
 
         array_push($org_arr['data'], $org_item);

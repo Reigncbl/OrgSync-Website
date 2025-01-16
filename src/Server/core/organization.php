@@ -7,15 +7,11 @@ class Organization {
     private $table = 'organizations';
 
     // Organization properties
-    public $id;
-    public $title;
-    public $logo;
-    public $description;
-    public $email;
-    public $facebook;
-    public $instagram;
-    public $linkedin;
-    public $website;
+    public $org_id;
+    public $org_name;
+    public $org_logo;
+    public $org_desc;
+
 
     public function __construct($db) {
         $this->conn = $db;
@@ -24,9 +20,9 @@ class Organization {
     // Retrieve organizations from the database
     public function read() {
         $query = 'SELECT 
-            id, title, logo, description, email, facebook, instagram, linkedin, website
+            org_id, org_name, org_logo, org_desc
         FROM ' . $this->table . ' 
-        ORDER BY id ASC';
+        ORDER BY org_id ASC';
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
