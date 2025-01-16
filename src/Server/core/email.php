@@ -50,7 +50,7 @@ class NewsletterEmailer {
                 echo "Error: " . $e->getMessage() . "\n";
             }
 
-            usleep(100000); // Delay
+            usleep(100000); 
         }
     }
 }
