@@ -14,7 +14,7 @@ async function handleLogin(event) {
 
         if (response.status === 200) {
             alert('Login successful!');
-            window.location.href = '/src/Client/home.html';
+            window.location.href = 'C:\laragon\www\OrgSync-Website\src\Client\scripts\dashboard.html';
 
         } else {
             alert(data.message);

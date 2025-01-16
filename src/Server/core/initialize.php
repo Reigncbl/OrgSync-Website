@@ -11,4 +11,5 @@ require_once(INC_PATH . DS . "config.php");
 require_once(CORE_PATH . DS . "userhandler.php");
 require_once(CORE_PATH . DS . "organization.php");
 require_once(CORE_PATH . DS . "eventhandler.php");
+require_once(CORE_PATH . DS . "emailhandler.php");
 ?>

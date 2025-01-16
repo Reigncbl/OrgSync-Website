@@ -1,9 +1,12 @@
 <?php
+require_once 'C:\laragon\www\OrgSync-Website\src\Server\core\email.php'; 
 
 $db_user = 'root';
 $db_pass = 'root';
 $db_name = 'web_dev';
-
+$apiKey = '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';
+$fromEmail = 'johncarlo.lorieta@gmail.com';
+$fromName = 'John Carlo Lorieta';
 try {
     
     $db = new PDO('mysql:host=localhost;dbname=' . $db_name . ';charset=utf8mb4', $db_user, $db_pass);
@@ -15,6 +18,13 @@ try {
 
  
     define('APP_NAME', 'Web Development');
+
+    // Instantiate the NewsletterEmailer class
+$emailer = new NewsletterEmailer($db, $apiKey, $fromEmail, $fromName);
+
+// Call the method to send newsletters
+$emailer->sendNewsletterEmails();
+
 } catch (PDOException $e) {
     die("Database connection failed: " . $e->getMessage());
 }
