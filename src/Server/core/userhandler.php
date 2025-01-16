@@ -1,5 +1,4 @@
 <?php
-
 class UserHandler {
 
     // Database connection and table name
@@ -98,7 +97,6 @@ class UserHandler {
         return false;
     }
     
-
     public function login($email, $password) {
         $query = "SELECT student_id,
         firstname,
