@@ -1,10 +1,10 @@
 <?php
-require_once 'C:\laragon\www\OrgSync-Website\src\Server\core\email.php'; 
+require_once 'C:\laragon\www\OrgSync-Website\src\Server\email\email.php'; 
 
 $db_user = 'root';
 $db_pass = 'root';
 $db_name = 'web_dev';
-$apiKey = 'ilagay mo pre api key mo dito';
+$apiKey = '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';
 $fromEmail = 'johncarlo.lorieta@gmail.com';
 $fromName = 'John Carlo Lorieta';
 try {
@@ -19,10 +19,10 @@ try {
  
     define('APP_NAME', 'Web Development');
 
-    // Instantiate the NewsletterEmailer class
+
 $emailer = new NewsletterEmailer($db, $apiKey, $fromEmail, $fromName);
 
-// Call the method to send newsletters
+
 $emailer->sendNewsletterEmails();
 
 } catch (PDOException $e) {
