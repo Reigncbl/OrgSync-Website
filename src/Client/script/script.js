@@ -34,10 +34,10 @@ fetch('/src/Server/api/read_org.php')
           const orgDetailContent = document.getElementById('orgDetailContent');
           //style="background-image: url('/src/Client/img/${orgDetails.org_logo}'); background-color: rgba(255, 255, 255, 0.1);"
           orgDetailContent.innerHTML = `
-            // <div class="rounded-2xl shadow-md h-96 flex items-start bg-cover bg-center"> 
+            <div class="rounded-2xl shadow-md h-96 flex items-start bg-cover bg-center"> 
                 <div class="flex flex-col space-y-8 p-8 h-full justify-center w-full">
                     <div class="flex flex-col space-y-4">
-                        <h1 class="text-5xl font-bold text-white">${orgDetails.org_name}</h1>
+                        <h1 class="text-5xl font-bold text-black">${orgDetails.org_name}</h1>
                         <div class="flex justify-between items-center space-x-4">
                             <button class="button bg-gradient-to-t from-[#F0C9C9] to-[#D9D9D9] text-black font-semibold text-lg p-5 px-7">Follow</button>
                             <div class="flex space-x-6 items-center justify-center">

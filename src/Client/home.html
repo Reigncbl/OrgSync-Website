@@ -46,21 +46,22 @@
   <!-- <div id="login-container" class="fixed inset-0 bg-black bg-opacity-70 hidden z-50 flex items-center justify-center h-full"></div>
   <div id="register-container" class="fixed inset-0 bg-black bg-opacity-70 hidden z-50 flex items-center justify-center h-full"></div> -->
 
-  <section id="home" class="relative flex px-24 pb-24 scroll-mt-36 h-screen justify-center items-center">
+  <section id="home" class="relative flex px-24 pb-24 scroll-mt-36 h-screen justify-center items-start">
     <div class="absolute bottom-24 w-full h-32 bg-gradient-to-t from-white to-transparent"></div>
-    <div class="flex flex-col justify-start items-start space-y-12 pt-16 h-fit w-">
+    <div class="flex flex-col justify-start items-start space-y-12 pt-24 h-fit w-1/2 pl-24 ">
       <div class="flex flex-col justify-start items-start space-y-4">
         <h2 class="text-2xl font-bold text-[#58070E] pb-4">WELCOME TO PUP ORGSYNC</h2>
-        <h1 class="text-6xl font-bold font-roboto">Sync,</h1>
-        <h1 class="text-6xl font-bold font-roboto">Organize,</h1>
-        <h1 class="text-6xl font-bold font-roboto">Succeed</h1>
+        <h1 class="text-7xl font-bold font-roboto">Sync,</h1>
+        <h1 class="text-7xl font-bold font-roboto">Organize,</h1>
+        <h1 class="text-7xl font-bold font-roboto">Succeed</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor non augue ut eleifend.</p>
       </div>
-      <button class="loginBtn button bg-[#800000] text-xl font-semibold p-6">Join Event</button>
+      <button id="login-btn" class="loginBtn button bg-[#800000] text-xl font-semibold p-6 z-10" onclick="window.location.href='/src/Client/scripts/login.html'">Join Event</button>
     </div>
     
     <img src="./img/pylon.png" alt="pylon" class="h-full">
   </section>
+  
   
 
 
@@ -214,7 +215,7 @@
   
 
   <footer id="footer" class="px-32 py-8 bg-[#3d1317] text-white">
-    <div class="flex flex-row md:flex-row justify-center items-center">
+    <div class="flex md:flex-row justify-center items-center">
             <ul class="flex flex-col justify-center items-center space-y-4">
               <li><a href="#home" class="hover:text-gray-300">Home</a></li>
               <li><a href="#events" class="hover:text-gray-300">Events</a></li>
@@ -223,6 +224,7 @@
             </ul>
     </div>
     <div class="text-center mt-8">
+      <p class="underline">Privacy Policy</p>
         <p>&copy; 2025 Business Insights. All rights reserved.</p>
     </div>
   </footer>
