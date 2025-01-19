@@ -4,7 +4,7 @@ require_once 'C:\laragon\www\OrgSync-Website\src\Server\email\email.php';
 $db_user = 'root';
 $db_pass = 'root';
 $db_name = 'web_dev';
-$apiKey = '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';
+
 $fromEmail = 'johncarlo.lorieta@gmail.com';
 $fromName = 'John Carlo Lorieta';
 try {
