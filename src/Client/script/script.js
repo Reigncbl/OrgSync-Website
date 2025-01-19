@@ -2,12 +2,11 @@
 fetch('/src/Server/api/read_org.php')
   .then(response => response.json())
   .then(data => {
-    console.log(data); // Check what data is being fetched
+    console.log(data); 
     if (data.data && data.data.length > 0) {
       const orgListContainer = document.getElementById('organization-list');
-      orgListContainer.innerHTML = ''; // Clear the container before adding new data
+      orgListContainer.innerHTML = ''; 
 
-      // Create organization cards dynamically
       const orgCards = data.data.map(org => {
         return `
           <div class="w-64 p-4 h-full bg-white rounded-3xl flex flex-col justify-between items-center space-y-4 shadow-md">
@@ -19,17 +18,15 @@ fetch('/src/Server/api/read_org.php')
             <button class="w-full p-4 bg-[#F0C9C9] rounded-xl hover:bg-[#ce5a5a] font-semibold" data-org-id="${org.org_id}">Learn More</button>
           </div>
         `;
-      }).join(''); // Combine all the card HTML into a single string
+      }).join('');
 
-      orgListContainer.innerHTML = orgCards; // Inject the cards into the container
+      orgListContainer.innerHTML = orgCards;
 
-      // Add click event listeners to the "Learn More" buttons
       document.querySelectorAll('button[data-org-id]').forEach(button => {
         button.addEventListener('click', function () {
           const orgId = this.getAttribute('data-org-id');
           const orgDetails = data.data.find(org => org.org_id == orgId);
 
-          // Hide the organization list and show the detailed view
           document.getElementById('organization-list').classList.add('hidden');
           const orgDetailContent = document.getElementById('orgDetailContent');
           //style="background-image: url('/src/Client/img/${orgDetails.org_logo}'); background-color: rgba(255, 255, 255, 0.1);"
@@ -52,14 +49,11 @@ fetch('/src/Server/api/read_org.php')
             </div>
           `;
 
-          // Show the organization detail view and show the back button
           document.getElementById('organization-detail').classList.remove('hidden');
         });
       });
 
-      // Add click event listener for the back button
       document.getElementById('backBtn').addEventListener('click', function () {
-        // Hide the organization detail view and show the list again
         document.getElementById('organization-detail').classList.add('hidden');
         document.getElementById('organization-list').classList.remove('hidden');
       });

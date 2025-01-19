@@ -4,25 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/src/Client/styles.css">
+    <script src="/src/Client/script/admin.js"></script>
     <title>OrgSync</title>
 </head>
-<body>
-    <div class="flex font-monserrat">
+<body class="font-monserrat">
+    <div class="flex h-full w-full fixed">
         <!-- Sidebar -->
-        <aside class="bg-gradient-to-t from-[#E73030] to-[#F2BDBD] w-64 h-screen shadow-lg shadow-gray-900/50 z-10 pl-6 fixed">
+        <aside class="bg-gradient-to-t from-[#E73030] to-[#F2BDBD] w-64 h-full shadow-lg fixed z-10 py-8">
             <div class="flex items-center justify-center w-full h-20 py-16">
-                <img src="../img/logo.png" alt="Logo" class="w-36">
+                <img src="/src/Client/img/logo.png" alt="Logo" class="w-full p-8">
             </div>
-            <nav class="h-full">
+            <nav class="h-full mt-8">
                 <ul class="space-y-2">
                     <li>
                         <a href="#" class="nav-link">
-                            <p class="nav-text"><i class="fa-solid fa-house text-2xl"></i><span>Home</span></p>
+                            <p class="nav-text"><i class="fa-solid fa-house text-2xl"></i><span>Dashboard</span></p>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link active">
-                            <p class="nav-text"><i class="fa-solid fa-clipboard-list text-2xl"></i><span>Manage Events</span></p>
+                        <a href="#" class="nav-link">
+                            <p class="nav-text"><i class="fa-solid fa-calendar-week text-2xl"></i><span>Add Events</span></p>
                         </a>
                     </li>
                     <li>
@@ -30,51 +31,145 @@
                             <p class="nav-text"><i class="fa-solid fa-calendar-days text-2xl"></i><span>Calendar</span></p>
                         </a>
                     </li>
+                    <li>
+                        <a href="#" class="nav-link">
+                            <p class="nav-text"><i class="fa-solid fa-users text-2xl"></i><span>Organization</span></p>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </aside>
 
         <!-- Main Content -->
-        <div class="w-fit h-screen bg-white ml-64 p-8 space-y-6">
-            <!-- Add Event Form -->
-            <div class="bg-[#F2BDBD] p-6 rounded-xl shadow-md">
-                <h1 class="text-2xl font-semibold mb-4">Add New Event</h1>
-                <form class="space-y-4">
-                    <div class="flex flex-col">
-                        <label for="event-title" class="font-medium">Event Title</label>
-                        <input type="text" id="event-title" class="input-field" placeholder="Enter event title">
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="event-date" class="font-medium">Event Date</label>
-                        <input type="date" id="event-date" class="input-field">
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="event-time" class="font-medium">Event Time</label>
-                        <input type="time" id="event-time" class="input-field">
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="event-description" class="font-medium">Description</label>
-                        <textarea id="event-description" class="input-field" placeholder="Enter event description"></textarea>
-                    </div>
-                    <button type="submit" class="button-dash bg-[#900000] text-white hover:bg-red-700 transition px-4 py-2 rounded-md">Add Event</button>
-                </form>
-            </div>
+        <main class="flex-1 p-6 ml-64 overflow-y-scroll">
+            <!-- Header -->
+            <header class="flex items-center justify-between">
+                <h1 class="text-2xl font-semibold mt-4">Welcome <span class="text-2xl font-extrabold text-[#800000]">Admin!</span></h1>
+                <div class="flex items-center space-x-8">
+                    <button class="text-[#800000] text-2xl rounded-xl hover:text-red-500"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <button class="text-[#800000] text-2xl rounded-xl hover:text-red-500"><i class="fa-solid fa-bell"></i></button>
+                </div>
+            </header>
+            <div class="bg-slate-400 w-full h-64 mt-4 rounded-lg">
 
-            <!-- Events List -->
-            <div class="space-y-4">
-                <h1 class="text-2xl font-semibold">Event List</h1>
-                <div class="bg-[#D9D9D9] p-6 rounded-xl shadow-md flex items-center justify-between">
-                    <div>
-                        <h2 class="text-xl font-semibold">Event Title</h2>
-                        <p class="text-gray-700">Date: 2025-01-20 | Time: 10:00 AM</p>
-                        <p class="mt-2 text-gray-600">Short description of the event...</p>
+            </div>
+            <!-- Overview Section -->
+            <h2 class="text-2xl font-bold mt-4">Overview</h2>
+            <section class="grid grid-cols-3 gap-2 mt-2">
+                <div class="bg-gradient-to-t from-[#E73030] to-[#F2BDBD] p-2 px-4 shadow rounded-lg flex flex-col h-32">
+                    <h2 class="text-xl font-bold text-[#800000] mb-6">Total No. of Users</h2>
+                    <div class="flex items-center justify-between">
+                        <i class="fa-regular fa-user text-white text-5xl font-light"></i>
+                        <div class="flex flex-col items-center">
+                            <p class="text-4xl font-bold text-white">123</p>
+                            <button class="text-white rounded-lg hover:bg-red-700 transition">Show Details</button>
+                        </div>
+                    </div>       
+                </div>
+                
+                <div class="bg-[#D9D9D9] p-2 px-4 shadow rounded-lg flex flex-col justify-between h-32">
+                    <h2 class="text-xl font-bold text-black mb-6">Total No. of Events</h2>
+                    <div class="flex items-center justify-between">
+                        <i class="fa-regular fa-calendar text-[#800000] text-5xl font-light"></i>
+                        <div class="flex flex-col items-center">
+                            <p class="text-4xl font-bold text-[#800000]">45</p>
+                            <button class="text-[#800000] rounded-lg hover:bg-red-200 transition">Show Details</button>
+                        </div>
+                    </div>       
+                </div>
+                
+                <div class="bg-[#D9D9D9] p-2 px-4 shadow rounded-lg flex flex-col justify-between h-32">
+                    <h2 class="text-xl font-bold text-black mb-6">Total No. of Organizations</h2>
+                    <div class="flex items-center justify-between">
+                        <i class="fa-solid fa-timeline text-[#800000] text-5xl"></i>
+                        <div class="flex flex-col items-center">
+                            <p class="text-4xl font-bold text-[#800000]">6</p>
+                            <button class="text-[#800000] rounded-lg hover:bg-red-200 transition">Show Details</button>
+                        </div>
+                    </div>       
+                </div>
+                
+            </section>
+
+            <!-- Events Section -->
+            <section class="mt-6">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-2xl font-bold">Events</h2>
+                    <button class="px-4 py-2 bg-[#E73030] text-white rounded-lg hover:bg-red-700 transition">
+                        Add Event +
+                    </button>
+                </div>
+                <div class="mt-6 space-y-4">
+                    <!-- Event Card -->
+                    <div class="bg-white p-4 shadow rounded-lg flex items-center">
+                        <div class="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center">
+                            <span class="font-bold text-lg">JAN</span>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="font-bold text-lg">Event Title</h3>
+                            <p class="text-sm text-gray-600">PUP Sta. Mesa Campus | 7:00 AM – 8:00 PM</p>
+                            <p class="text-sm text-gray-600">Organized by: Org Name</p>
+                        </div>
+                        <div class="ml-auto">
+                            <button class="px-4 py-2 bg-[#E73030] text-white rounded-lg hover:bg-red-700 transition">
+                                View Details
+                            </button>
+                        </div>
                     </div>
-                    <div class="flex space-x-2">
-                        <button class="button-dash text-[#900000] border border-[#900000] px-4 py-2 rounded-md hover:bg-[#900000] hover:text-white transition">Edit</button>
-                        <button class="button-dash bg-[#900000] text-white px-4 py-2 rounded-md hover:bg-red-700 transition">Delete</button>
+                    <!-- Repeat Event Cards -->
+                    <div class="bg-white p-4 shadow rounded-lg flex items-center">
+                        <div class="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center">
+                            <span class="font-bold text-lg">JAN</span>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="font-bold text-lg">Event Title</h3>
+                            <p class="text-sm text-gray-600">PUP Sta. Mesa Campus | 7:00 AM – 8:00 PM</p>
+                            <p class="text-sm text-gray-600">Organized by: Org Name</p>
+                        </div>
+                        <div class="ml-auto">
+                            <button class="px-4 py-2 bg-[#E73030] text-white rounded-lg hover:bg-red-700 transition">
+                                View Details
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <!-- Repeat for additional events -->
+            </section>
+        </main>
+        <!-- sidebar -->
+        <div class="w-96 h-full p-6 flex flex-col space-y-6">
+            <!-- date and Time -->
+            <div class="w-full h-fit flex flex-col space-y-6">
+                <div class="flex items-center justify-between w-full mt-1 space-x-1">
+                    <!-- Date Section -->
+                    <div class="date rounded-l-xl w-full flex items-center space-x-2">
+                        <i class="text-2xl text-[#FFAE21] fa-solid fa-calendar-days"></i>
+                        <h1 id="current-date" class="text-[#686B71] font-semibold"></h1>
+                    </div>
+                    <!-- Time Section -->
+                    <div class="date rounded-r-xl w-full flex items-center space-x-2">
+                        <i id="time-icon" class="text-2xl"></i>
+                        <h1 id="current-time" class="text-[#686B71] font-semibold"></h1>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile -->
+            <div class="flex items-center w-full h-fit p-2 space-x-4 bg-[#F2BDBD] rounded-lg shadow-lg">
+                <!-- Image Section -->
+                <div class="w-16 h-16 bg-gray-300 rounded-full overflow-hidden ">
+                    <img src="#" alt="username" class="w-full h-full object-cover">
+                </div>
+            
+                <!-- Content Section -->
+                <div>
+                    <h1 class="text-2xl font-semibold">Org Name</h1>
+                    <h3>Details</h3>
+                    <button class="text-sm">View Profile</button>
+                </div>
+            </div>
+            <div class="flex flex-col items-center w-full h-fit p-4 bg-[#D9D9D9] rounded-lg shadow-lg">
+                <h1 class="text-[#800000] font-bold text-5xl">78</h1>
+                <h1 class="font-medium">Website Visitor</h1>
             </div>
         </div>
     </div>

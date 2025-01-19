@@ -30,6 +30,9 @@
       }
 
       .date {
-        @apply flex items-center space-x-4 shadow-lg w-1/2 h-full p-2 border border-slate-300;
+        @apply flex items-center space-x-4 shadow-xl w-1/2 h-full p-2 border border-slate-200;
+      }
+      .table-col {
+        @apply border-x px-4 py-2;
       }
 }
