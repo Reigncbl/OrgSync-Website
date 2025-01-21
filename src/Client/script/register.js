@@ -7,6 +7,12 @@ async function handleRegister(event) {
     const password = document.getElementById('password').value;
     const account_type = 'user';  // or whichever account type you're setting
 
+    // Basic input validation
+    if (!studentid || !firstname || !lastname || !email || !password) {
+        alert('Please fill out all required fields.');
+        return;
+    }
+
     try {
         const response = await fetch('http://localhost:3000/src/Server/api/register.php', {
             method: 'POST',
@@ -14,14 +20,12 @@ async function handleRegister(event) {
             body: JSON.stringify({ studentid, firstname, lastname, email, password, account_type })
         });
 
-      
         const data = await response.json();
-
         console.log('Response Data:', data);
 
         if (response.status === 200) {
             alert('Registration successful!');
-            window.location.href = '/src/Client/scripts/login.html';
+            window.location.href = '/src/Client/scripts/login.html';  // Redirect to login
         } else {
             alert(data.message);
         }

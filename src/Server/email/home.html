@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/src/Client/styles.css">
   <script src="/src/Client/script/script.js" defer></script>
-  <script src="/src/Client/script/newletter_handler.js" defer></script>
   <script src="/src/Client/script/popup.js"></script>
   <title>OrgSync</title>
 </head>
@@ -47,22 +46,21 @@
   <!-- <div id="login-container" class="fixed inset-0 bg-black bg-opacity-70 hidden z-50 flex items-center justify-center h-full"></div>
   <div id="register-container" class="fixed inset-0 bg-black bg-opacity-70 hidden z-50 flex items-center justify-center h-full"></div> -->
 
-  <section id="home" class="relative flex px-24 pb-24 scroll-mt-36 h-screen justify-center items-start">
+  <section id="home" class="relative flex px-24 pb-24 scroll-mt-36 h-screen justify-center items-center">
     <div class="absolute bottom-24 w-full h-32 bg-gradient-to-t from-white to-transparent"></div>
-    <div class="flex flex-col justify-start items-start space-y-12 pt-24 h-fit w-1/2 pl-24 ">
+    <div class="flex flex-col justify-start items-start space-y-12 pt-16 h-fit w-">
       <div class="flex flex-col justify-start items-start space-y-4">
         <h2 class="text-2xl font-bold text-[#58070E] pb-4">WELCOME TO PUP ORGSYNC</h2>
-        <h1 class="text-7xl font-bold font-roboto">Sync,</h1>
-        <h1 class="text-7xl font-bold font-roboto">Organize,</h1>
-        <h1 class="text-7xl font-bold font-roboto">Succeed</h1>
+        <h1 class="text-6xl font-bold font-roboto">Sync,</h1>
+        <h1 class="text-6xl font-bold font-roboto">Organize,</h1>
+        <h1 class="text-6xl font-bold font-roboto">Succeed</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor non augue ut eleifend.</p>
       </div>
-      <button id="login-btn" class="loginBtn button bg-[#800000] text-xl font-semibold p-6 z-10" onclick="window.location.href='/src/Client/scripts/login.html'">Join Event</button>
+      <button class="loginBtn button bg-[#800000] text-xl font-semibold p-6">Join Event</button>
     </div>
     
     <img src="./img/pylon.png" alt="pylon" class="h-full">
   </section>
-  
   
 
 
@@ -199,9 +197,8 @@
             <h1 class="text-3xl text-center font-extrabold font-monserrat text-[#800000] mb-4">🎉 Be The First To Know</h1>
             <p class="text-[#232222] text-center font-medium"> <span class="font-extrabold">Stay updated </span>and get notifications about upcoming and ongoing events from the organizations you love!</p>
             <form class="flex flex-col items-center justify-center space-x-1">
-              <input type="email" id="foreign_email" name="foreign_email" class="w-80 px-4 py-2 mt-5 text-gray-900 bg-gray-50 border border-gray-300 rounded-lg" placeholder="Enter your email here" required>
-              <button onclick="newsletter_handler(event)" type="submit" class="w-1/2 px-1 py-2 mt-4 font-medium text-white bg-gradient-to-t from-[#1F1616] to-[#EF0F0F] rounded-lg hover:bg-white hover:text-gray-700 focus:ring-2 focus:ring-gray-700">Submit</button>
-
+              <input type="email" id="email" name="email" class="w-80 px-4 py-2 mt-5 text-gray-900 bg-gray-50 border border-gray-300 rounded-lg" placeholder="Enter your email here" required>
+              <button type="submit" class="w-1/2 px-1 py-2 mt-4 font-medium text-white bg-gradient-to-t from-[#1F1616] to-[#EF0F0F] rounded-lg hover:bg-white hover:text-gray-700 focus:ring-2 focus:ring-gray-700">Submit</button>
             </form>
             <p class="text-xs text-center text-[#E1D4D4] mt-2">
               Already have an account? 
@@ -217,7 +214,7 @@
   
 
   <footer id="footer" class="px-32 py-8 bg-[#3d1317] text-white">
-    <div class="flex md:flex-row justify-center items-center">
+    <div class="flex flex-row md:flex-row justify-center items-center">
             <ul class="flex flex-col justify-center items-center space-y-4">
               <li><a href="#home" class="hover:text-gray-300">Home</a></li>
               <li><a href="#events" class="hover:text-gray-300">Events</a></li>
@@ -226,7 +223,6 @@
             </ul>
     </div>
     <div class="text-center mt-8">
-      <p class="underline">Privacy Policy</p>
         <p>&copy; 2025 Business Insights. All rights reserved.</p>
     </div>
   </footer>

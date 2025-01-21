@@ -1,5 +1,4 @@
 <?php
-
 class Organization {
 
     // Database connection and table name

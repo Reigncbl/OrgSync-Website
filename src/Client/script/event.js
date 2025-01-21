@@ -69,3 +69,60 @@ const closePopupBtn = document.getElementById('closePopupBtn');
           eventFormPopup.classList.add('hidden');
       }
   });  
+
+  function submitForm() {
+    const form = document.getElementById('eventForm');
+    const formData = new FormData(form);
+
+    // Validation
+    const eventTitle = document.getElementById('event_title').value.trim();
+    const eventDes = document.getElementById('event_des').value.trim();
+    const platform = document.getElementById('platform').value.trim();
+    const platformLink = document.getElementById('platform_link').value.trim();
+    const location = document.getElementById('location').value.trim();
+    const startDate = document.getElementById('date_started').value;
+    const endDate = document.getElementById('date_ended').value;
+
+    // Validate required fields
+    if (!eventTitle || !eventDes || !platform || !platformLink || !location) {
+        alert("Please fill in all required fields.");
+        return;  // Stop the form submission
+    }
+
+    // Validate platform link
+    const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+    if (!urlPattern.test(platformLink)) {
+        alert("Please enter a valid platform link.");
+        return;
+    }
+
+    // Validate that start date is before end date
+    if (startDate >= endDate) {
+        alert("Start time must be before end time.");
+        return;
+    }
+
+    console.log("Form data is valid, submitting...");
+    console.log("Event Title:", eventTitle);
+    console.log("Event Description:", eventDes);
+    console.log("Platform:", platform);
+    console.log("Platform Link:", platformLink);
+    console.log("Location:", location);
+
+    // Send the form data with the file
+    fetch('http://localhost:3000/src/Server/api/event_add.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Server Response:', data);
+        if (data.message) {
+            alert(data.message); // Display the response message
+        }
+    })
+    .catch(error => {
+        console.error('Error during form submission:', error);
+        alert('Error during form submission. Please check the console for details.');
+    });
+}

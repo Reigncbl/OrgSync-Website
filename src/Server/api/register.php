@@ -19,9 +19,13 @@ if (isset($data->studentid) && isset($data->firstname) && isset($data->lastname)
     $post->firstname = $data->firstname;
     $post->lastname = $data->lastname;
     $post->email = $data->email;
-    $post->password = $data->password;
+    
+    // Hash the password before storing it
+    $post->password = password_hash($data->password, PASSWORD_DEFAULT);
+    
     $post->account_type = $data->account_type;
 
+    // Create the user
     if ($post->create()) {
         echo json_encode(array('message' => 'User Created'));
     } else {
@@ -30,5 +34,4 @@ if (isset($data->studentid) && isset($data->firstname) && isset($data->lastname)
 } else {
     echo json_encode(array('message' => 'Missing required fields'));
 }
-
 ?>
