@@ -61,40 +61,23 @@ class UserHandler {
 
     }
     
-    public function create()
-    {
-        $query = 'INSERT INTO ' . $this->table . ' 
+    public function create() {
+        $query = "INSERT INTO " . $this->table . " 
                   (student_id, firstname, lastname, email, password, account_type) 
-                  VALUES (:student_id, :firstname, :lastname, :email, :password, :account_type)';
-    
+                  VALUES (?, ?, ?, ?, ?, ?)";
+                  
         $stmt = $this->conn->prepare($query);
-    
-        if (!$stmt) {
-            echo "Error preparing statement: " . $this->conn->errorInfo()[2];
-            return false;
-        }
-    
-        $this->student_id = htmlspecialchars(strip_tags($this->student_id ?? ''));
-        $this->firstname = htmlspecialchars(strip_tags($this->firstname ?? ''));
-        $this->lastname = htmlspecialchars(strip_tags($this->lastname ?? ''));
-        $this->email = htmlspecialchars(strip_tags($this->email ?? ''));
-        $this->password = htmlspecialchars($this->password ?? ''); 
-        $this->account_type = htmlspecialchars(strip_tags($this->account_type ?? ''));
-    
-        $stmt->bindParam(':student_id', $this->student_id);
-        $stmt->bindParam(':firstname', $this->firstname);
-        $stmt->bindParam(':lastname', $this->lastname);
-        $stmt->bindParam(':email', $this->email);
-        $stmt->bindParam(':password', $this->password);
-        $stmt->bindParam(':account_type', $this->account_type);
-    
-        if ($stmt->execute()) {
-            return true;
-        }
-    
-        $errorInfo = $stmt->errorInfo();
-        echo "Error: " . $errorInfo[2];
-        return false;
+        
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        
+        return $stmt->execute([
+            $this->student_id,
+            $this->firstname,
+            $this->lastname,
+            $this->email,
+            $this->password,
+            $this->account_type
+        ]);
     }
     
     public function login($email, $password) {
@@ -111,6 +94,7 @@ class UserHandler {
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $password); 
         $stmt->execute();
+
     
         if ($stmt->rowCount() > 0) {
             return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -118,5 +102,6 @@ class UserHandler {
     
         return false;
     }
+    
     
 }

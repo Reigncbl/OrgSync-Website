@@ -6,35 +6,28 @@ header('Content-Type: application/json');
 // Initialize API
 require_once(dirname(__FILE__) . '/../core/initialize.php');
 
-// Start the session
-session_start();
-
 try {
     // Check if the request method is POST
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
- 
+        // Retrieve input data
         $data = json_decode(file_get_contents("php://input"));
 
-
+        // Validate input
         if (!empty($data->email) && !empty($data->password)) {
-           
+            // User instance
             $user = new UserHandler($db);
 
-  
+            // Verify user credentials
             $result = $user->login($data->email, $data->password);
             if ($result) {
-       
-                $_SESSION['student_id'] = $result['student_id']; 
-                $_SESSION['email'] = $result['email'];
-                $_SESSION['account_type'] = $result['account_type']; 
-                
+                // Authentication successful
                 http_response_code(200);
                 echo json_encode(array(
                     'message' => 'Login successful',
                     'user' => $result
                 ));
             } else {
-                
+                // Authentication failed
                 http_response_code(401);
                 echo json_encode(array('message' => 'Invalid email or password'));
             }

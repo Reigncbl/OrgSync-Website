@@ -1,9 +1,9 @@
 <?php
 require_once 'C:\laragon\www\OrgSync-Website\src\Server\email\email.php'; 
 
-$db_user = '';
-$db_pass = '';
-$db_name = '';
+$db_user = 'root';
+$db_pass = 'root';
+$db_name = 'web_dev';
 
 $fromEmail = 'johncarlo.lorieta@gmail.com';
 $fromName = 'John Carlo Lorieta';
@@ -20,10 +20,8 @@ try {
     define('APP_NAME', 'Web Development');
 
 
-$emailer = new NewsletterEmailer($db,, $fromEmail, $fromName);
 
 
-$emailer->sendNewsletterEmails();
 
 } catch (PDOException $e) {
     die("Database connection failed: " . $e->getMessage());
