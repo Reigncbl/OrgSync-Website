@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OrgSync</title>
+  <link rel="stylesheet" href="/src/Client/styles.css">
+  <script src="/src/Client/script/calendar.js"></script>
+
+</head>
+<body class="font-monserrat">
+    <div class="flex h-full w-full fixed">
+        <!-- Sidebar -->
+        <aside class="bg-gradient-to-t from-[#E73030] to-[#F2BDBD] w-64 h-full shadow-lg fixed z-10 py-8">
+            <div class="flex items-center justify-center w-full h-20 py-16">
+                <img src="/src/Client/img/logo.png" alt="Logo" class="w-full p-8">
+            </div>
+            <nav class="h-full mt-8">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#" class="nav-link">
+                            <p class="nav-text"><i class="fa-solid fa-house text-2xl"></i><span>Dashboard</span></p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link">
+                            <p class="nav-text"><i class="fa-solid fa-calendar-week text-2xl"></i><span>Add Events</span></p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link">
+                            <p class="nav-text"><i class="fa-solid fa-calendar-days text-2xl"></i><span>Calendar</span></p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link">
+                            <p class="nav-text"><i class="fa-solid fa-users text-2xl"></i><span>Organization</span></p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 ml-64 overflow-y-scroll">
+         <!-- Header -->
+            <header class="flex items-center justify-between">
+                <h1 class="text-3xl font-bold">Calendar</span></h1>
+            <div class="flex items-center space-x-8">
+                <button class="text-[#800000] text-2xl rounded-xl hover:text-red-500"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button class="text-[#800000] text-2xl rounded-xl hover:text-red-500"><i class="fa-solid fa-bell"></i></button>
+            </div>
+            </header>
+            <div class="w-full mt-12 ">
+                <!-- Header -->
+                <div class="flex items-center justify-between py-2">
+                    <div class="flex space-x-2 items-center">
+                        <h2 id="month-title" class="text-3xl font-extrabold text-[#800000]"></h2>
+                        <h3 id="year-title" class="text-2xl font-bold"></h3>
+                    </div>
+                    
+                    <div class="flex space-x-2">
+                        <button id="prev-btn" class="px-3 py-1 border-2 border-[#800000] text-[#800000] font-bold rounded-full hover:bg-red-700 hover:text-white">&lt;</button>
+                        <button id="next-btn" class="px-3 py-1 border-2 border-[#800000] text-[#800000] font-bold rounded-full hover:bg-red-700  hover:text-white">&gt;</button>
+                    </div>
+                </div>
+                <div class="border-2 border-[#800000] rounded-lg mt-2">
+                    <!-- Days of the Week -->
+                    <div class="grid grid-cols-7 text-center text-sm font-semibold text-black border-b-2 border-[#800000]">
+                        <div class="py-2">Sun</div>
+                        <div class="py-2">Mon</div>
+                        <div class="py-2">Tue</div>
+                        <div class="py-2">Wed</div>
+                        <div class="py-2">Thu</div>
+                        <div class="py-2">Fri</div>
+                        <div class="py-2">Sat</div>
+                    </div>
+                
+                    <!-- Dates -->
+                    <div id="calendar-dates" class="grid grid-cols-7 text-center text-sm">
+                    <!-- Calendar dates will be dynamically added here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- sidebar -->
+        <div class="w-96 h-full p-6 flex flex-col space-y-6">
+            <!-- date and Time -->
+            <div class="w-full h-fit flex flex-col space-y-6">
+                <div class="flex items-center justify-between w-full mt-1 space-x-1">
+                    <!-- Date Section -->
+                    <div class="date rounded-l-xl w-full flex items-center space-x-2">
+                        <i class="text-2xl text-[#FFAE21] fa-solid fa-calendar-days"></i>
+                        <h1 id="current-date" class="text-[#686B71] font-semibold"></h1>
+                    </div>
+                    <!-- Time Section -->
+                    <div class="date rounded-r-xl w-full flex items-center space-x-2">
+                        <i id="time-icon" class="text-2xl"></i>
+                        <h1 id="current-time" class="text-[#686B71] font-semibold"></h1>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile -->
+            <div class="flex items-center w-full h-fit p-2 space-x-4 bg-[#F2BDBD] rounded-lg shadow-lg">
+                <!-- Image Section -->
+                <div class="w-16 h-16 bg-gray-300 rounded-full overflow-hidden ">
+                    <img src="#" alt="username" class="w-full h-full object-cover">
+                </div>
+            
+                <!-- Content Section -->
+                <div>
+                    <h1 class="text-2xl font-semibold">Org Name</h1>
+                    <h3>Details</h3>
+                    <button class="text-sm">View Profile</button>
+                </div>
+            </div>
+            <div class="flex flex-col items-center w-full h-fit p-4 bg-[#D9D9D9] rounded-lg shadow-lg">
+                <h1 class="text-[#800000] font-bold text-5xl">78</h1>
+                <h1 class="font-medium">Website Visitor</h1>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
