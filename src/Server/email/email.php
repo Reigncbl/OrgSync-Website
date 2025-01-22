@@ -1,5 +1,5 @@
 <?php
-require 'C:\laragon\www\OrgSync-Website\vendor\autoload.php';
+// require 'C:\laragon\www\OrgSync-Website\vendor\autoload.php';
 use SendGrid\Mail\Mail;
 
 class NewsletterEmailer {

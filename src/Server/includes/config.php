@@ -1,5 +1,5 @@
 <?php
-require_once 'C:\laragon\www\OrgSync-Website\src\Server\email\email.php'; 
+// require_once 'C:\laragon\www\OrgSync-Website\src\Server\email\email.php'; 
 
 $db_user = 'root';
 $db_pass = 'root';
