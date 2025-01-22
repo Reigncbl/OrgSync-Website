@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event List</title>
+    <style>
+        .event {
+            margin-bottom: 20px;
+        }
+        .event img {
+            max-width: 200px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="events-container"></div> <!-- Container for displaying events -->
+
+    <script>
+        // Log before fetching data
+        console.log('Fetching event data...');
+
+        // Fetch event data from API
+        fetch('http://localhost:3000/src/Server/api/read_event.php')
+            .then(response => {
+                // Log the raw response
+                console.log('Raw response:', response);
+                
+                // Return parsed JSON
+                return response.json();
+            })
+            .then(events => {
+                // Log the events data after parsing
+                console.log('Parsed events:', events);
+
+                // Check if events is an object and has a data property
+                if (typeof events === 'object' && events.data) {
+                    const eventList = events.data;
+
+                    if (eventList.length === 0) {
+                        console.log('No events found.');
+                        return;  // Exit if there are no events
+                    }
+
+                    const container = document.getElementById('events-container');
+
+                    // Loop through each event and log event details
+                    eventList.forEach((event, index) => {
+                        console.log(`Event ${index + 1}:`, event);  // Log each event
+
+                        // Create a new div for each event
+                        const eventDiv = document.createElement('div');
+                        eventDiv.classList.add('event');
+
+                        // Add event details
+                        eventDiv.innerHTML = `
+                            <h2>${event.event_title}</h2>
+                            <p>${event.event_des}</p>
+                            <p><strong>Date:</strong> ${event.date}</p>
+                            <p><strong>Started:</strong> ${event.date_started}</p>
+                            <p><strong>Ended:</strong> ${event.date_ended}</p>
+                            <p><strong>Visibility:</strong> ${event.eventvisibility}</p>
+                            <p><strong>Platform:</strong> ${event.platform}</p>
+                            <p><a href="${event.platform_link}" target="_blank">Platform Link</a></p>
+                            <p><strong>Location:</strong> ${event.location}</p>
+                        `;
+
+                        // Add the banner if it exists
+                        if (event.banner) {
+                            console.log('Event banner found:', event.banner);  // Log banner data
+                            const img = document.createElement('img');
+                            img.src = 'data:image/png;base64,' + event.banner;
+                            img.alt = 'Event Banner';
+                            eventDiv.appendChild(img);
+                        } else {
+                            console.log('No banner for event:', event.event_title);  // Log no banner
+                        }
+
+                        // Append event to the container
+                        container.appendChild(eventDiv);
+                    });
+                } else {
+                    console.error('Expected an object with a "data" property but received:', events);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching events:', error);
+            });
+    </script>
+
+</body>
+</html>
