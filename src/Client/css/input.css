@@ -35,5 +35,7 @@
       .table-col {
         @apply border-x px-4 py-2 h-fit text-center;
       }
-      
+      .event-box {
+        @apply flex bg-white p-2 px-4 rounded-xl items-center space-x-4;
+      }
 }

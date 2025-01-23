@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (eventDate.getMonth() === month && eventDate.getFullYear() === year) {
                 const eventElement = document.getElementById(`event-${eventDate.getDate()}`);
                 if (eventElement) {
-                    eventElement.innerHTML += `<div class="bg-red-500 text-white font-semibold p-2 rounded-lg shadow-md mb-1" style="background-color: #f87171 !important;">${event.event_title}</div>`;
+                    eventElement.innerHTML += `<div class="text-white font-semibold p-2 rounded-lg shadow-md mb-1" style="background-color: #f87171 !important;">${event.event_title}</div>`;
                 }
             }
         });
@@ -54,13 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('http://localhost:3000/src/Server/api/read_event.php');
             const data = await response.json();
 
-            console.log('Fetched data:', data); // Log API response
+            console.log('Fetched data:', data); 
 
-            // Check if the response has a `data` property and it's an array
             if (data && data.status === "success" && Array.isArray(data.data)) {
-                events = data.data; // Assign the `data` array to `events`
-                console.log('Events loaded:', events); // Log events
-                renderCalendar(currentMonth, currentYear); // Render the calendar with events
+                events = data.data;
+                console.log('Events loaded:', events);
+                renderCalendar(currentMonth, currentYear);
             } else {
                 console.error('Unexpected API response format:', data);
             }
@@ -93,3 +92,49 @@ document.addEventListener('DOMContentLoaded', () => {
         renderCalendar(currentMonth, currentYear);
     });
 });
+
+fetch('/src/Server/api/read_event.php')
+  .then(response => response.json())
+  .then(data => {
+    console.log(data); 
+    if (data.data && data.data.length > 0) {
+      const eventListContainer = document.getElementById('side-event');
+      eventListContainer.innerHTML = ''; 
+
+      const topTwoEvents = data.data.slice(0, 2);
+
+      const eventCards = topTwoEvents.map(event => {
+        return `
+            <div class="w-full h-fit p-4 bg-[#D9D9D9] rounded-lg shadow-lg flex flex-col space-y-2">
+                <div>
+                    <h1 class="text-xl font-semibold">${event.event_title}</h1>
+                </div>
+                <div class="event-box">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <h3>${event.date}</h3>
+                </div>
+                <div class="flex space-x-2">
+                    <div class="event-box w-full">
+                        <i class="fa-regular fa-clock"></i>
+                        <h1>${event.date_started}</h1>
+                    </div>
+                    <div class="event-box w-full">
+                        <i class="fa-regular fa-clock"></i>
+                        <h1>${event.date_ended}</h1>
+                    </div>
+                </div>
+                <div class="event-box">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <h3>${event.location}</h3>
+                </div>
+            </div>
+        `;
+      }).join('');
+
+      eventListContainer.innerHTML = eventCards;
+    }
+  })
+  .catch(error => {
+    console.error('Error fetching organization data:', error);
+  });
+
