@@ -22,7 +22,7 @@ async function handleLogin(event) {
             } else {
                 // Fallback for unexpected types (optional)
                 alert('Unknown account type. Redirecting to default dashboard.');
-                redirectUrl = '/src/Client/scripts/home.html';
+                redirectUrl = '/src/Client/scripts/dashboard.html';
             }
 
             alert('Login successful!');

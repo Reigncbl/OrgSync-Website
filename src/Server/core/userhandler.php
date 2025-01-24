@@ -37,28 +37,25 @@ class UserHandler {
         return $stmt;
     }
 
-    public function read_single(){
+    public function read_single() {
         $query = 'SELECT 
-        student_id,
-        firstname,
-        lastname,
-        email,
-        password,
-        account_type
-    FROM ' . $this->table . ' 
+            student_id,
+            firstname,
+            lastname,
+            email,
+            account_type
+        FROM ' . $this->table . ' 
         WHERE student_id = ? LIMIT 1';
-
+    
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->student_id);
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        $this ->firstname =$row['firstname'];
-        $this ->lastname =$row['lastname'];
-        $this ->email =$row['email'];
-        $this ->password =$row['password'];
-        $this ->account_type = $row['account_type'];
-
+    
+        $this->firstname = $row['firstname'];
+        $this->lastname = $row['lastname'];
+        $this->email = $row['email'];
+        $this->account_type = $row['account_type'];
     }
     
     public function create() {
