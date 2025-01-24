@@ -13,9 +13,20 @@ async function handleLogin(event) {
         const data = await response.json();
 
         if (response.status === 200) {
-            alert('Login successful!');
-            window.location.href = '/src/Client/scripts/dashboard.html';
+            // Redirect based on account_type
+            let redirectUrl;
+            if (data.user.account_type === 'Admin') {
+                redirectUrl = '/src/Client/scripts/admin.html';
+            } else if (data.user.account_type === 'User') {
+                redirectUrl = '/src/Client/scripts/dashboard.html';
+            } else {
+                // Fallback for unexpected types (optional)
+                alert('Unknown account type. Redirecting to default dashboard.');
+                redirectUrl = '/src/Client/scripts/home.html';
+            }
 
+            alert('Login successful!');
+            window.location.href = redirectUrl;
         } else {
             alert(data.message);
         }
