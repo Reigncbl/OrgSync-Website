@@ -14,6 +14,7 @@ class EventHandler {
     public $location;
     public $eventvisibility;
     public $banner;
+    public $org_id;
 
     // Constructor receives the database connection
     public function __construct($db) {
@@ -24,8 +25,8 @@ class EventHandler {
     public function createEvent() {
         // Prepare SQL query to insert event data
         $query = "INSERT INTO " . $this->table . " 
-                  (event_title, event_des, date, date_started, date_ended, platform, platform_link, location, eventvisibility, banner)
-                  VALUES (:event_title, :event_des, :date, :date_started, :date_ended, :platform, :platform_link, :location, :eventvisibility, :banner)";
+                  (event_title, event_des, date, date_started, date_ended, platform, platform_link, location, eventvisibility, banner, org_id)
+                  VALUES (:event_title, :event_des, :date, :date_started, :date_ended, :platform, :platform_link, :location, :eventvisibility, :banner, :org_id)";
         
         // Prepare the statement
         $stmt = $this->db->prepare($query);
@@ -41,6 +42,7 @@ class EventHandler {
         $stmt->bindParam(':location', $this->location);
         $stmt->bindParam(':eventvisibility', $this->eventvisibility);
         $stmt->bindParam(':banner', $this->banner);
+        $stmt->bindParam(':org_id', $this->org_id);
 
         // Execute the query and check for success
         if ($stmt->execute()) {
@@ -64,6 +66,7 @@ class EventHandler {
             eventvisibility,
             platform,
             platform_link,
+            org_id,
             location
         FROM ' . $this->table;
     
