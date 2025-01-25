@@ -5,7 +5,7 @@ async function handleRegister(event) {
     const lastname = document.getElementById('lastname').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    const account_type = 'user';  // or whichever account type you're setting
+    const account_type = 'User';  // or whichever account type you're setting
 
     // Basic input validation
     if (!studentid || !firstname || !lastname || !email || !password) {

@@ -37,28 +37,25 @@ class UserHandler {
         return $stmt;
     }
 
-    public function read_single(){
+    public function read_single() {
         $query = 'SELECT 
-        student_id,
-        firstname,
-        lastname,
-        email,
-        password,
-        account_type
-    FROM ' . $this->table . ' 
+            student_id,
+            firstname,
+            lastname,
+            email,
+            account_type
+        FROM ' . $this->table . ' 
         WHERE student_id = ? LIMIT 1';
-
+    
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->student_id);
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        $this ->firstname =$row['firstname'];
-        $this ->lastname =$row['lastname'];
-        $this ->email =$row['email'];
-        $this ->password =$row['password'];
-        $this ->account_type = $row['account_type'];
-
+    
+        $this->firstname = $row['firstname'];
+        $this->lastname = $row['lastname'];
+        $this->email = $row['email'];
+        $this->account_type = $row['account_type'];
     }
     
     public function create() {
@@ -67,9 +64,11 @@ class UserHandler {
                   VALUES (?, ?, ?, ?, ?, ?)";
                   
         $stmt = $this->conn->prepare($query);
-        
+        error_log("Raw password before hashing: " . $this->password);
+
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
-        
+
+        error_log("Hashed password: " . $this->password);
         return $stmt->execute([
             $this->student_id,
             $this->firstname,
@@ -78,30 +77,38 @@ class UserHandler {
             $this->password,
             $this->account_type
         ]);
+        
     }
     
-    public function login($email, $password) {
-        $query = "SELECT student_id,
-        firstname,
-        lastname,
-        email,
-        password,
-        account_type
-                  FROM users 
-                  WHERE email = :email AND password = :password";
-    
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $password); 
-        $stmt->execute();
+   public function login($email, $password) {
+    $query = "SELECT student_id, firstname, lastname, email, password, account_type
+              FROM users 
+              WHERE email = :email";
 
-    
-        if ($stmt->rowCount() > 0) {
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+
+    if ($stmt->rowCount() > 0) {
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $hashed_password = $row['password'];
+
+        // Debug: Log input password and stored hash
+        error_log("Input password: " . $password);
+        error_log("Stored hash: " . $hashed_password);
+
+        if (password_verify($password, $hashed_password)) {
+            unset($row['password']);
+            return $row;
+        } else {
+            error_log("Password verification failed");
         }
-    
-        return false;
+    } else {
+        error_log("No user found with email: " . $email);
     }
+
+    return false;
+}
     
     
 }
