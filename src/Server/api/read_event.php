@@ -13,8 +13,7 @@ error_reporting(E_ALL);
 
 try {
     require_once(dirname(__FILE__) . '/../core/initialize.php');
-   
-
+    
     if (!$db) {
         throw new PDOException('Database connection failed');
     }
@@ -24,8 +23,7 @@ try {
     $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     
-   
-
+    
     // Instantiate the EventHandler class
     $eventHandler = new EventHandler($db);
 
@@ -52,14 +50,12 @@ try {
     echo json_encode($response);
 
 } catch (PDOException $e) {
-   
     http_response_code(500);
     echo json_encode(array(
         'status' => 'error',
         'message' => 'Database error: ' . $e->getMessage()
     ));
 } catch (Exception $e) {
-   
     http_response_code(500);
     echo json_encode(array(
         'status' => 'error',

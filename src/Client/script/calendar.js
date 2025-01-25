@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const userData = JSON.parse(sessionStorage.getItem('userData')); // Retrieve user data from sessionStorage
+    if (!userData) {
+        window.location.href = '/login.html'; // Redirect if no user data found
+    }
+
     let currentMonth = new Date().getMonth();
     let currentYear = new Date().getFullYear();
 
@@ -51,14 +56,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fetch event data from the API
     const fetchEvents = async () => {
         try {
-            const response = await fetch('http://localhost:3000/src/Server/api/read_event.php');
+            const response = await fetch('/src/Server/api/read_calendar.php');
             const data = await response.json();
-
+    
             console.log('Fetched data:', data); 
-
-            if (data && data.status === "success" && Array.isArray(data.data)) {
-                events = data.data;
-                console.log('Events loaded:', events);
+    
+            if (data && Array.isArray(data.data)) {
+                const studentId = userData.student_id; // Get student_id from user data
+                events = data.data.filter(event => event.student_id === studentId); // Filter events by student_id
+                console.log('Filtered events:', events);
                 renderCalendar(currentMonth, currentYear);
             } else {
                 console.error('Unexpected API response format:', data);
@@ -93,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-fetch('/src/Server/api/read_event.php')
+fetch('/src/Server/api/read_calendar.php')
   .then(response => response.json())
   .then(data => {
     console.log(data); 
