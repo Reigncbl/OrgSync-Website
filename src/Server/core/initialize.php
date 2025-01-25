@@ -1,4 +1,16 @@
 <?php
+// initialize.php
+session_start();
+
+// Optional: Define helper functions for session management
+function setSessionData($key, $value) {
+    $_SESSION[$key] = $value;
+}
+
+function getSessionData($key) {
+    return $_SESSION[$key] ?? null;
+}
+
 defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
 
 
