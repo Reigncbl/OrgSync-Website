@@ -52,44 +52,54 @@ class EventHandler {
         }
     }
 
-  public function read() {
-    try {
-        // Create query to fetch event data
-        $query = 'SELECT 
-            eventid,
-            event_des,
-            event_title,
-            banner,
-            date,
-            date_started,
-            date_ended,
-            eventvisibility,
-            platform,
-            platform_link,
-            org_id,
-            location
-        FROM ' . $this->table;
+    public function read($org_id = null) {
+        try {
+            // Base query
+            $query = 'SELECT 
+                eventid,
+                event_des,
+                event_title,
+                banner,
+                date,
+                date_started,
+                date_ended,
+                eventvisibility,
+                platform,
+                platform_link,
+                location,
+                org_id
+            FROM ' . $this->table;
     
-        $stmt = $this->db->prepare($query);
-        $stmt->execute();
-    
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-        // Process each row
-        foreach ($results as &$row) {
-            if (!empty($row['banner'])) {
-                // Ensure the banner is binary and base64 encode it
-                $row['banner'] = base64_encode($row['banner']);
+            // Add organization filter if provided
+            if ($org_id !== null) {
+                $query .= ' WHERE org_id = :org_id';
             }
+    
+            $stmt = $this->db->prepare($query);
+            
+            // Bind organization ID if provided
+            if ($org_id !== null) {
+                $stmt->bindParam(':org_id', $org_id, PDO::PARAM_INT);
+            }
+    
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            // Process banner images
+            foreach ($results as &$row) {
+                if (!empty($row['banner'])) {
+                    $row['banner'] = base64_encode($row['banner']);
+                }
+                // Ensure org_id is properly typed
+                $row['org_id'] = $row['org_id'] !== null ? (int)$row['org_id'] : null;
+            }
+    
+            return $results;
+    
+        } catch (PDOException $e) {
+            error_log('Database error in EventHandler::read(): ' . $e->getMessage());
+            return null;
         }
-
-        return $results;
-
-    } catch (PDOException $e) {
-        error_log('Database error: ' . $e->getMessage());
-        return null;
     }
-}
-
 }
 ?>

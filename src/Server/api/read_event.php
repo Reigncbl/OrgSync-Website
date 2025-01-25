@@ -1,66 +1,71 @@
 <?php
 // Headers
-header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Origin: http://localhost:3000');
 header('Content-Type: application/json; charset=UTF-8');
+header('Access-Control-Allow-Credentials: true');
 
 // Enable error reporting
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-
-
+// Start session only if not already active
+if (session_status() === PHP_SESSION_NONE) {
+    session_start([
+        'cookie_lifetime' => 86400,
+        'cookie_secure' => false, // true in production
+        'cookie_httponly' => true,
+        'cookie_samesite' => 'Lax'
+    ]);
+}
 
 try {
     require_once(dirname(__FILE__) . '/../core/initialize.php');
-    
     if (!$db) {
-        throw new PDOException('Database connection failed');
+        throw new RuntimeException('Database connection failed');
     }
 
-    // Configure PDO to throw exceptions and return associative arrays
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    
-    
-    // Instantiate the EventHandler class
+    // Get organization ID from session
+    $org_id = $_SESSION['org_id'] ?? null;
+
     $eventHandler = new EventHandler($db);
+    $events = $eventHandler->read($org_id);
 
-    // Fetch events from the database and encode the banner image
-    $events = $eventHandler->read();
-
-    // Check if any events were found
-    if ($events) {
-        $response = array(
-            'status' => 'success',
-            'count' => count($events),
-            'data' => $events
-        );
-    } else {
-        $response = array(
-            'status' => 'success',
-            'count' => 0,
-            'data' => array(),
-            'message' => 'No records found'
-        );
+    if ($events === null) {
+        throw new RuntimeException('Event retrieval failed');
     }
 
-    
+    $response = [
+        'status' => 'success',
+        'count' => count($events),
+        'data' => $events
+    ];
+
+    if (empty($events)) {
+        $response['message'] = 'No events found';
+    }
+
     echo json_encode($response);
 
 } catch (PDOException $e) {
     http_response_code(500);
-    echo json_encode(array(
+    error_log('Database Error: ' . $e->getMessage());
+    echo json_encode([
         'status' => 'error',
-        'message' => 'Database error: ' . $e->getMessage()
-    ));
+        'message' => 'Database operation failed'
+    ]);
+} catch (RuntimeException $e) {
+    http_response_code(400);
+    echo json_encode([
+        'status' => 'error',
+        'message' => $e->getMessage()
+    ]);
 } catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(array(
+    error_log('Unexpected Error: ' . $e->getMessage());
+    echo json_encode([
         'status' => 'error',
-        'message' => 'General error: ' . $e->getMessage()
-    ));
+        'message' => 'An unexpected error occurred'
+    ]);
 }
-
 ?>
