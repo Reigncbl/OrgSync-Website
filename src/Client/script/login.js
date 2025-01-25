@@ -8,31 +8,23 @@ async function handleLogin(event) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password }),
+            credentials: 'include'
         });
 
         const data = await response.json();
 
-        if (response.status === 200) {
-            // Redirect based on account_type
-            let redirectUrl;
-            if (data.user.account_type === 'Admin') {
-                redirectUrl = '/src/Client/scripts/admin.html';
-            } else if (data.user.account_type === 'User') {
-                redirectUrl = '/src/Client/scripts/dashboard.html';
-            } else {
-                // Fallback for unexpected types (optional)
-                alert('Unknown account type. Redirecting to default dashboard.');
-                redirectUrl = '/src/Client/scripts/dashboard.html';
-            }
-
-            alert('Login successful!');
+        if (response.ok) {
+            sessionStorage.setItem('userData', JSON.stringify(data.user));
+            const redirectUrl = data.user.account_type === 'Admin' 
+                ? '/src/Client/scripts/admin.html' 
+                : '/src/Client/scripts/dashboard.html';
             window.location.href = redirectUrl;
         } else {
-            alert(data.message);
+            alert(data.message || 'Login failed');
         }
     } catch (error) {
-        alert('An error occurred. Please try again.');
-        console.error(error);
+        console.error('Login error:', error);
+        alert('Login failed. Please try again.');
     }
 }
 
