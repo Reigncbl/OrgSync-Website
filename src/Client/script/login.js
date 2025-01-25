@@ -3,40 +3,28 @@ async function handleLogin(event) {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    console.log("Attempting login with:", { email, password }); // Debug log
-
     try {
         const response = await fetch('http://localhost:3000/src/Server/api/login.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password }),
+            credentials: 'include'
         });
 
         const data = await response.json();
 
-        console.log("Login response:", data); // Debug log
-        
-
-        if (response.status === 200) {
-            let redirectUrl;
-            if (data.user.account_type === 'Admin') {
-                redirectUrl = '/src/Client/scripts/admin.html';
-            } else if (data.user.account_type === 'User') {
-                redirectUrl = '/src/Client/scripts/dashboard.html';
-            } else {
-                console.warn("Unknown account type:", data.user.account_type); // Debug warning
-                redirectUrl = '/src/Client/scripts/dashboard.html';
-            }
-
-            alert('Login successful!');
+        if (response.ok) {
+            sessionStorage.setItem('userData', JSON.stringify(data.user));
+            const redirectUrl = data.user.account_type === 'Admin' 
+                ? '/src/Client/scripts/admin.html' 
+                : '/src/Client/scripts/dashboard.html';
             window.location.href = redirectUrl;
         } else {
-            console.error("Login failed:", data.message); // Debug error
-            alert(data.message);
+            alert(data.message || 'Login failed');
         }
     } catch (error) {
-        console.error("Error during login:", error); // Debug error
-        alert('An error occurred. Please try again.');
+        console.error('Login error:', error);
+        alert('Login failed. Please try again.');
     }
 }
 

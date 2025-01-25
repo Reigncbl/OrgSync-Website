@@ -84,18 +84,18 @@ class UserHandler {
     
     public function login($email, $password) {
         $query = "SELECT 
-            s.student_id, 
-            s.firstname, 
-            s.lastname, 
-            s.email,
-            s.password,
-            s.account_type, 
-            so.org_id
-        FROM 
-            users s 
-            INNER JOIN user_organizations so 
-            ON s.student_id = so.student_id
-        WHERE s.email = :email";
+        s.student_id, 
+        s.firstname, 
+        s.lastname, 
+        s.email,
+        s.password,
+        s.account_type, 
+        so.org_id
+    FROM 
+        users s 
+        INNER JOIN user_organizations so 
+        ON s.student_id = so.student_id
+    WHERE s.email = :email";
     
         // Debug: Log the query
         error_log("Executing query: $query");
