@@ -3,9 +3,6 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
-// Include the Organization class
-require_once(dirname(__FILE__) . '/../core/Organization.php');  
-
 // Initialize API
 require_once(dirname(__FILE__) . '/../core/initialize.php');
 

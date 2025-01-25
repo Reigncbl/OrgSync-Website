@@ -21,7 +21,6 @@ if (session_status() === PHP_SESSION_NONE) {
 
 try {
     require_once(dirname(__FILE__) . '/../core/initialize.php');
-
     if (!$db) {
         throw new RuntimeException('Database connection failed');
     }

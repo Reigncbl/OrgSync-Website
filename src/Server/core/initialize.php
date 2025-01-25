@@ -31,4 +31,5 @@ require_once(CORE_PATH . DS . "userhandler.php");
 require_once(CORE_PATH . DS . "organization.php");
 require_once(CORE_PATH . DS . "eventhandler.php");
 require_once(CORE_PATH . DS . "emailhandler.php");
+require_once(CORE_PATH . DS . "calendar.php");
 ?>

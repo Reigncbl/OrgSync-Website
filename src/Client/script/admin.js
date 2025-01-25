@@ -45,7 +45,7 @@ fetch('/src/Server/api/read_event.php')
         
       const eventCards = data.data.map(event => {
         return `
-            <article class="bg-white p-4 shadow rounded-lg flex items-center">
+            <div class="bg-white p-4 shadow rounded-lg flex items-center">
                 <div class="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center">
                     <span class="font-bold text-lg">${event.date}</span>
                 </div>
@@ -59,7 +59,7 @@ fetch('/src/Server/api/read_event.php')
                         View Details
                     </button>
                 </div>
-            </article>
+            </div>
         `;
       }).join('');
 
@@ -69,3 +69,12 @@ fetch('/src/Server/api/read_event.php')
   .catch(error => {
     console.error('Error fetching organization data:', error);
   });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const databaseLink = document.getElementById('database-link');
+    const subLinks = document.getElementById('sub-links');
+
+    databaseLink.addEventListener('click', () => {
+        subLinks.classList.toggle('hidden');
+    });
+});

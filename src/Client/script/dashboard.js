@@ -1,15 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM fully loaded and parsed');
 
-    // User Data Handling
-    const userData = JSON.parse(sessionStorage.getItem('userData'));
-    console.log('User data from sessionStorage:', userData);
-
-    if (!userData) {
-        console.warn('No user data found, redirecting to login page');
-        window.location.href = '/login.html';
-        return;
-    }
+  
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
 
     // Populate User Info
     console.log('Populating user info...');
@@ -134,6 +127,47 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Logout failed:', error);
                 alert('Logout failed. Please try again.');
             });
+    // Load Events
+    fetch('/src/Server/api/read_event.php')
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById('events-container');
+            if(data.data?.length) {
+                container.innerHTML = data.data.map(event => `
+                    <div class="flex items-start space-x-8 bg-[#D9D9D9] rounded-3xl p-6 h-64 w-full">
+                        ${event.banner ? `
+                        <img src="data:image/png;base64,${event.banner}" 
+                            class="w-72 h-full bg-slate-500 rounded-xl object-cover"
+                            alt="${event.event_title}">` : 
+                        '<div class="w-72 h-full bg-slate-500 rounded-xl"></div>'}
+                        
+                        <div class="flex flex-col justify-between h-full w-full">
+                            <div>
+                                <h1 class="text-3xl font-semibold">${event.event_title}</h1>
+                                <h3 class="text-[#900000] font-medium mt-2">
+                                    <span>${event.date}</span>
+                                    <span>${event.date_started} - ${event.date_ended}</span>
+                                </h3>
+                            </div>
+                            <p class="mt-4 text-gray-700">${event.event_des}</p>
+                            <div class="flex justify-end">
+                                <button class="button-dash text-[#900000] hover:text-white hover:bg-[#900000] transition px-4 py-2 rounded-xl border border-[#900000]">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        });
+
+    // Logout functionality
+    document.addEventListener('click', (e) => {
+        if(e.target.closest('#logout-btn')) {
+            sessionStorage.removeItem('userData');
+            fetch('/src/Server/api/logout.php', {
+                credentials: 'include'
+            }).then(() => window.location.href = '/login.html');
         }
     });
 });
