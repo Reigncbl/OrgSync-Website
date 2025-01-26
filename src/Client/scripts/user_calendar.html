@@ -6,35 +6,35 @@
   <title>OrgSync</title>
   <link rel="stylesheet" href="/src/Client/styles.css">
   <script src="/src/Client/script/calendar.js"></script>
-  <script src="/src/Client/script/admin.js"></script>
+  <script src="/src/Client/script/clock.js"></script>
 
 </head>
 <body class="font-monserrat">
     <div class="flex h-full w-full fixed">
         <!-- Sidebar -->
-        <aside class="bg-gradient-to-t from-[#E73030] to-[#F2BDBD] w-64 h-full shadow-lg fixed z-10 py-8">
+        <aside class="bg-gradient-to-t from-[#E73030] to-[#F2BDBD] w-64 h-screen shadow-lg shadow-gray-900/50 z-10 pl-6 fixed">
             <div class="flex items-center justify-center w-full h-20 py-16">
-                <img src="/src/Client/img/logo.png" alt="Logo" class="w-full p-8">
+                <img src="../img/logo.png" alt="Logo" class="w-36">
             </div>
-            <nav class="h-full mt-8">
+            <nav class="h-full">
                 <ul class="space-y-2">
                     <li>
-                        <a href="#" class="nav-link">
-                            <p class="nav-text"><i class="fa-solid fa-house text-2xl"></i><span>Dashboard</span></p>
+                        <a href="/src/Client/scripts/user_dash.html" class="nav-link">
+                            <p class="nav-text"><i class="fa-solid fa-house text-2xl"></i><span>Home</span></p>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link">
-                            <p class="nav-text"><i class="fa-solid fa-calendar-week text-2xl"></i><span>Add Events</span></p>
+                        <a href="/src/Client/scripts/user_event.html" class="nav-link">
+                            <p class="nav-text"><i class="fa-solid fa-clipboard-list text-2xl"></i><span>Events</span></p>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link">
+                        <a href="/src/Client/scripts/user_calendar.html" class="nav-link">
                             <p class="nav-text"><i class="fa-solid fa-calendar-days text-2xl"></i><span>Calendar</span></p>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link">
+                        <a href="/src/Client/scripts/user_org.html" class="nav-link">
                             <p class="nav-text"><i class="fa-solid fa-users text-2xl"></i><span>Organization</span></p>
                         </a>
                     </li>

@@ -9,27 +9,14 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Start session only if not already active
-if (session_status() === PHP_SESSION_NONE) {
-    session_start([
-        'cookie_lifetime' => 86400,
-        'cookie_secure' => false, // true in production
-        'cookie_httponly' => true,
-        'cookie_samesite' => 'Lax'
-    ]);
-}
-
 try {
     require_once(dirname(__FILE__) . '/../core/initialize.php');
     if (!$db) {
         throw new RuntimeException('Database connection failed');
     }
 
-    // Get organization ID from session
-    $org_id = $_SESSION['org_id'] ?? null;
-
     $eventHandler = new EventHandler($db);
-    $events = $eventHandler->read($org_id);
+    $events = $eventHandler->read(); // No organization ID passed
 
     if ($events === null) {
         throw new RuntimeException('Event retrieval failed');

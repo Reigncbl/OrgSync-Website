@@ -62,20 +62,21 @@ try {
             ];
         }
 
-        // Send JSON response
-        echo json_encode($cal_arr);
+        // Send JSON response with success message
+        echo json_encode(['status' => 'success', 'data' => $cal_arr['data']]);
     } else {
-        echo json_encode(['message' => 'No events found.']);
+        // If no events found, return empty array with success status
+        echo json_encode(['status' => 'success', 'data' => []]);
     }
 } catch (PDOException $e) {
     // Handle database-related exceptions
     debug("PDOException: " . $e->getMessage());
     http_response_code(500);
-    echo json_encode(['message' => 'Database error occurred.', 'error' => $e->getMessage()]);
+    echo json_encode(['status' => 'error', 'message' => 'Database error occurred.', 'error' => $e->getMessage()]);
 } catch (Exception $e) {
     // Handle general exceptions
     debug("Exception: " . $e->getMessage());
     http_response_code(500);
-    echo json_encode(['message' => 'An error occurred.', 'error' => $e->getMessage()]);
+    echo json_encode(['status' => 'error', 'message' => 'An error occurred.', 'error' => $e->getMessage()]);
 }
 ?>

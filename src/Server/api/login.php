@@ -26,7 +26,7 @@ try {
                 $_SESSION['logged_in'] = true;
                 $_SESSION['student_id'] = $result['student_id'];
                 $_SESSION['account_type'] = $result['account_type'];
-                $_SESSION['org_ids'] = $result['org_ids']; // Store array of org IDs
+                $_SESSION['org_id'] = $result['org_id'];
 
                 http_response_code(200);
                 echo json_encode([
@@ -37,7 +37,7 @@ try {
                         'lastname' => $result['lastname'],
                         'email' => $result['email'],
                         'account_type' => $result['account_type'],
-                        'org_ids' => $result['org_ids'] // Return array of org IDs
+                        'org_id' => $result['org_id']
                     ]
                 ]);
             } else {
@@ -56,3 +56,4 @@ try {
     http_response_code(500);
     echo json_encode(['message' => 'Server error: ' . $e->getMessage()]);
 }
+?>

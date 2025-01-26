@@ -14,35 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // Debug: Log user org_id
-    console.log('User org_id:', userOrgId);
-
-    // Function to update date and time
-    function updateDateTime() {
-        const dateElement = document.getElementById('current-date');
-        const timeElement = document.getElementById('current-time');
-        const timeIcon = document.getElementById('time-icon');
-
-        if (!dateElement || !timeElement || !timeIcon) {
-            console.error('Missing elements for date/time update');
-            return;
-        }
-
-        const now = new Date();
-        const options = { year: 'numeric', month: 'short', day: 'numeric' };
-        dateElement.textContent = now.toLocaleDateString(undefined, options);
-
-        let hours = now.getHours();
-        const minutes = now.getMinutes().toString().padStart(2, '0');
-        const seconds = now.getSeconds().toString().padStart(2, '0');
-        const ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12 || 12;
-
-        timeElement.textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
-        timeIcon.className = `text-2xl fa-solid ${ampm === 'AM' ? 'fa-sun' : 'fa-moon'}`;
-        timeIcon.style.color = ampm === 'AM' ? '#FFAE21' : '#2563eb';
-    }
-
     // Function to render events
     function renderEvents(events) {
         const eventListContainer = document.getElementById('admin-event');
@@ -84,20 +55,20 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('/src/Server/api/read_event.php')
         .then((response) => {
             if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+                throw new Error(`HTTP error! Status: ${response.status}`);
             }
             return response.text(); // Use text first to debug issues
         })
         .then((responseText) => {
             try {
-            const data = JSON.parse(responseText); // Parse as JSON
-            console.log('Fetched event data:', data);
-            renderEvents(data.data || []);
+                const data = JSON.parse(responseText); // Parse as JSON
+                console.log('Fetched event data:', data);
+                renderEvents(data.data || []);
             } catch (err) {
-            console.error('Error parsing JSON:', err, responseText);
+                console.error('Error parsing JSON:', err, responseText);
             }
         })
-    .catch((error) => console.error('Error fetching events:', error));
+        .catch((error) => console.error('Error fetching events:', error));
 
     // Toggle sub-links visibility
     const databaseLink = document.getElementById('database-link');
@@ -107,9 +78,4 @@ document.addEventListener('DOMContentLoaded', () => {
             subLinks.classList.toggle('hidden');
         });
     }
-
-    // Update date and time every second
-    setInterval(updateDateTime, 1000);
-    updateDateTime();
 });
-
