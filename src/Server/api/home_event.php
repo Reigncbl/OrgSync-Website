@@ -15,23 +15,29 @@ try {
         throw new RuntimeException('Database connection failed');
     }
 
-    $eventHandler = new EventHandler($db);
-    $events = $eventHandler->read(); // No organization ID passed
+    // Create homeEvent instance
+    $homeEvent = new homeEvent($db);
+
+    // Retrieve events
+    $events = $homeEvent->read();
 
     if ($events === null) {
         throw new RuntimeException('Event retrieval failed');
     }
 
+    // Prepare response data
     $response = [
         'status' => 'success',
         'count' => count($events),
         'data' => $events
     ];
 
+    // If no events were found, add a message
     if (empty($events)) {
         $response['message'] = 'No events found';
     }
 
+    // Return the JSON response
     echo json_encode($response);
 
 } catch (PDOException $e) {
