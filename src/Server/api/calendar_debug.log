@@ -35,3 +35,75 @@
 [2025-01-26 10:44:32] [DEBUG] Binding session values in Calendar::add | {"student_id":"2022-00001-CM-0","org_id":1}
 [2025-01-26 10:44:32] [DEBUG] Insert operation result | {"success":true,"rowCount":1,"errorInfo":["00000",null,null]}
 [2025-01-26 10:44:32] [SUCCESS] Event added successfully | {"event_id":59}
+[2025-01-26 10:54:15] [START] Calendar Add API Endpoint Started | {"remote_ip":"::1","request_method":"POST"}
+[2025-01-26 10:54:15] [AUTH] User authenticated | {"student_id":"2022-00001-CM-1","org_id":1}
+[2025-01-26 10:54:15] [INFO] Received POST data | {"raw_data":{"event_id":"53","student_id":"2022-00001-CM-1","org_id":1,"is_attending":true,"added_at":"2025-01-26T10:54:15.514Z","visibility_status":"public"}}
+[2025-01-26 10:54:15] [INFO] Prepared calendar data | {"calendar_data":{"event_id":"53","is_attending":true,"added_at":"2025-01-26 10:54:15","visibility_status":"public"}}
+[2025-01-26 10:54:15] [DEBUG] Binding session values in Calendar::add | {"student_id":"2022-00001-CM-1","org_id":1}
+[2025-01-26 10:54:15] [DEBUG] Insert operation result | {"success":true,"rowCount":1,"errorInfo":["00000",null,null]}
+[2025-01-26 10:54:15] [SUCCESS] Event added successfully | {"event_id":"53"}
+[2025-01-26 10:54:53] [START] Calendar Add API Endpoint Started | {"remote_ip":"::1","request_method":"POST"}
+[2025-01-26 10:54:53] [AUTH] User authenticated | {"student_id":"2022-00001-CM-1","org_id":1}
+[2025-01-26 10:54:53] [INFO] Received POST data | {"raw_data":{"event_id":"54","student_id":"2022-00001-CM-1","org_id":1,"is_attending":true,"added_at":"2025-01-26T10:54:53.510Z","visibility_status":"public"}}
+[2025-01-26 10:54:53] [INFO] Prepared calendar data | {"calendar_data":{"event_id":"54","is_attending":true,"added_at":"2025-01-26 10:54:53","visibility_status":"public"}}
+[2025-01-26 10:54:53] [DEBUG] Binding session values in Calendar::add | {"student_id":"2022-00001-CM-1","org_id":1}
+[2025-01-26 10:54:53] [DEBUG] Insert operation result | {"success":true,"rowCount":1,"errorInfo":["00000",null,null]}
+[2025-01-26 10:54:53] [SUCCESS] Event added successfully | {"event_id":"54"}
+[2025-01-26 11:01:12] [START] Calendar Add API Endpoint Started | {"remote_ip":"::1","request_method":"POST"}
+[2025-01-26 11:01:29] [START] Calendar Add API Endpoint Started | {"remote_ip":"::1","request_method":"POST"}
+[2025-01-26 11:04:39] [START] Calendar Add API Endpoint Started | {"remote_ip":"::1","request_method":"POST"}
+[2025-01-26 11:04:39] [INPUT] Raw Input Received | {"raw_data":"{\"event_id\":\"53\",\"student_id\":\"2022-00001-CM-1\",\"org_id\":1,\"is_attending\":true,\"added_at\":\"2025-01-26T11:04:39.951Z\",\"visibility_status\":\"public\"}"}
+[2025-01-26 11:04:39] [PARSE] Parsed Input Data | {"input_data":{"event_id":"53","student_id":"2022-00001-CM-1","org_id":1,"is_attending":true,"added_at":"2025-01-26T11:04:39.951Z","visibility_status":"public"},"parse_success":true}
+[2025-01-26 11:04:39] [VALIDATE] Input Validation Checks | {"event_id_type":"string","student_id_type":"string","org_id_type":"integer"}
+[2025-01-26 11:04:39] [CHECK] Participation Check | {"student_id":"2022-00001-CM-1","event_id":"53","org_id":1,"already_exists":true}
+[2025-01-26 11:04:39] [VALIDATION] Duplicate join attempt | {"event_id":"53","student_id":"2022-00001-CM-1","org_id":1,"is_attending":true,"added_at":"2025-01-26T11:04:39.951Z","visibility_status":"public"}
+[2025-01-26 11:04:39] [ERROR] Error Caught | {"message":"You have already joined this event","code":0,"trace":"#0 {main}"}
+[2025-01-26 11:04:39] [END] Calendar Add API Endpoint Completed | {"timestamp":"2025-01-26 11:04:39"}
+[2025-01-26 11:04:52] [START] Calendar Add API Endpoint Started | {"remote_ip":"::1","request_method":"POST"}
+[2025-01-26 11:04:52] [INPUT] Raw Input Received | {"raw_data":"{\"event_id\":\"54\",\"student_id\":\"2022-00001-CM-1\",\"org_id\":1,\"is_attending\":true,\"added_at\":\"2025-01-26T11:04:52.056Z\",\"visibility_status\":\"public\"}"}
+[2025-01-26 11:04:52] [PARSE] Parsed Input Data | {"input_data":{"event_id":"54","student_id":"2022-00001-CM-1","org_id":1,"is_attending":true,"added_at":"2025-01-26T11:04:52.056Z","visibility_status":"public"},"parse_success":true}
+[2025-01-26 11:04:52] [VALIDATE] Input Validation Checks | {"event_id_type":"string","student_id_type":"string","org_id_type":"integer"}
+[2025-01-26 11:04:52] [CHECK] Participation Check | {"student_id":"2022-00001-CM-1","event_id":"54","org_id":1,"already_exists":true}
+[2025-01-26 11:04:52] [VALIDATION] Duplicate join attempt | {"event_id":"54","student_id":"2022-00001-CM-1","org_id":1,"is_attending":true,"added_at":"2025-01-26T11:04:52.056Z","visibility_status":"public"}
+[2025-01-26 11:04:52] [ERROR] Error Caught | {"message":"You have already joined this event","code":0,"trace":"#0 {main}"}
+[2025-01-26 11:04:52] [END] Calendar Add API Endpoint Completed | {"timestamp":"2025-01-26 11:04:52"}
+[2025-01-26 11:19:42] [START] Calendar Add API Endpoint Started | {"remote_ip":"::1","request_method":"POST"}
+[2025-01-26 11:19:42] [INPUT] Raw Input Received | {"raw_data":"{\"event_id\":\"54\",\"student_id\":\"2022-00001-CM-1\",\"org_id\":1,\"is_attending\":true,\"added_at\":\"2025-01-26T11:19:42.518Z\",\"visibility_status\":\"public\"}"}
+[2025-01-26 11:19:42] [PARSE] Parsed Input Data | {"input_data":{"event_id":"54","student_id":"2022-00001-CM-1","org_id":1,"is_attending":true,"added_at":"2025-01-26T11:19:42.518Z","visibility_status":"public"},"parse_success":true}
+[2025-01-26 11:19:42] [VALIDATE] Input Validation Checks | {"event_id_type":"string","student_id_type":"string","org_id_type":"integer"}
+[2025-01-26 11:19:42] [CHECK] Participation Check | {"student_id":"2022-00001-CM-1","event_id":"54","org_id":1,"already_exists":true}
+[2025-01-26 11:19:42] [VALIDATION] Duplicate join attempt | {"event_id":"54","student_id":"2022-00001-CM-1","org_id":1,"is_attending":true,"added_at":"2025-01-26T11:19:42.518Z","visibility_status":"public"}
+[2025-01-26 11:19:42] [ERROR] Error Caught | {"message":"You have already joined this event","code":0,"trace":"#0 {main}"}
+[2025-01-26 11:19:42] [END] Calendar Add API Endpoint Completed | {"timestamp":"2025-01-26 11:19:42"}
+[2025-01-26 11:20:08] [START] Calendar Add API Endpoint Started | {"remote_ip":"::1","request_method":"POST"}
+[2025-01-26 11:20:08] [INPUT] Raw Input Received | {"raw_data":"{\"event_id\":\"53\",\"student_id\":\"2022-00001-CM-1\",\"org_id\":1,\"is_attending\":true,\"added_at\":\"2025-01-26T11:20:08.193Z\",\"visibility_status\":\"public\"}"}
+[2025-01-26 11:20:08] [PARSE] Parsed Input Data | {"input_data":{"event_id":"53","student_id":"2022-00001-CM-1","org_id":1,"is_attending":true,"added_at":"2025-01-26T11:20:08.193Z","visibility_status":"public"},"parse_success":true}
+[2025-01-26 11:20:08] [VALIDATE] Input Validation Checks | {"event_id_type":"string","student_id_type":"string","org_id_type":"integer"}
+[2025-01-26 11:20:08] [CHECK] Participation Check | {"student_id":"2022-00001-CM-1","event_id":"53","org_id":1,"already_exists":false}
+[2025-01-26 11:20:08] [PREPARE] Prepared Calendar Data | {"event_id":53,"student_id":"2022-00001-CM-1","org_id":1,"is_attending":true,"added_at":"2025-01-26 11:20:08","visibility_status":"public"}
+[2025-01-26 11:20:08] [RESULT] Calendar Add Operation | {"success":true,"timestamp":"2025-01-26 11:20:08"}
+[2025-01-26 11:20:08] [END] Calendar Add API Endpoint Completed | {"timestamp":"2025-01-26 11:20:08"}
+[2025-01-26 11:20:10] [START] Calendar Add API Endpoint Started | {"remote_ip":"::1","request_method":"POST"}
+[2025-01-26 11:20:10] [INPUT] Raw Input Received | {"raw_data":"{\"event_id\":\"54\",\"student_id\":\"2022-00001-CM-1\",\"org_id\":1,\"is_attending\":true,\"added_at\":\"2025-01-26T11:20:10.373Z\",\"visibility_status\":\"public\"}"}
+[2025-01-26 11:20:10] [PARSE] Parsed Input Data | {"input_data":{"event_id":"54","student_id":"2022-00001-CM-1","org_id":1,"is_attending":true,"added_at":"2025-01-26T11:20:10.373Z","visibility_status":"public"},"parse_success":true}
+[2025-01-26 11:20:10] [VALIDATE] Input Validation Checks | {"event_id_type":"string","student_id_type":"string","org_id_type":"integer"}
+[2025-01-26 11:20:10] [CHECK] Participation Check | {"student_id":"2022-00001-CM-1","event_id":"54","org_id":1,"already_exists":false}
+[2025-01-26 11:20:10] [PREPARE] Prepared Calendar Data | {"event_id":54,"student_id":"2022-00001-CM-1","org_id":1,"is_attending":true,"added_at":"2025-01-26 11:20:10","visibility_status":"public"}
+[2025-01-26 11:20:10] [RESULT] Calendar Add Operation | {"success":true,"timestamp":"2025-01-26 11:20:10"}
+[2025-01-26 11:20:10] [END] Calendar Add API Endpoint Completed | {"timestamp":"2025-01-26 11:20:10"}
+[2025-01-26 11:20:28] [START] Calendar Add API Endpoint Started | {"remote_ip":"::1","request_method":"POST"}
+[2025-01-26 11:20:28] [INPUT] Raw Input Received | {"raw_data":"{\"event_id\":\"53\",\"student_id\":\"2022-00001-CM-1\",\"org_id\":1,\"is_attending\":true,\"added_at\":\"2025-01-26T11:20:28.757Z\",\"visibility_status\":\"public\"}"}
+[2025-01-26 11:20:28] [PARSE] Parsed Input Data | {"input_data":{"event_id":"53","student_id":"2022-00001-CM-1","org_id":1,"is_attending":true,"added_at":"2025-01-26T11:20:28.757Z","visibility_status":"public"},"parse_success":true}
+[2025-01-26 11:20:28] [VALIDATE] Input Validation Checks | {"event_id_type":"string","student_id_type":"string","org_id_type":"integer"}
+[2025-01-26 11:20:28] [CHECK] Participation Check | {"student_id":"2022-00001-CM-1","event_id":"53","org_id":1,"already_exists":true}
+[2025-01-26 11:20:28] [VALIDATION] Duplicate join attempt | {"event_id":"53","student_id":"2022-00001-CM-1","org_id":1,"is_attending":true,"added_at":"2025-01-26T11:20:28.757Z","visibility_status":"public"}
+[2025-01-26 11:20:28] [ERROR] Error Caught | {"message":"You have already joined this event","code":0,"trace":"#0 {main}"}
+[2025-01-26 11:20:28] [END] Calendar Add API Endpoint Completed | {"timestamp":"2025-01-26 11:20:28"}
+[2025-01-26 11:20:31] [START] Calendar Add API Endpoint Started | {"remote_ip":"::1","request_method":"POST"}
+[2025-01-26 11:20:31] [INPUT] Raw Input Received | {"raw_data":"{\"event_id\":\"54\",\"student_id\":\"2022-00001-CM-1\",\"org_id\":1,\"is_attending\":true,\"added_at\":\"2025-01-26T11:20:31.877Z\",\"visibility_status\":\"public\"}"}
+[2025-01-26 11:20:31] [PARSE] Parsed Input Data | {"input_data":{"event_id":"54","student_id":"2022-00001-CM-1","org_id":1,"is_attending":true,"added_at":"2025-01-26T11:20:31.877Z","visibility_status":"public"},"parse_success":true}
+[2025-01-26 11:20:31] [VALIDATE] Input Validation Checks | {"event_id_type":"string","student_id_type":"string","org_id_type":"integer"}
+[2025-01-26 11:20:31] [CHECK] Participation Check | {"student_id":"2022-00001-CM-1","event_id":"54","org_id":1,"already_exists":true}
+[2025-01-26 11:20:31] [VALIDATION] Duplicate join attempt | {"event_id":"54","student_id":"2022-00001-CM-1","org_id":1,"is_attending":true,"added_at":"2025-01-26T11:20:31.877Z","visibility_status":"public"}
+[2025-01-26 11:20:31] [ERROR] Error Caught | {"message":"You have already joined this event","code":0,"trace":"#0 {main}"}
+[2025-01-26 11:20:31] [END] Calendar Add API Endpoint Completed | {"timestamp":"2025-01-26 11:20:31"}
