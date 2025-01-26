@@ -17,23 +17,22 @@ class UserHandler {
     public function __construct($db) {
         $this->conn = $db;
     }
-
- // Retrieve users from the database
+  
     public function read() {
         $query = 'SELECT 
-            student_id,
-            firstname,
-            lastname,
-            password,
-            email,
-            account_type
-        FROM ' . $this->table . ' 
-        ORDER BY student_id ASC';
-
-     
+            u.student_id,
+            u.firstname,
+            u.lastname,
+            u.email,
+            u.account_type,
+            uo.org_id
+        FROM ' . $this->table . ' u
+        LEFT JOIN user_organizations uo ON u.student_id = uo.student_id
+        ORDER BY u.student_id ASC';
+    
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-
+    
         return $stmt;
     }
     //retrieve the number of users from the database
@@ -108,12 +107,29 @@ class UserHandler {
         // Execute the query
         $stmt->execute();
     
-        // Debug: Log the row count
-        error_log("Row count after query execution: " . $stmt->rowCount());
+
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-        // Check if a record exists
-        if ($stmt->rowCount() > 0) {
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        // Debug: Log the raw database results
+        error_log("Raw database results: " . json_encode($rows));
+    
+        if (count($rows) > 0) {
+            $userData = $rows[0];
+            $hashed_password = $userData['password'];
+            unset($userData['password']);
+    
+            // Collect org_ids
+            $orgIds = array();
+            foreach ($rows as $row) {
+                if (!is_null($row['org_id'])) {
+                    $orgIds[] = $row['org_id'];
+                }
+            }
+    
+            // Debug: Log the org_ids
+            error_log("Aggregated org_ids: " . json_encode($orgIds));
+
+       
     
             // Debug: Log fetched data (excluding sensitive info like passwords)
             error_log("Fetched user data: " . json_encode([
@@ -126,18 +142,22 @@ class UserHandler {
     
             // Verify the password
             if (password_verify($password, $hashed_password)) {
-                unset($row['password']); // Exclude password from results
-                return $row; // Return user data
+                // If the user is an admin, we only return one org_id, not an array
+                if ($userData['account_type'] === 'Admin') {
+                    $userData['org_id'] = $orgIds[0]; // Just the first org_id for admin
+                    unset($userData['org_ids']); // Remove org_ids array for admins
+                } else {
+                    $userData['org_ids'] = $orgIds; // Regular users get all org_ids
+                }
+                return $userData;
             } else {
-                error_log("Password verification failed for email: $email");
+                return false; // Return false if password doesn't match
             }
         } else {
-            error_log("No user found with email: $email");
+            return false; // Return false if no user found
+               
         }
     
         return false; // Return false on failure
     }
-    
-    
-    
 }
