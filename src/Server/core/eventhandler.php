@@ -56,19 +56,23 @@ class EventHandler {
         try {
             // Base query
             $query = 'SELECT 
-                eventid,
-                event_des,
-                event_title,
-                banner,
-                date,
-                date_started,
-                date_ended,
-                eventvisibility,
-                platform,
-                platform_link,
-                location,
-                org_id
-            FROM ' . $this->table;
+            e.eventid,
+            e.event_des,
+            e.event_title,
+            e.banner,
+            e.date,
+            e.date_started,
+            e.date_ended,
+            e.eventvisibility,
+            e.platform,
+            e.platform_link,
+            e.location,
+            o.org_id,
+            o.org_name,
+            o.org_desc
+        FROM ' . $this->table . ' e
+        JOIN organizations o ON e.org_id = o.org_id';
+
     
             // Add organization filter if provided
             if ($org_id !== null) {

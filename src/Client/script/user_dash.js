@@ -29,47 +29,66 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Fetch and render `user_top_3` events
-    fetch(`/src/Server/api/read_calendar.php?student_id=${studentId}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.data && data.data.length > 0) {
-                const userDiv = document.getElementById('user_top_3');
-                data.data.forEach(event => {
-                    const userCard = document.createElement('div');
-                    userCard.classList.add('bg-gradient-to-t', 'from-[#E73030]', 'to-[#F2BDBD]', 'shadow', 'rounded-lg', 'relative', 'p-2', 'h-32');
+fetch(`/src/Server/api/read_calendar.php?student_id=${studentId}`)
+.then(response => {
+    if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+})
+.then(data => {
+    if (data.data && data.data.length > 0) {
+        const userDiv = document.getElementById('user_top_3');
 
-                    userCard.innerHTML = `
-                        <h1 class="text-xl font-bold text-black overflow-hidden h-fit">${event.event_title}</h1>
-                        <div class="flex space-x-2">
-                            <i class="fa-solid fa-circle-user text-white text-2xl"></i>
-                            <h1 class="text-xl text-black font-medium">${event.org_name}</h1>
-                        </div>
-                    `;
-                    userDiv.appendChild(userCard);
-                });
-            } else {
-                console.error('No events or data found for `user_top_3`.');
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching `user_top_3` data:', error);
+        // Sort events by a specific criterion (e.g., date_started, or any priority field)
+        const sortedEvents = data.data.sort((a, b) => new Date(a.date_started) - new Date(b.date_started));
+
+        // Take the top 3 events
+        const top3Events = sortedEvents.slice(0, 3);
+
+        // Clear any existing content in `user_top_3` before appending new events
+        userDiv.innerHTML = '';
+
+        top3Events.forEach(event => {
+            const userCard = document.createElement('div');
+            userCard.classList.add('bg-gradient-to-t', 'from-[#E73030]', 'to-[#F2BDBD]', 'shadow', 'rounded-lg', 'relative', 'p-2', 'h-32');
+
+            userCard.innerHTML = `
+                <h1 class="text-xl font-bold text-black overflow-hidden h-fit">${event.event_title}</h1>
+                <div class="flex space-x-2">
+                    <i class="fa-solid fa-circle-user text-white text-2xl"></i>
+                    <h1 class="text-xl text-black font-medium">${event.org_name}</h1>
+                </div>
+            `;
+            userDiv.appendChild(userCard);
         });
+    } else {
+        console.error('No events or data found for `user_top_3`.');
+    }
+})
+.catch(error => {
+    console.error('Error fetching `user_top_3` data:', error);
+});
+
 
     // Fetch and Render Events
-    fetch('/src/Server/api/read_event.php')
+// Fetch and Render Events
+fetch('/src/Server/api/read_event.php')
     .then(response => response.json())
     .then(data => {
         const container = document.getElementById('user-event-list');
         if (data.data?.length) {
-            container.innerHTML = data.data.map(event => `
+            // Parse dates and sort events by date_started ascending
+            const sortedEvents = data.data.sort((a, b) => new Date(a.date_started) - new Date(b.date_started));
+
+            // Take the top 5 events
+            const top5Events = sortedEvents.slice(0, 5);
+
+            // Render only the top 5 sorted events
+            container.innerHTML = top5Events.map(event => `
                 <div class="event-card flex items-start justify-start space-x-6 mb-8" data-event-id="${event.eventid}">
                     <div class="h-[150px] relative flex">
-                        <h1 class="font-medium text-[#800000] text-2xl">${event.date}</h1>
+                        <h1 class="font-medium text-[#800000] text-2xl">${event.date_started}</h1>
                     </div>
                     
                     <div class="flex flex-col items-center justify-center bg-gradient-to-t from-[#E73030] to-[#F2BDBD] rounded-lg h-36 w-96 shadow-2xl">
@@ -87,10 +106,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     <hr class="border-[#800000] border-t-2">
                 </div>
             `).join('');
+        } else {
+            container.innerHTML = '<p>No events available.</p>';
         }
     })
     .catch(error => console.error('Error loading events:', error));
 });
+
+
 
 fetch('/src/Server/api/read_calendar.php')
   .then(response => response.json())
