@@ -56,7 +56,9 @@ try {
                 'eventvisibility' => $row['eventvisibility'],
                 'platform' => $row['platform'],
                 'platform_link' => $row['platform_link'],
-                'location' => $row['location']
+                'location' => $row['location'],
+                'org_name' => $row['org_name'],
+                'org_desc' => $row['org_desc']
             ];
         }
 
