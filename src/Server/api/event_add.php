@@ -15,6 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+// Check if the user is logged in (org_id is set in the session)
+if (!isset($_SESSION['org_id'])) {
+    http_response_code(401); // Unauthorized
+    echo json_encode(['message' => 'Unauthorized access. Please log in.']);
+    exit;
+}
+
 // Validate and process the form data
 if (
     isset($_POST['event_title']) && 
@@ -29,6 +36,9 @@ if (
     isset($_FILES['banner'])
 ) {
     $event = new EventHandler($db);
+
+    // Assign organization ID from the session
+    $event->org_id = $_SESSION['org_id'];
 
     // Assign data to the event object
     $event->event_title = $_POST['event_title'];

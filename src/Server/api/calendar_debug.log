@@ -1,0 +1,37 @@
+[2025-01-26 05:52:19] [START] Calendar Add API Endpoint Started | {"remote_ip":"::1","request_method":"POST"}
+[2025-01-26 05:52:19] [AUTH] User authenticated | {"student_id":"2022-00001-CM-0","org_id":1}
+[2025-01-26 05:52:19] [INFO] Received POST data | {"raw_data":{"event_id":54,"is_attending":1,"added_at":"2023-09-20 14:30:00","visibility_status":1}}
+[2025-01-26 05:52:19] [INFO] Prepared calendar data | {"calendar_data":{"event_id":54,"is_attending":1,"added_at":"2025-01-26 05:52:19","visibility_status":1}}
+[2025-01-26 05:52:19] [DEBUG] Binding session values in Calendar::add | {"student_id":"2022-00001-CM-0","org_id":1}
+[2025-01-26 05:52:19] [DEBUG] Insert operation result | {"success":true,"rowCount":1,"errorInfo":["00000",null,null]}
+[2025-01-26 05:52:19] [SUCCESS] Event added successfully | {"event_id":54}
+[2025-01-26 09:06:35] [START] Calendar Add API Endpoint Started | {"remote_ip":"::1","request_method":"POST"}
+[2025-01-26 09:06:35] [AUTH] User authenticated | {"student_id":"2022-00001-CM-0","org_id":1}
+[2025-01-26 09:06:35] [INFO] Received POST data | {"raw_data":{"event_id":54,"is_attending":1,"added_at":"2023-09-20 14:30:00","visibility_status":1}}
+[2025-01-26 09:06:35] [INFO] Prepared calendar data | {"calendar_data":{"event_id":54,"is_attending":1,"added_at":"2025-01-26 09:06:35","visibility_status":1}}
+[2025-01-26 09:06:35] [DEBUG] Binding session values in Calendar::add | {"student_id":"2022-00001-CM-0","org_id":1}
+[2025-01-26 09:06:35] [DEBUG] Insert operation result | {"success":true,"rowCount":1,"errorInfo":["00000",null,null]}
+[2025-01-26 09:06:35] [SUCCESS] Event added successfully | {"event_id":54}
+[2025-01-26 10:40:39] [START] Calendar Add API Endpoint Started | {"remote_ip":"::1","request_method":"POST"}
+[2025-01-26 10:40:39] [SECURITY] Unauthorized access attempt | {"student_id":"2022-00001-CM-1","org_id":"NOT SET"}
+[2025-01-26 10:40:39] [ERROR] Request processing failed | {"error_message":"Unauthorized: User or organization not identified","error_code":0}
+[2025-01-26 10:41:00] [START] Calendar Add API Endpoint Started | {"remote_ip":"::1","request_method":"POST"}
+[2025-01-26 10:41:00] [AUTH] User authenticated | {"student_id":"2022-00001-CM-0","org_id":1}
+[2025-01-26 10:41:00] [INFO] Received POST data | {"raw_data":{"event_id":59,"is_attending":1,"added_at":"2023-09-20 14:30:00","visibility_status":1}}
+[2025-01-26 10:41:00] [INFO] Prepared calendar data | {"calendar_data":{"event_id":59,"is_attending":1,"added_at":"2025-01-26 10:41:00","visibility_status":1}}
+[2025-01-26 10:41:00] [DEBUG] Binding session values in Calendar::add | {"student_id":"2022-00001-CM-0","org_id":1}
+[2025-01-26 10:41:00] [DEBUG] Insert operation result | {"success":true,"rowCount":1,"errorInfo":["00000",null,null]}
+[2025-01-26 10:41:00] [SUCCESS] Event added successfully | {"event_id":59}
+[2025-01-26 10:41:20] [START] Calendar Add API Endpoint Started | {"remote_ip":"::1","request_method":"POST"}
+[2025-01-26 10:41:20] [SECURITY] Unauthorized access attempt | {"student_id":"2022-00001-CM-1","org_id":"NOT SET"}
+[2025-01-26 10:41:20] [ERROR] Request processing failed | {"error_message":"Unauthorized: User or organization not identified","error_code":0}
+[2025-01-26 10:42:10] [START] Calendar Add API Endpoint Started | {"remote_ip":"::1","request_method":"POST"}
+[2025-01-26 10:42:10] [SECURITY] Unauthorized access attempt | {"student_id":"2022-00001-CM-1","org_id":"NOT SET"}
+[2025-01-26 10:42:10] [ERROR] Request processing failed | {"error_message":"Unauthorized: User or organization not identified","error_code":0}
+[2025-01-26 10:44:32] [START] Calendar Add API Endpoint Started | {"remote_ip":"::1","request_method":"POST"}
+[2025-01-26 10:44:32] [AUTH] User authenticated | {"student_id":"2022-00001-CM-0","org_id":1}
+[2025-01-26 10:44:32] [INFO] Received POST data | {"raw_data":{"event_id":59,"is_attending":1,"added_at":"2023-09-20 14:30:00","visibility_status":"Public"}}
+[2025-01-26 10:44:32] [INFO] Prepared calendar data | {"calendar_data":{"event_id":59,"is_attending":1,"added_at":"2025-01-26 10:44:32","visibility_status":"Public"}}
+[2025-01-26 10:44:32] [DEBUG] Binding session values in Calendar::add | {"student_id":"2022-00001-CM-0","org_id":1}
+[2025-01-26 10:44:32] [DEBUG] Insert operation result | {"success":true,"rowCount":1,"errorInfo":["00000",null,null]}
+[2025-01-26 10:44:32] [SUCCESS] Event added successfully | {"event_id":59}

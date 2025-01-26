@@ -112,3 +112,33 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateDateTime, 1000);
     updateDateTime();
 });
+
+document.getElementById('event-table-body').addEventListener('click', async (e) => {
+    if (e.target.classList.contains('delete-btn')) {
+        const row = e.target.closest('tr');
+        const eventId = row.dataset.eventId;
+
+        if (confirm('Are you sure you want to delete this event?')) {
+            try {
+                const response = await fetch('/api/delete-event.php', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({ event_id: eventId })
+                });
+
+                const data = await response.json();
+                if (response.ok && data.message === 'Event deleted') {
+                    row.remove();
+                } else {
+                    alert('Failed to delete event: ' + (data.message || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to delete event.');
+            }
+        }
+    }
+});
