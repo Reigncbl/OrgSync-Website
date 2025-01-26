@@ -101,22 +101,5 @@ class EventHandler {
             return null;
         }
     }
-    public function delete() {
-        try {
-            $query = "DELETE FROM {$this->table} WHERE eventid = :event_id";
-            $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':event_id', $this->event_id, PDO::PARAM_INT);
-            
-            if (!$stmt->execute()) {
-                error_log('Delete failed: ' . implode(', ', $stmt->errorInfo()));
-                return false;
-            }
-            
-            return $stmt->rowCount() > 0;
-        } catch (PDOException $e) {
-            error_log('Delete Error: ' . $e->getMessage());
-            return false;
-        }
-    }
 }
 ?>

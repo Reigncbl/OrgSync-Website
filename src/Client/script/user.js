@@ -57,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(debugContainer);
     }
 
-    // Create debug panel
     createDebugPanel();
 
     // Debug panel toggle hotkey
@@ -142,7 +141,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
     
-            if (!userData.org_id) {
+            // Fixed organization check
+            if (!userData.org_ids || userData.org_ids.length === 0) {
                 alert('You need to be part of an organization to join events');
                 return;
             }
@@ -151,17 +151,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const joinPayload = {
                     event_id: eventId,
                     student_id: userData.student_id,
-                    org_id: userData.org_id,
+                    // Use first org ID from array
+                    org_id: userData.org_ids[0], 
                     is_attending: true,
                     added_at: new Date().toISOString(),
                     visibility_status: 'public'
                 };
     
-                // Enhanced logging of join attempt
                 console.group('Event Join Attempt');
                 console.log('Payload:', joinPayload);
-                console.log('Event ID:', eventId);
-                console.log('User Data:', userData);
     
                 const response = await fetch('/src/Server/api/calendar_add.php', {
                     method: 'POST',
@@ -169,14 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify(joinPayload)
                 });
     
-                // Log full response details
-                console.log('Response Status:', response.status);
-                console.log('Response OK:', response.ok);
-    
                 const result = await response.json();
-                
-                // Log parsed result
-                console.log('Result:', result);
                 console.groupEnd();
     
                 if(response.ok) {
@@ -186,24 +177,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     e.target.classList.add('bg-green-500', 'hover:bg-green-500');
                     alert('Successfully joined event!');
                 } else {
-                    // More detailed error handling
                     const errorMessage = result.message || 'Unknown error occurred';
-                    console.error('Event Join Error:', {
-                        message: errorMessage,
-                        payload: joinPayload,
-                        responseStatus: response.status
-                    });
                     throw new Error(errorMessage);
                 }
             } catch (error) {
-                // Comprehensive error logging
-                console.group('Event Join Error');
-                console.error('Full Error:', error);
-                console.log('Error Name:', error.name);
-                console.log('Error Message:', error.message);
-                console.log('Error Stack:', error.stack);
-                console.groupEnd();
-    
+                console.error('Event Join Error:', error);
                 alert(`Failed to join event: ${error.message}`);
             }
         }
