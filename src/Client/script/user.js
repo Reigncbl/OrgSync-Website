@@ -6,6 +6,67 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    // Debug: Display session info
+    function createDebugPanel() {
+        const debugContainer = document.createElement('div');
+        debugContainer.id = 'session-debug';
+        Object.assign(debugContainer.style, {
+            position: 'fixed',
+            bottom: '10px',
+            right: '10px',
+            background: 'white',
+            padding: '15px',
+            border: '2px solid #800000',
+            borderRadius: '8px',
+            zIndex: '1000',
+            boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+            maxWidth: '400px',
+            fontSize: '14px'
+        });
+
+        const preStyle = {
+            margin: '0',
+            fontSize: '12px',
+            maxHeight: '300px',
+            overflow: 'auto',
+            background: '#f5f5f5',
+            padding: '10px',
+            borderRadius: '4px',
+            whiteSpace: 'pre-wrap',
+            wordWrap: 'break-word'
+        };
+
+        debugContainer.innerHTML = `
+            <h3 style="margin: 0 0 10px 0; color: #800000;">Session Data</h3>
+            <pre style="${Object.entries(preStyle).map(([k,v]) => `${k}:${v}`).join(';')}">
+                ${JSON.stringify(userData, null, 2)}
+            </pre>
+            <button onclick="copySessionData()" style="
+                margin-top: 10px;
+                padding: 4px 8px;
+                background: #800000;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            ">
+                Copy to Clipboard
+            </button>
+        `;
+
+        document.body.appendChild(debugContainer);
+    }
+
+    createDebugPanel();
+
+    // Debug panel toggle hotkey
+    document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+            const debugDiv = document.getElementById('session-debug');
+            debugDiv.style.display = debugDiv.style.display === 'none' ? 'block' : 'none';
+        }
+    });
+
     // Populate User Info
     document.getElementById('dashboard-username').textContent = `${userData.firstname} ${userData.lastname}`;
     document.getElementById('dashboard-email').textContent = userData.email;
@@ -29,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateDateTime, 1000);
     updateDateTime();
 
-    // Fetch and Render Events with Event Delegation
+    // Fetch and Render Events
     fetch('/src/Server/api/read_event.php')
     .then(response => response.json())
     .then(data => {
@@ -65,53 +126,72 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(error => console.error('Error loading events:', error));
 
-    // Event Delegation for Join Buttons
     document.addEventListener('click', async (e) => {
         if(e.target.closest('.join-event-btn')) {
             const eventCard = e.target.closest('.event-card');
             const eventId = eventCard.dataset.eventId;
             const userData = JSON.parse(sessionStorage.getItem('userData'));
-
+    
+            // Refresh debug panel
+            document.querySelector('#session-debug pre').textContent = JSON.stringify(userData, null, 2);
+    
             if (!userData) {
                 alert('Please log in to join events.');
                 window.location.href = '/login.html';
                 return;
             }
-
-            if (!userData.org_id) {
+    
+            // Fixed organization check
+            if (!userData.org_ids || userData.org_ids.length === 0) {
                 alert('You need to be part of an organization to join events');
                 return;
             }
-
+    
             try {
+                const joinPayload = {
+                    event_id: eventId,
+                    student_id: userData.student_id,
+                    // Use first org ID from array
+                    org_id: userData.org_ids[0], 
+                    is_attending: true,
+                    added_at: new Date().toISOString(),
+                    visibility_status: 'public'
+                };
+    
+                console.group('Event Join Attempt');
+                console.log('Payload:', joinPayload);
+    
                 const response = await fetch('/src/Server/api/calendar_add.php', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({
-                        event_id: eventId,
-                        student_id: userData.student_id,
-                        org_id: userData.org_id,
-                        is_attending: true,
-                        added_at: new Date().toISOString(),
-                        visibility_status: 'public'
-                    })
+                    body: JSON.stringify(joinPayload)
                 });
-
+    
                 const result = await response.json();
-                
-                if(result.success) {
+                console.groupEnd();
+    
+                if(response.ok) {
                     e.target.disabled = true;
                     e.target.textContent = 'Joined!';
                     e.target.classList.remove('bg-gradient-to-t', 'from-[#1F1616]', 'to-[#EF0F0F]');
                     e.target.classList.add('bg-green-500', 'hover:bg-green-500');
                     alert('Successfully joined event!');
                 } else {
-                    throw new Error(result.message || 'Failed to join event');
+                    const errorMessage = result.message || 'Unknown error occurred';
+                    throw new Error(errorMessage);
                 }
             } catch (error) {
-                console.error('Error:', error);
+                console.error('Event Join Error:', error);
                 alert(`Failed to join event: ${error.message}`);
             }
         }
     });
 });
+
+// Global copy function
+function copySessionData() {
+    const userData = JSON.parse(sessionStorage.getItem('userData')) || {};
+    navigator.clipboard.writeText(JSON.stringify(userData, null, 2))
+        .then(() => alert('Session data copied to clipboard!'))
+        .catch(err => console.error('Failed to copy:', err));
+}

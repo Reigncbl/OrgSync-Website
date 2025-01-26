@@ -13,12 +13,11 @@ class UserHandler {
     public $password;
     public $account_type;
 
-
     public function __construct($db) {
         $this->conn = $db;
     }
 
- // Retrieve users from the database
+    // Retrieve users from the database
     public function read() {
         $query = 'SELECT 
             student_id,
@@ -30,14 +29,11 @@ class UserHandler {
         FROM ' . $this->table . ' 
         ORDER BY student_id ASC';
 
-     
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
 
         return $stmt;
     }
-    //retrieve the number of users from the database
- 
 
     public function read_single() {
         $query = 'SELECT 
@@ -66,11 +62,8 @@ class UserHandler {
                   VALUES (?, ?, ?, ?, ?, ?)";
                   
         $stmt = $this->conn->prepare($query);
-        error_log("Raw password before hashing: " . $this->password);
-
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
 
-        error_log("Hashed password: " . $this->password);
         return $stmt->execute([
             $this->student_id,
             $this->firstname,
@@ -79,7 +72,6 @@ class UserHandler {
             $this->password,
             $this->account_type
         ]);
-        
     }
     
     public function login($email, $password) {
@@ -97,47 +89,37 @@ class UserHandler {
             ON s.student_id = so.student_id
         WHERE s.email = :email";
     
-        // Debug: Log the query
-        error_log("Executing query: $query");
-    
         $stmt = $this->conn->prepare($query);
-    
-        // Bind parameters
         $stmt->bindParam(':email', $email);
-    
-        // Execute the query
         $stmt->execute();
     
-        // Debug: Log the row count
-        error_log("Row count after query execution: " . $stmt->rowCount());
+        // Debug: Log the raw database results
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        error_log("Raw database results: " . json_encode($rows));
     
-        // Check if a record exists
-        if ($stmt->rowCount() > 0) {
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (count($rows) > 0) {
+            $userData = $rows[0];
+            $hashed_password = $userData['password'];
+            unset($userData['password']);
     
-            // Debug: Log fetched data (excluding sensitive info like passwords)
-            error_log("Fetched user data: " . json_encode([
-                'student_id' => $row['student_id'],
-                'account_type' => $row['account_type'],
-                'org_id' => $row['org_id']
-            ]));
+            // Collect all org_ids
+            $userData['org_ids'] = array();
+            foreach ($rows as $row) {
+                if (!is_null($row['org_id'])) {
+                    $userData['org_ids'][] = $row['org_id'];
+                }
+            }
     
-            $hashed_password = $row['password'];
+            // Debug: Log the aggregated org_ids
+            error_log("Aggregated org_ids: " . json_encode($userData['org_ids']));
     
-            // Verify the password
             if (password_verify($password, $hashed_password)) {
-                unset($row['password']); // Exclude password from results
-                return $row; // Return user data
+                return $userData;
             } else {
-                error_log("Password verification failed for email: $email");
+                return false;
             }
         } else {
-            error_log("No user found with email: $email");
+            return false;
         }
-    
-        return false; // Return false on failure
     }
-    
-    
-    
 }
