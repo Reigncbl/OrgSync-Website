@@ -23,11 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Missing table body for rendering followers');
             return;
         }
-    
-        // Filter followers by org_id
+
+        // Filter followers by org_id on the frontend
         const filteredFollowers = followers.filter(follower => follower.org_id === userOrgId);
         console.log('Filtered followers:', filteredFollowers);
-    
+
         if (filteredFollowers.length > 0) {
             // Create table rows
             const rows = filteredFollowers.map(follower => `
@@ -57,8 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         }
     }
-    
- 
+
     // Fetch and render followers
     fetch('http://localhost:3000/src/Server/api/read_followers.php', {
         method: 'GET',
@@ -71,24 +70,19 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            return response.text(); // Use text first to debug issues
+            return response.json(); // Parse as JSON
         })
-        .then((responseText) => {
-            try {
-                const data = JSON.parse(responseText); // Parse as JSON
-                console.log('Fetched follower data:', data);
+        .then((data) => {
+            console.log('Fetched follower data:', data);
 
-                if (data.status === 'success') {
-                    renderFollowers(data.data || []);
-                } else if (data.status === 'empty') {
-                    console.warn('No followers data found:', data);
-                    document.getElementById('follower-table-body').innerHTML =
-                        '<tr><td colspan="7" class="text-center">No followers found</td></tr>';
-                } else {
-                    console.error('Unexpected status in response:', data.status);
-                }
-            } catch (err) {
-                console.error('Error parsing JSON:', err, responseText);
+            if (data.status === 'success') {
+                renderFollowers(data.data || []);
+            } else if (data.status === 'empty') {
+                console.warn('No followers data found:', data);
+                document.getElementById('follower-table-body').innerHTML =
+                    '<tr><td colspan="7" class="text-center">No followers found</td></tr>';
+            } else {
+                console.error('Unexpected status in response:', data.status);
             }
         })
         .catch((error) => {

@@ -1,13 +1,14 @@
 <?php
 session_start();
-header('Access-Control-Allow-Origin: http://your-frontend-domain.com');
+header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Credentials: true');
 
 require_once(dirname(__FILE__) . '/../core/initialize.php');
 
-// Validate session
-if (!isset($_SESSION['org_id'])) {
+// Updated session validation
+if (!isset($_SESSION['logged_in']) || 
+    (empty($_SESSION['org_ids']) && empty($_SESSION['org_id']))) {
     http_response_code(401);
     echo json_encode(['error' => 'Unauthorized access']);
     exit;
