@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const userData = JSON.parse(sessionStorage.getItem('userData')); // Retrieve user data from sessionStorage
+    // User Authentication Check
+    const userData = JSON.parse(sessionStorage.getItem('userData'));
     if (!userData) {
-        window.location.href = '/login.html'; // Redirect if no user data found
+        window.location.href = '/login.html';
+        return;
     }
 
     let currentMonth = new Date().getMonth();
@@ -33,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add days of the month
         for (let day = 1; day <= daysInMonth; day++) {
             calendarContainer.innerHTML += `
-                <div class="py-2 relative border h-32">
+                <div class="py-2 relative border h-32 overflow-hidden">
                     <span class="absolute top-1 left-1 text-xs font-bold">${day}</span>
                     <div id="event-${day}" class="mt-6 text-xs rounded-lg">
                         <!-- Event content will go here -->
@@ -142,5 +144,8 @@ fetch('/src/Server/api/read_calendar.php')
   })
   .catch(error => {
     console.error('Error fetching organization data:', error);
-  });
+
+
+});
+
 

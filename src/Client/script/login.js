@@ -17,7 +17,7 @@ async function handleLogin(event) {
             sessionStorage.setItem('userData', JSON.stringify(data.user));
             const redirectUrl = data.user.account_type === 'Admin' 
                 ? '/src/Client/scripts/admin.html' 
-                : '/src/Client/scripts/user_event.html';
+                : '/src/Client/scripts/user_dash.html';
             window.location.href = redirectUrl;
         } else {
             alert(data.message || 'Login failed');

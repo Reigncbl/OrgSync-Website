@@ -13,9 +13,11 @@ class UserHandler {
     public $password;
     public $account_type;
 
+
     public function __construct($db) {
         $this->conn = $db;
     }
+  
     public function read() {
         $query = 'SELECT 
             u.student_id,
@@ -33,6 +35,8 @@ class UserHandler {
     
         return $stmt;
     }
+    //retrieve the number of users from the database
+ 
 
     public function read_single() {
         $query = 'SELECT 
@@ -61,8 +65,11 @@ class UserHandler {
                   VALUES (?, ?, ?, ?, ?, ?)";
                   
         $stmt = $this->conn->prepare($query);
+        error_log("Raw password before hashing: " . $this->password);
+
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
 
+        error_log("Hashed password: " . $this->password);
         return $stmt->execute([
             $this->student_id,
             $this->firstname,
@@ -71,6 +78,7 @@ class UserHandler {
             $this->password,
             $this->account_type
         ]);
+        
     }
     
     public function login($email, $password) {
@@ -88,10 +96,18 @@ class UserHandler {
             ON s.student_id = so.student_id
         WHERE s.email = :email";
     
+        // Debug: Log the query
+        error_log("Executing query: $query");
+    
         $stmt = $this->conn->prepare($query);
+    
+        // Bind parameters
         $stmt->bindParam(':email', $email);
+    
+        // Execute the query
         $stmt->execute();
     
+
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
         // Debug: Log the raw database results
@@ -112,7 +128,19 @@ class UserHandler {
     
             // Debug: Log the org_ids
             error_log("Aggregated org_ids: " . json_encode($orgIds));
+
+       
     
+            // Debug: Log fetched data (excluding sensitive info like passwords)
+            error_log("Fetched user data: " . json_encode([
+                'student_id' => $row['student_id'],
+                'account_type' => $row['account_type'],
+                'org_id' => $row['org_id']
+            ]));
+    
+            $hashed_password = $row['password'];
+    
+            // Verify the password
             if (password_verify($password, $hashed_password)) {
                 // If the user is an admin, we only return one org_id, not an array
                 if ($userData['account_type'] === 'Admin') {
@@ -127,7 +155,9 @@ class UserHandler {
             }
         } else {
             return false; // Return false if no user found
+               
         }
-    }
     
+        return false; // Return false on failure
+    }
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/src/Client/styles.css">
-    <script src="/src/Client/script/user.js" defer></script>
+    <script src="/src/Client/script/user_event.js" defer></script>
     <title>OrgSync</title>
 </head>
 <body>
@@ -16,22 +16,22 @@
             <nav class="h-full">
                 <ul class="space-y-2">
                     <li>
-                        <a href="Client\scripts\user_dash.html" class="nav-link">
+                        <a href="/src/Client/scripts/user_dash.html" class="nav-link">
                             <p class="nav-text"><i class="fa-solid fa-house text-2xl"></i><span>Home</span></p>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link">
+                        <a href="/src/Client/scripts/user_event.html" class="nav-link">
                             <p class="nav-text"><i class="fa-solid fa-clipboard-list text-2xl"></i><span>Events</span></p>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link">
+                        <a href="/src/Client/scripts/user_calendar.html" class="nav-link">
                             <p class="nav-text"><i class="fa-solid fa-calendar-days text-2xl"></i><span>Calendar</span></p>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link">
+                        <a href="/src/Client/scripts/user_org.html" class="nav-link">
                             <p class="nav-text"><i class="fa-solid fa-users text-2xl"></i><span>Organization</span></p>
                         </a>
                     </li>
@@ -66,43 +66,7 @@
 
                 <div class="p-6 flex flex-col " id="upcomingEvents">
                     <!-- Dynamic content will be inserted here -->
-                    <div class="flex items-start justify-start space-x-6">
-                        <div id="upcomingEventdate1" class="h-[150px] relative flex">
-                            <h1 class="font-medium text-[#800000] text-2xl">Date here</h1>
-                        </div>
-                        
-                        <div id="upcomingEventimg1" class="flex flex-col items-center justify-center bg-gradient-to-t from-[#E73030] to-[#F2BDBD] rounded-lg h-36 w-96 shadow-2xl">
-                        </div>
-
-                        <div id="upcomingEvent1" class="flex flex-col space-y-2 w-full">
-                            <h1 class="items-center justify-start font-bold text-black text-2xl">Event Title here</h1>
-                            <h1 class="items-center justify-start font-medium text-black text-lg">Event detail here</h1>
-                            <h1 class="items-center justify-start font-medium text-black text-lg">Organized by: Org name here</h1>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-end w-full pr-6">
-                        <div class="flex items-center space-x-4">
-                          <button class="text-[#800000] text-medium hover:underline">View All</button>
-                          <button id='jon-btn' class="w-1/2 px-1 py-2 font-medium text-white bg-gradient-to-t from-[#1F1616] to-[#EF0F0F] rounded-3xl hover:bg-white hover:text-black focus:ring-2 focus:ring-gray-700">Join Event</button>
-                        </div>
-                    </div>
-                    <div class=" flex items-center justify-center my-6">
-                        <h1 class="font-semibold text-2xl text-[#800000]">------------------------------------------------------------------------------</h1>
-                    </div>
-                    <div class="flex items-start justify-start space-x-6">
-                        <div id="upcomingEventdate1" class="h-[150px] relative flex">
-                            <h1 class="font-medium text-[#800000] text-2xl">Date here</h1>
-                        </div>
-                        
-                        <div id="upcomingEventimg1" class="flex flex-col items-center justify-center bg-gradient-to-t from-[#E73030] to-[#F2BDBD] rounded-lg h-36 w-96 shadow-2xl">
-                        </div>
-
-                        <div id="upcomingEvent1" class="flex flex-col space-y-2 w-full">
-                            <h1 class="items-center justify-start font-bold text-black text-2xl">Event Title here</h1>
-                            <h1 class="items-center justify-start font-medium text-black text-lg">Event detail here</h1>
-                            <h1 class="items-center justify-start font-medium text-black text-lg">Organized by: Org name here</h1>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
 

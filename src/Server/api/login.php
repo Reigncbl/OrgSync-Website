@@ -78,6 +78,7 @@ try {
                         ]
                     ]);
                 }
+
             } else {
                 // Handle invalid login (either failed login or unexpected result)
                 http_response_code(401);
@@ -96,3 +97,5 @@ try {
     http_response_code(500);
     echo json_encode(['message' => 'Server error: ' . $e->getMessage()]);
 }
+?>
+

@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(response => response.json())
     .then(data => {
         const container = document.getElementById('upcomingEvents');
-        if(data.data?.length) {
+        if (data.data?.length) {
             container.innerHTML = data.data.map(event => `
                 <div class="event-card flex items-start justify-start space-x-6 mb-8" data-event-id="${event.eventid}">
                     <div class="h-[150px] relative flex">
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch(error => console.error('Error loading events:', error));
 
     document.addEventListener('click', async (e) => {
-        if(e.target.closest('.join-event-btn')) {
+        if (e.target.closest('.join-event-btn')) {
             const eventCard = e.target.closest('.event-card');
             const eventId = eventCard.dataset.eventId;
             const userData = JSON.parse(sessionStorage.getItem('userData'));
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
                 console.groupEnd();
     
-                if(response.ok) {
+                if (response.ok) {
                     e.target.disabled = true;
                     e.target.textContent = 'Joined!';
                     e.target.classList.remove('bg-gradient-to-t', 'from-[#1F1616]', 'to-[#EF0F0F]');

@@ -38,9 +38,12 @@ class Calendar {
             e.eventvisibility,
             e.platform,
             e.platform_link,
-            e.location
+            e.location,
+            o.org_name,
+            o.org_desc
         FROM ' . $this->table . ' c
         INNER JOIN event_handler e ON c.event_id = e.eventid
+        INNER JOIN organizations o on c.org_id = o.org_id
         ORDER BY c.calendar_id ASC';
 
         
