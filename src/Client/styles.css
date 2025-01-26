@@ -798,10 +798,6 @@ video {
   top: 0.5rem;
 }
 
-.top-2\.5{
-  top: 0.625rem;
-}
-
 .z-10{
   z-index: 10;
 }
@@ -837,11 +833,6 @@ video {
 .my-1{
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
-}
-
-.my-6{
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
 }
 
 .mb-2{
@@ -1118,6 +1109,10 @@ video {
   grid-template-columns: repeat(7, minmax(0, 1fr));
 }
 
+.grid-cols-1{
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
 .flex-col{
   flex-direction: column;
 }
@@ -1259,7 +1254,6 @@ video {
 .scroll-smooth{
   scroll-behavior: smooth;
 }
-
 
 .truncate{
   overflow: hidden;
@@ -1527,6 +1521,10 @@ video {
 
 .p-8{
   padding: 2rem;
+}
+
+.p-32{
+  padding: 8rem;
 }
 
 .px-1{
@@ -1901,14 +1899,6 @@ video {
   color: rgb(89 88 88 / var(--tw-placeholder-opacity, 1));
 }
 
-.placeholder-\[\#80000080\]::-moz-placeholder{
-  color: #80000080;
-}
-
-.placeholder-\[\#80000080\]::placeholder{
-  color: #80000080;
-}
-
 .shadow{
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
@@ -1962,11 +1952,6 @@ video {
   background-color: rgb(128 0 0 / var(--tw-bg-opacity, 1));
 }
 
-.hover\:bg-\[\#900000\]:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(144 0 0 / var(--tw-bg-opacity, 1));
-}
-
 .hover\:bg-\[\#ce5a5a\]:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(206 90 90 / var(--tw-bg-opacity, 1));
@@ -1990,12 +1975,6 @@ video {
 .hover\:bg-white:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-}
-
-
-.hover\:bg-\[\#c5c5c5\]:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(197 197 197 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:bg-gradient-to-t:hover{
@@ -2052,8 +2031,20 @@ video {
   --tw-ring-color: rgb(55 65 81 / var(--tw-ring-opacity, 1));
 }
 
+@media (min-width: 640px){
+  .sm\:grid-cols-2{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (min-width: 768px){
   .md\:flex-row{
     flex-direction: row;
+  }
+}
+
+@media (min-width: 1024px){
+  .lg\:grid-cols-3{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }

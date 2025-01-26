@@ -30,13 +30,12 @@ fetch('/src/Server/api/read_org.php')
           document.getElementById('organization-list').classList.add('hidden');
           const orgDetailContent = document.getElementById('orgDetailContent');
           orgDetailContent.innerHTML = `
-            <div class="rounded-2xl shadow-md h-96 flex items-start bg-cover bg-center" 
-                 style="background-image: url('/src/Client/img/${orgDetails.org_logo || 'default_logo.png'}'); background-color: rgba(255, 255, 255, 0.1);">
+            <div class="rounded-2xl shadow-md h-96 p-8 flex items-start bg-cover bg-center" 
                 <div class="flex flex-col space-y-8 p-8 h-full justify-center w-full">
                     <div class="flex flex-col space-y-4">
                         <h1 class="text-5xl font-bold text-black">${orgDetails.org_name || 'Untitled Organization'}</h1>
                         <div class="flex justify-between items-center space-x-4">
-                            <button class="button bg-gradient-to-t from-[#F0C9C9] to-[#D9D9D9] text-black font-semibold text-lg p-5 px-7">Follow</button>
+                            <button onclick="window.location.href='/src/Client/scripts/login.html'" class="text-white bg-[#800000] px-4 py-2 rounded-2xl font-semibold text-lg">Follow</button>
                             <div class="flex space-x-6 items-center justify-center">
                                 <a href="${orgDetails.facebook || '#'}"><i class="fa-brands fa-facebook text-4xl text-white"></i></a>
                                 <a href="${orgDetails.instagram || '#'}"><i class="fa-brands fa-instagram text-4xl text-white"></i></a>
@@ -99,8 +98,8 @@ function renderEvents(events) {
             </div>
             <div class="w-full flex flex-col items-end">
               <hr class="w-full border-t-2 border-[#800000CC] my-4" />
-              <button class="text-[#800000] pr-4">
-                View Event Details <i class="pl-2 fa-solid fa-arrow-right"></i>
+              <button class="text-[#800000] pr-4" onclick="window.location.href='/src/Client/scripts/login.html'">
+                Join Event <i class="pl-2 fa-solid fa-arrow-right"></i>
               </button>
             </div>
           </div>

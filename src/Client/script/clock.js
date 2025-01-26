@@ -27,3 +27,30 @@ function updateDateTime() {
 // Update date and time every second
 setInterval(updateDateTime, 1000);
 updateDateTime();
+
+
+function generateCalendar(month, year) {
+    const monthYearElement = document.getElementById("month-year");
+    const calendarDaysElement = document.getElementById("calendar-days");
+    calendarDaysElement.innerHTML = '';
+
+    // Set the month and year
+    monthYearElement.textContent = `${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}`;
+
+    // Get the first day of the month and the number of days in the month
+    const firstDay = new Date(year, month).getDay();
+    const numDays = new Date(year, month + 1, 0).getDate();
+
+    // Fill in the days of the month
+    for (let i = 0; i < firstDay; i++) {
+        calendarDaysElement.innerHTML += `<div class="text-gray-400"></div>`; // Empty cells before the first day
+    }
+
+    for (let day = 1; day <= numDays; day++) {
+        calendarDaysElement.innerHTML += `<div class="p-1 hover:bg-[#800000] hover:text-white rounded-full">${day}</div>`;
+    }
+}
+
+// Set the current month and year
+const currentDate = new Date();
+generateCalendar(currentDate.getMonth(), currentDate.getFullYear());

@@ -4,129 +4,122 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/src/Client/styles.css">
+    <script src="/src/Client/script/user_org.js" defer></script>
+    <script src="/src/Client/script/clock.js" defer></script>
     <title>OrgSync</title>
 </head>
 <body>
     <div class="flex font-monserrat">
-        <aside class="bg-gradient-to-t from-[#E73030] to-[#F2BDBD] w-64 h-screen shadow-lg shadow-gray-900/50 z-10 pl-6 fixed">
-            <div class="flex items-center justify-center w-full h-20 py-16">
-                <img src="../img/logo.png" alt="Logo" class="w-36">
-            </div>
-            <nav class="h-full">
-                <ul class="space-y-2">
-                    <li>
-                        <a href="/src/Client/scripts/user_dash.html" class="nav-link">
-                            <p class="nav-text"><i class="fa-solid fa-house text-2xl"></i><span>Home</span></p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/src/Client/scripts/user_event.html" class="nav-link">
-                            <p class="nav-text"><i class="fa-solid fa-clipboard-list text-2xl"></i><span>Events</span></p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/src/Client/scripts/user_calendar.html" class="nav-link">
-                            <p class="nav-text"><i class="fa-solid fa-calendar-days text-2xl"></i><span>Calendar</span></p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/src/Client/scripts/user_org.html" class="nav-link">
-                            <p class="nav-text"><i class="fa-solid fa-users text-2xl"></i><span>Organization</span></p>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </aside>
-        <div class="flex items-center w-full h-screen bg-white ml-64">
-            <div class="w-full h-full flex flex-col mt-24 scroll-smooth overflow-y-scroll">
-                <div class="flex items-center justify-between w-full h-20 px-6">
-                    <h1 class="text-4xl font-semibold">ORGANIZATION</h1>
-                    <div class="flex items-center space-x-4">
-                        <i class="fa-solid fa-magnifying-glass text-2xl"></i>
-                        <i class="fa-solid fa-bell text-2xl"></i>
-                    </div>
+        <div class="flex h-full w-full fixed">
+            <!-- nav sidebar -->
+            <aside class="bg-gradient-to-t from-[#E73030] to-[#F2BDBD] w-64 h-screen shadow-lg shadow-gray-900/50 z-10 pl-6 fixed">
+                <div class="flex items-center justify-center w-full h-20 py-16">
+                    <img src="../img/logo.png" alt="Logo" class="w-36">
                 </div>
-                <div class="flex items-center justify-start space-x-4 w-full h-16 px-6 mt-4">
-                    <button class="button-dash">All</button>
-                    <button class="button-dash">For You</button>
-                    <button class="button-dash">Following</button>
-                </div>
-                <style>
-                    .button-dash {
-                    position: relative;
-                    padding: 8px 16px;
-                    border: 2px solid #800000;
-                    border-radius: 20px;
-                    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-                    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
-                    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-                    }
-                </style>
+                <nav class="h-full">
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="/src/Client/scripts/user_dash.html" class="nav-link">
+                                <p class="nav-text"><i class="fa-solid fa-house text-2xl"></i><span>Home</span></p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/src/Client/scripts/user_event.html" class="nav-link">
+                                <p class="nav-text"><i class="fa-solid fa-clipboard-list text-2xl"></i><span>Events</span></p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/src/Client/scripts/user_calendar.html" class="nav-link">
+                                <p class="nav-text"><i class="fa-solid fa-calendar-days text-2xl"></i><span>Calendar</span></p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/src/Client/scripts/user_org.html" class="nav-link">
+                                <p class="nav-text"><i class="fa-solid fa-users text-2xl"></i><span>Organization</span></p>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
 
-                <div class="p-6 flex flex-col " >
-                    
-                    <div class="flex items-start justify-start space-x-6">
-                        <!-- Dynamic content will be inserted here -->
-                        <!-- <div class="p-6 flex flex-col items-start justify-between bg-gradient-to-t from-[#E73030] to-[#F2BDBD] rounded-lg h-64 w-full shadow-2xl">
-                            <div class="h-full w-full">
-                                <p>hello</p>
-                            </div>
-                            <div class="flex flex-col items-end justify-center w-full ">
-                                <hr class="w-full border-t-2 border-[#800000CC] my-4" />
-                              <button class="w-1/4 px-1 py-2 font-medium text-white bg-gradient-to-t from-[#1F1616] to-[#EF0F0F] rounded-lg hover:bg-white hover:text-black focus:ring-2 focus:ring-gray-700">Follow</button>
-                            </div>
-                          </div> -->
-                    </div>
-                    <div class="p-6 flex flex-col">
-                    
-                        <div class="flex items-center justify-between w-full h-20 ">
-                            <h1 class="text-3xl font-bold">Orgs Available</h1>
-                        </div>
-                        <div class="grid grid-cols-3 gap-3">
-                            <!-- Dynamic content will be inserted here -->
-                            <!-- <div id="org1" class="flex flex-col space-y-4 items-center justify-between bg-[#D9D9D9] rounded-lg h-[300px] w-full shadow-lg p-4">
-                                <div class="w-full h-[150px] bg-[#ea4c4c] rounded-lg ">
-                                    <img src="#" alt="Orgimg" class="w-full h-full">
-                                </div>
-                                <div>
-                                    <h1 class="font-semibold text-black text-2xl">Orgname here</h1>
-                                    <button class="w-full p-4 bg-[#F0C9C9] rounded-xl hover:bg-[#ce5a5a] font-semibold">Learn More</button>
-                                </div>
-                            </div> -->
-                            
+            <!-- Main Content -->
+            <main class="flex-1 p-6 ml-64 overflow-y-scroll space-y-6">
+                <!-- Header -->
+                <header class="flex flex-col">
+                    <div class="flex items-center justify-between">
+                        <h1 class="text-4xl font-bold">DASHBOARD</h1>
+                        <div class="flex items-center space-x-8">
+                            <button class="text-[#800000] text-2xl rounded-xl hover:text-red-500"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button class="text-[#800000] text-2xl rounded-xl hover:text-red-500"><i class="fa-solid fa-bell"></i></button>
                         </div>
                     </div>
-                </div>
+                </header>
                 
-            </div>
+                <div class="flex items-center justify-start space-x-4 w-full h-16 mt-4">
+                    <button class="button-events">All</button>
+                    <button class="button-events">Following</button>
+                </div>
+            
+                <!-- Joined Organizations Section -->
+                <div class="flex flex-col">
+                    <h1 class="text-2xl font-semibold">Joined Organizations</h1>
+                    <div id="join_org" class="grid grid-cols-3 gap-4"></div>
+                </div>
+            
+                <!-- Available Organizations Section -->
+                <div class="flex flex-col">
+                    <h1 class="text-2xl font-semibold">Available Organizations</h1>
+                    <div id="avail_org" class="grid grid-cols-3 gap-4"></div>
+                </div>
+            </main>
 
-            <div class="w-1/3 h-full p-6 flex flex-col space-y-6">
-                <div class="flex items-center justify-between w-full h-12 mt-4 space-x-1">
-                    <div id="current-date" class="date rounded-l-lg w-full">
-                        <i class="fa-solid fa-calendar-days"></i>
-                        <h1>Date</h1>
-                    </div>
-                    <div id="current-time" class="date rounded-r-lg w-full">
-                        <i class="fa-solid fa-clock"></i>
-                        <h1>Time</h1>
-                    </div>
-                </div>
-                <div class="flex items-center w-full h-fit p-6 space-x-4 bg-[#F2BDBD] rounded-2xl">
-                    <div class="w-24 h-24 bg-gray-300 rounded-full overflow-hidden">
-                        <div id="profile-initial" class="w-full h-full flex items-center justify-center text-3xl font-bold bg-blue-200"></div>
-                    </div>
-                    <div>
-                        <h1 class="text-2xl font-semibold" id="dashboard-username">Username</h1>
-                        <h3 id="dashboard-email">Student No</h3>
+            <!-- sidebar -->
+            <div class="w-96 h-full p-6 flex flex-col space-y-6">
+                <!-- date and Time -->
+                <div class="w-full h-fit flex flex-col space-y-6">
+                    <div class="flex items-center justify-between w-full mt-1 space-x-1">
+                        <!-- Date Section -->
+                        <div class="date rounded-l-xl w-full flex items-center space-x-2">
+                            <i class="text-2xl text-[#FFAE21] fa-solid fa-calendar-days"></i>
+                            <h1 id="current-date" class="text-[#686B71] font-semibold"></h1>
+                        </div>
+                        <!-- Time Section -->
+                        <div class="date rounded-r-xl w-full flex items-center space-x-2">
+                            <i id="time-icon" class="text-2xl"></i>
+                            <h1 id="current-time" class="text-[#686B71] font-semibold"></h1>
+                        </div>
                     </div>
                 </div>
-                <div class="flex flex-col space-y-4 p-4">
-                    <div class="w-full h-[250px] bg-[#F2BDBD] rounded-lg shadow-lg relative flex">
-                        <h1>Calendar here</h1>
+
+                <!-- Profile -->
+                <div class="flex items-center w-full h-fit p-2 px-4 space-x-4 bg-[#F2BDBD] rounded-lg shadow-lg">
+                    <!-- Image Section -->
+                    <div class="w-14 h-14 bg-gray-300 rounded-full">
+                        <img id="profile-initial" src="#" alt="username" class="w-full h-full object-cover">
                     </div>
-                    <div class="w-full h-1/2 bg-[#F2BDBD] rounded-lg shadow-lg relative flex">
-                        <h1>Reminder here</h1>
+                    <!-- Content Section -->
+                    <div class="truncate">
+                        <h1 id="dashboard-username" class="text-2xl font-semibold"></h1>
+                        <h3 id="dashboard-email">Details</h3>
+                        <button class="text-sm">View Profile</button>
                     </div>
+                </div>
+
+                <!-- calendar -->
+                <div class="w-full h-fit p-4 space-x-4 bg-[#D9D9D9] rounded-lg shadow-lg ">
+                    <header class="text-center text-xl font-semibold mb-4" id="month-year">
+                        January 2025
+                    </header>
+                    <div class="grid grid-cols-7 gap-2 text-center">
+                        <div class="font-medium text-gray-700">Sun</div>
+                        <div class="font-medium text-gray-700">Mon</div>
+                        <div class="font-medium text-gray-700">Tue</div>
+                        <div class="font-medium text-gray-700">Wed</div>
+                        <div class="font-medium text-gray-700">Thu</div>
+                        <div class="font-medium text-gray-700">Fri</div>
+                        <div class="font-medium text-gray-700">Sat</div>
+                    </div>
+                    <div id="calendar-days" class="grid grid-cols-7 gap-2 text-center mt-2"></div>        
                 </div>
             </div>
         </div>

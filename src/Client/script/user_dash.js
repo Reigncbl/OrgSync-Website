@@ -60,87 +60,37 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error fetching `user_top_3` data:', error);
         });
 
-    // Render `home_event` events
-    const renderEvents = (events) => {
-        const eventListContainer = document.getElementById('user-event-list');
-        if (events.length > 0) {
-            const eventCards = events.map((event) => {
-                const eventDate = event.date ? new Date(event.date).toDateString() : 'Unknown Date';
-                const startTime = event.date_started || 'Unknown Start Time';
-                const endTime = event.date_ended || 'Unknown End Time';
-
-                return `
-                    <div class="flex justify-center items-center space-x-8 px-12 py-2 w-full">
-                        <div>
-                            <h1 class="text-3xl font-bold text-[#900000]">${eventDate.split(' ')[1] || 'N/A'}</h1>
-                            <hr class="border-t-2 border-[#800000CC] my-1 w-12" />
-                            <h1 class="text-6xl font-extrabold text-[#900000]">${eventDate.split(' ')[2] || '00'}</h1>
-                        </div>
-                        <img src="data:image/png;base64,${event.banner || ''}" alt="Event Image" class="w-48 h-32 bg-[#BC0C0CC9] rounded-lg drop-shadow-md shadow-md" />
-                        <div class="flex-1 flex flex-col justify-between items-start space-y-2 h-full">
-                            <div>
-                                <h1 class="text-3xl font-bold">${event.event_title || 'Untitled Event'}</h1>
-                                <h3 class="text-sm">${event.location || 'Unknown Location'} | Time: ${startTime} - ${endTime}</h3>
-                                <h3 class="text-sm">Date: ${eventDate}</h3>
-                                <p class="text-sm">Organized by: ${event.org_name || 'Unknown Organization'}</p>
-                            </div>
-                        </div>
+    // Fetch and Render Events
+    fetch('/src/Server/api/read_event.php')
+    .then(response => response.json())
+    .then(data => {
+        const container = document.getElementById('user-event-list');
+        if (data.data?.length) {
+            container.innerHTML = data.data.map(event => `
+                <div class="event-card flex items-start justify-start space-x-6 mb-8" data-event-id="${event.eventid}">
+                    <div class="h-[150px] relative flex">
+                        <h1 class="font-medium text-[#800000] text-2xl">${event.date}</h1>
                     </div>
-                    `;
-            }).join('');
+                    
+                    <div class="flex flex-col items-center justify-center bg-gradient-to-t from-[#E73030] to-[#F2BDBD] rounded-lg h-36 w-96 shadow-2xl">
+                        ${event.banner ? `<img src="data:image/png;base64,${event.banner}" class="w-full h-full object-cover rounded-lg">` : ''}
+                    </div>
 
-            eventListContainer.innerHTML = eventCards;
-        } else {
-            eventListContainer.innerHTML = '<p>No events found.</p>';
+                    <div class="flex flex-col space-y-2 w-full">
+                        <h1 class="font-bold text-2xl">${event.event_title}</h1>
+                        <p class="text-lg">${event.event_des}</p>
+                        <p class="text-lg">Organized by: ${event.org_name}</p>
+                    </div>
+                
+                </div>
+                <div class="my-6 text-center">
+                    <hr class="border-[#800000] border-t-2">
+                </div>
+            `).join('');
         }
-    };
-
-    // Fetch and render `home_event` events
-    fetch('/src/Server/api/read_events.php')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Fetched event data:', data);
-            if (data.status === 'success') {
-                renderEvents(data.data || []);
-            } else {
-                console.log('No events found or error in fetching `home_event`.');
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching `home_event` data:', error);
-        });
+    })
+    .catch(error => console.error('Error loading events:', error));
 });
-
-function generateCalendar(month, year) {
-    const monthYearElement = document.getElementById("month-year");
-    const calendarDaysElement = document.getElementById("calendar-days");
-    calendarDaysElement.innerHTML = '';
-
-    // Set the month and year
-    monthYearElement.textContent = `${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}`;
-
-    // Get the first day of the month and the number of days in the month
-    const firstDay = new Date(year, month).getDay();
-    const numDays = new Date(year, month + 1, 0).getDate();
-
-    // Fill in the days of the month
-    for (let i = 0; i < firstDay; i++) {
-        calendarDaysElement.innerHTML += `<div class="text-gray-400"></div>`; // Empty cells before the first day
-    }
-
-    for (let day = 1; day <= numDays; day++) {
-        calendarDaysElement.innerHTML += `<div class="p-1 hover:bg-[#800000] hover:text-white rounded-full">${day}</div>`;
-    }
-}
-
-// Set the current month and year
-const currentDate = new Date();
-generateCalendar(currentDate.getMonth(), currentDate.getFullYear());
 
 fetch('/src/Server/api/read_calendar.php')
   .then(response => response.json())

@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         debugContainer.id = 'session-debug';
         Object.assign(debugContainer.style, {
             position: 'fixed',
-            bottom: '10px',
+            top: '10px',
             right: '10px',
             background: 'white',
             padding: '15px',
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     
                     <div class="flex items-center space-x-4">
-                        <button class="join-event-btn w-1/2 px-4 py-2 font-medium text-white bg-gradient-to-t from-[#1F1616] to-[#EF0F0F] rounded-3xl hover:bg-white hover:text-black">
+                        <button class="join-event-btn px-4 py-2 font-medium text-white bg-gradient-to-t from-[#1F1616] to-[#EF0F0F] rounded-3xl hover:bg-white hover:text-black">
                             Join Event
                         </button>
                     </div>
