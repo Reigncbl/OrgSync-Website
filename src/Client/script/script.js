@@ -63,26 +63,66 @@ fetch('/src/Server/api/read_org.php')
     console.error('Error fetching organization data:', error);
   });
 
+// Function to render events
+function renderEvents(events) {
+  const eventListContainer = document.getElementById('event-list');
+  if (!eventListContainer) {
+    console.error('Missing event list container');
+    return;
+  }
 
+  // Clear existing content
+  eventListContainer.innerHTML = '';
 
+  if (events.length > 0) {
+    const eventCards = events
+      .map(
+        (event) => `
+      <div class="flex justify-start items-start space-x-8 px-12 py-4 w-full border-b-2 border-[#800000CC]">
+        <div>
+          <h1 class="text-3xl font-bold text-[#900000]">${event.month || 'N/A'}</h1>
+          <hr class="border-t-2 border-[#800000CC] my-1 w-12" />
+          <h1 class="text-6xl font-extrabold text-[#900000]">${event.day || '00'}</h1>
+        </div>
+        <img src="data:image/png;base64,${event.banner || ''}" alt="Event Image" class="w-64 h-48 bg-[#BC0C0CC9] rounded-lg drop-shadow-md shadow-md" />
+        <div class="flex-1 flex flex-col justify-between items-start space-y-2 h-full">
+          <div>
+            <h1 class="text-3xl font-bold">${event.event_title || 'Untitled Event'}</h1>
+            <h3 class="text-sm">${event.location || 'Unknown Location'}</h3>
+            <h3 class="text-sm">${event.date_started || 'No Date Provided'} - ${event.date_ended || 'No End Date'}</h3>
+            <p class="text-sm">${event.event_des || 'No description available.'}</p>
+          </div>
+          <div class="w-full flex flex-col items-end">
+            <hr class="w-full border-t-2 border-[#800000CC] my-4" />
+            <button class="text-[#800000] pr-4">
+              View Event Details <i class="pl-2 fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>`
+      )
+      .join('');
 
-// document.getElementById('login-btn').addEventListener('click', function() {
-//     document.getElementById('login-container').classList.remove('hidden'); 
+    eventListContainer.innerHTML = eventCards;
+  } else {
+    eventListContainer.innerHTML = '<p>No events found.</p>';
+  }
+}
 
-//     fetch('./scripts/login.html')
-//         .then(response => response.text())
-//         .then(html => {
-//             document.getElementById('login-container').innerHTML = html;
-//         })
-//         .catch(error => console.error('Error loading the login page:', error));
-// });
-
-
-// document.getElementById('login-container').addEventListener('click', function(e) {
-//     if (e.target === this) { 
-//         document.getElementById('login-container').classList.add('hidden'); 
-//     }
-// });
+// Fetch and render events
+fetch('/src/Server/api/read_event.php')
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then((data) => {
+    console.log('Fetched event data:', data);
+    // Ensure data.data exists before passing to renderEvents
+    renderEvents(data.data || []);
+  })
+  .catch((error) => console.error('Error fetching events:', error));
 
 
 

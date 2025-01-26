@@ -1,13 +1,14 @@
 <?php
 
-// Add these at the very top
 header('Access-Control-Allow-Origin: http://localhost:3000');
 header('Access-Control-Allow-Credentials: true');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
-// Rest of your existing initialize.php code
-session_start();
+// Check if session is already started, prevent calling session_start() again
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Optional: Define helper functions for session management
 function setSessionData($key, $value) {

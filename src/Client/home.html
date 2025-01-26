@@ -10,7 +10,7 @@
   <title>OrgSync</title>
 </head>
 
-<body class="font-monserrat overflow-y-scroll bg-white">
+<body class="font-monserrat overflow-y-scroll bg-white scroll-smooth">
   <header class="sticky top-0 w-full z-50 shadow-lg">
     <div class="flex justify-between items-center bg-white h-20 pl-32 pr-16 py-2">
       <!-- logo -->
@@ -44,8 +44,6 @@
     </div>
   </header>
 
-  <!-- <div id="login-container" class="fixed inset-0 bg-black bg-opacity-70 hidden z-50 flex items-center justify-center h-full"></div>
-  <div id="register-container" class="fixed inset-0 bg-black bg-opacity-70 hidden z-50 flex items-center justify-center h-full"></div> -->
 
   <section id="home" class="relative flex px-24 pb-24 scroll-mt-36 h-screen justify-center items-start">
     <div class="absolute bottom-24 w-full h-32 bg-gradient-to-t from-white to-transparent"></div>
@@ -63,10 +61,8 @@
     <img src="./img/pylon.png" alt="pylon" class="h-full">
   </section>
   
-  
 
-
-  <section id="events" class="flex flex-col items-center h-screen scroll-mt-36 mx-16 pb-16">
+  <section id="events" class="flex flex-col items-center h-fit scroll-mt-36 mx-16 pb-16">
     <div class="flex flex-col pb-2 space-x-16 w-full px-2">
       <h1 class="text-3xl font-semibold p-8">POPULAR EVENTS</h1>
       <ul class="flex space-x-8 font-semibold text-xl">
@@ -75,73 +71,14 @@
         <li class="button-events"><a href="#">Following</a></li>
       </ul>
     </div>
-
-    <hr class="w-full border-t-2 border-[#800000CC] mt-6"/>
-    <div class="overflow-y-scroll m-12 flex flex-col items-center space-y-8">
-      <div class="flex justify-start items-start space-x-8 px-12 py-8 w-full border-b-2 border-[#800000CC]">
-        <div>
-          <h1 class="text-3xl font-bold text-[#900000]">Month</h1>
-          <hr class="border-t-2 border-[#800000CC] my-1 w-12" />
-          <h1 class="text-6xl font-extrabold text-[#900000]">01</h1>
-        </div>
-        <img src="#" alt="#" class="w-96 h-64 bg-[#BC0C0CC9] rounded-lg drop-shadow-md shadow-md" />
-        <div class="flex-1 flex flex-col justify-between items-start space-y-2 h-full">
-          <div>
-            <h1 class="text-3xl font-bold">Event Title</h1>
-            <h3>Location</h3>
-            <h3>Time</h3>
-            <p>Lorem ipsum dolor sit amet. Ut similique dolorem a fugit eligendi ad asperiores explicabo. Ea sint vero quo rerum quod et voluptatem magnam et mollitia nihil qui Quis porro et voluptatem voluptas. </p>
-          </div>
-          <div class="w-full flex flex-col items-end">
-            <hr class="w-full border-t-2 border-[#800000CC] my-4" />
-            <button class="text-[#800000] pr-4">View Event Details <i class="pl-2 fa-solid fa-arrow-right"></i> </button>
-          </div>
-        </div>
-      </div>
-      <div class="flex justify-start items-start space-x-8 px-12 py-8 w-full border-b-2 border-[#800000CC]">
-        <div>
-          <h1 class="text-3xl font-bold text-[#900000]">Month</h1>
-          <hr class="border-t-2 border-[#800000CC] my-1 w-12" />
-          <h1 class="text-6xl font-extrabold text-[#900000]">01</h1>
-        </div>
-        <img src="#" alt="#" class="w-96 h-64 bg-[#BC0C0CC9] rounded-lg drop-shadow-md shadow-md" />
-        <div class="flex-1 flex flex-col justify-between items-start space-y-2 h-full">
-          <div>
-            <h1 class="text-3xl font-bold">Event Title</h1>
-            <h3>Location</h3>
-            <h3>Time</h3>
-            <p>Lorem ipsum dolor sit amet. Ut similique dolorem a fugit eligendi ad asperiores explicabo. Ea sint vero quo rerum quod et voluptatem magnam et mollitia nihil qui Quis porro et voluptatem voluptas. </p>
-          </div>
-          <div class="w-full flex flex-col items-end">
-            <hr class="w-full border-t-2 border-[#800000CC] my-4" />
-            <button class="text-[#800000] pr-4">View Event Details <i class="pl-2 fa-solid fa-arrow-right"></i> </button>
-          </div>
-        </div>
-      </div>
-      <div class="flex justify-start items-start space-x-8 px-12 py-8 w-full border-b-2 border-[#800000CC]">
-        <div>
-          <h1 class="text-3xl font-bold text-[#900000]">Month</h1>
-          <hr class="border-t-2 border-[#800000CC] my-1 w-12" />
-          <h1 class="text-6xl font-extrabold text-[#900000]">01</h1>
-        </div>
-        <img src="#" alt="#" class="w-96 h-64 bg-[#BC0C0CC9] rounded-lg drop-shadow-md shadow-md" />
-        <div class="flex-1 flex flex-col justify-between items-start space-y-2 h-full">
-          <div>
-            <h1 class="text-3xl font-bold">Event Title</h1>
-            <h3>Location</h3>
-            <h3>Time</h3>
-            <p>Lorem ipsum dolor sit amet. Ut similique dolorem a fugit eligendi ad asperiores explicabo. Ea sint vero quo rerum quod et voluptatem magnam et mollitia nihil qui Quis porro et voluptatem voluptas. </p>
-          </div>
-          <div class="w-full flex flex-col items-end">
-            <hr class="w-full border-t-2 border-[#800000CC] my-4" />
-            <button class="text-[#800000] pr-4">View Event Details <i class="pl-2 fa-solid fa-arrow-right"></i> </button>
-          </div>
-        </div>
-      </div>
+  
+    <hr class="w-full border-t-2 border-[#800000CC] mt-6" />
+    <div id="event-list" class="overflow-y-scroll flex flex-col items-center space-y-2 h-[600px] px-4 w-full">
+      <!-- Event cards will be dynamically injected here -->
       <button class="text-[#800000] pr-4">More Events <i class="pl-2 fa-solid fa-arrow-right"></i> </button>
     </div>
-    
   </section>
+  
 
 
   <section id="organization" class="flex flex-col items-center h-screen scroll-mt-36 pb-16">
@@ -213,7 +150,6 @@
       </div>
    
   </div>
-  
   
 
   <footer id="footer" class="px-32 py-8 bg-[#3d1317] text-white">

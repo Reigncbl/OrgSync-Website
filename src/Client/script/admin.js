@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Filter events by org_id
         const filteredEvents = events.filter(event => event.org_id === userOrgId);
-        console.log('Filtered events:', filteredEvents); // Debug: Log filtered events
+        console.log('Filtered events:', filteredEvents);
 
         if (filteredEvents.length > 0) {
             const eventCards = filteredEvents.map(event => `
@@ -82,17 +82,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fetch and render events
     fetch('/src/Server/api/read_event.php')
-        .then(response => {
+        .then((response) => {
             if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+            throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            return response.json();
+            return response.text(); // Use text first to debug issues
         })
-        .then(data => {
-            console.log('Fetched event data:', data); // Debug: Log fetched data
+        .then((responseText) => {
+            try {
+            const data = JSON.parse(responseText); // Parse as JSON
+            console.log('Fetched event data:', data);
             renderEvents(data.data || []);
+            } catch (err) {
+            console.error('Error parsing JSON:', err, responseText);
+            }
         })
-        .catch(error => console.error('Error fetching events:', error));
+    .catch((error) => console.error('Error fetching events:', error));
 
     // Toggle sub-links visibility
     const databaseLink = document.getElementById('database-link');
