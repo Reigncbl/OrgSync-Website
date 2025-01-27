@@ -1,72 +1,85 @@
 <?php
-// follow_org.php
-
+// follow_organization.php
+header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
+header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
+header('Access-Control-Allow-Credentials: true');
 
-// 1. Verify Request Method
+require_once(dirname(__FILE__) . '/../core/initialize.php'); // Assuming this initializes the database connection and session
+
+// Enable debug mode (set to true for debugging, false for production)
+$debug = true;
+
+// Verify request method
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
-    echo json_encode(['success' => false, 'message' => 'Method not allowed']);
-    exit;
-}
-
-// 2. Decode JSON Payload
-$requestPayload = json_decode(file_get_contents('php://input'), true);
-if (!$requestPayload) {
-    http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Invalid JSON payload']);
-    exit;
-}
-
-// 3. Extract and Validate Data
-$orgId = $requestPayload['org_id'] ?? null;
-$studentId = $requestPayload['student_id'] ?? null;
-$dateAdmitted = $requestPayload['date_admitted'] ?? null;
-
-if (!$orgId || !$studentId || !$dateAdmitted) {
-    http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Missing required fields']);
-    exit;
-}
-
-// 4. Database Connection
-$host = 'localhost';
-$dbname = 'your_database';
-$username = 'your_username';
-$password = 'your_password';
-
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Database connection failed']);
-    exit;
-}
-
-// 5. Check if the User is Already Following the Organization
-try {
-    $checkQuery = $pdo->prepare('SELECT COUNT(*) FROM followed_organizations WHERE org_id = :org_id AND student_id = :student_id');
-    $checkQuery->execute(['org_id' => $orgId, 'student_id' => $studentId]);
-
-    if ($checkQuery->fetchColumn() > 0) {
-        echo json_encode(['success' => false, 'message' => 'You are already following this organization']);
-        exit;
+    $response = ['message' => 'Method not allowed'];
+    if ($debug) {
+        $response['debug'] = ['method_received' => $_SERVER['REQUEST_METHOD']];
     }
-} catch (PDOException $e) {
-    http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Failed to check follow status']);
+    echo json_encode($response);
     exit;
 }
 
-// 6. Insert Follow Record
-try {
-    $insertQuery = $pdo->prepare('INSERT INTO followed_organizations (org_id, student_id, date_admitted) VALUES (:org_id, :student_id, :date_admitted)');
-    $insertQuery->execute(['org_id' => $orgId, 'student_id' => $studentId, 'date_admitted' => $dateAdmitted]);
 
-    echo json_encode(['success' => true, 'message' => 'Successfully followed the organization']);
-} catch (PDOException $e) {
+if (!isset($_SESSION['student_id'])) {
+    http_response_code(401);
+    $response = ['message' => 'Not logged in'];
+    if ($debug) {
+        $response['debug'] = ['session' => $_SESSION];
+    }
+    echo json_encode($response);
+    exit;
+}
+
+// Get and validate input
+$data = json_decode(file_get_contents("php://input"), true); // true to return as associative array
+if ($debug) {
+    error_log('Raw input: ' . file_get_contents("php://input")); // Log raw input for debugging
+    error_log('Decoded input: ' . print_r($data, true)); // Log decoded data
+}
+
+if (!isset($data['org_id']) || !is_numeric($data['org_id'])) {
+    http_response_code(400);
+    $response = ['message' => 'Invalid organization ID'];
+    if ($debug) {
+        $response['debug'] = ['input' => $data];
+    }
+    echo json_encode($response);
+    exit;
+}
+
+// Initialize Organization object
+$organization = new Organization($db); // Assuming $db is initialized in core/initialize.php
+$organization->org_id = (int)$data['org_id'];
+
+// Attempt to create follow relationship
+if ($organization->create_follow($_SESSION['student_id'])) {
+    http_response_code(201);
+    echo json_encode(['message' => 'Successfully followed organization']);
+    exit;
+}
+
+// Check if the follow already exists
+$query = 'SELECT * FROM user_organizations 
+          WHERE student_id = :student_id AND org_id = :org_id';
+$stmt = $db->prepare($query);
+$stmt->execute([
+    ':student_id' => $_SESSION['student_id'],
+    ':org_id' => $data['org_id']
+]);
+
+if ($stmt->rowCount() > 0) {
+    http_response_code(409);
+    echo json_encode(['message' => 'Already following this organization']);
+} else {
+    $errorInfo = $stmt->errorInfo(); // Get error details from PDO
     http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Failed to follow the organization']);
+    $response = ['message' => 'Failed to follow organization'];
+    if ($debug) {
+        $response['debug'] = ['query_error' => $errorInfo];
+    }
+    echo json_encode($response);
 }
 ?>
