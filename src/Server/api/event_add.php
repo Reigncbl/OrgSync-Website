@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
-
+header('Access-Control-Allow-Credentials: true'); // Allow credentials
 
 // Include initialization script
 require_once(dirname(__FILE__) . '/../core/initialize.php');
@@ -15,10 +15,22 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Check if the user is logged in (org_id is set in the session)
-if (!isset($_SESSION['org_id'])) {
+// Check if the user is logged in (org_ids is set in the session)
+if (!isset($_SESSION['org_ids']) || !isset($_SESSION['student_id'])) {
     http_response_code(401); // Unauthorized
     echo json_encode(['message' => 'Unauthorized access. Please log in.']);
+    exit;
+}
+
+// Fetch user data to check account type
+$userHandler = new UserHandler($db);
+$userHandler->student_id = $_SESSION['student_id']; // Assuming student_id is stored in the session
+$userHandler->read_single();
+
+// Check if user is an admin
+if ($_SESSION['account_type'] !== 'Admin') {
+    http_response_code(403); // Forbidden
+    echo json_encode(['message' => 'You are not authorized to create events.']);
     exit;
 }
 
@@ -38,7 +50,7 @@ if (
     $event = new EventHandler($db);
 
     // Assign organization ID from the session
-    $event->org_id = $_SESSION['org_id'];
+    $event->org_id = $_SESSION['org_ids'][0]; // Get the first org_id if it's an array
 
     // Assign data to the event object
     $event->event_title = $_POST['event_title'];

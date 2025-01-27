@@ -28,48 +28,65 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn('User data not found in sessionStorage');
     }
 
-    // Fetch and render `user_top_3` events
+// Fetch and render `user_top_3` events
 fetch(`/src/Server/api/read_calendar.php?student_id=${studentId}`)
-.then(response => {
-    if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    return response.json();
-})
-.then(data => {
-    if (data.data && data.data.length > 0) {
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.data && data.data.length > 0) {
+            const userDiv = document.getElementById('user_top_3');
+
+            // Get the user's org_ids from sessionStorage
+            const userData = JSON.parse(sessionStorage.getItem('userData'));
+            const userOrgIds = userData?.org_ids || [];
+
+            // Filter events to include only those where the event's org_id is in the user's org_ids array
+            const eventsWithUserOrgs = data.data.filter(event => 
+                Array.isArray(userOrgIds) && userOrgIds.includes(event.org_id)
+            );
+
+            // Sort events by a specific criterion (e.g., date_started, or any priority field)
+            const sortedEvents = eventsWithUserOrgs.sort((a, b) => new Date(a.date_started) - new Date(b.date_started));
+
+            // Take the top 3 events
+            const top3Events = sortedEvents.slice(0, 3);
+
+            // Clear any existing content in `user_top_3` before appending new events
+            userDiv.innerHTML = '';
+
+            if (top3Events.length > 0) {
+                top3Events.forEach(event => {
+                    const userCard = document.createElement('div');
+                    userCard.classList.add('bg-gradient-to-t', 'from-[#E73030]', 'to-[#F2BDBD]', 'shadow', 'rounded-lg', 'relative', 'p-2', 'h-32');
+
+                    userCard.innerHTML = `
+                        <h1 class="text-xl font-bold text-black overflow-hidden h-fit">${event.event_title}</h1>
+                        <div class="flex space-x-2">
+                            <i class="fa-solid fa-circle-user text-white text-2xl"></i>
+                            <h1 class="text-xl text-black font-medium">${event.org_name}</h1>
+                        </div>
+                    `;
+                    userDiv.appendChild(userCard);
+                });
+            } else {
+                console.error('No events found for the user\'s organizations.');
+                userDiv.innerHTML = '<p>No events associated with your organizations.</p>';
+            }
+        } else {
+            console.error('No events or data found for `user_top_3`.');
+            const userDiv = document.getElementById('user_top_3');
+            userDiv.innerHTML = '<p>No events available.</p>';
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching `user_top_3` data:', error);
         const userDiv = document.getElementById('user_top_3');
-
-        // Sort events by a specific criterion (e.g., date_started, or any priority field)
-        const sortedEvents = data.data.sort((a, b) => new Date(a.date_started) - new Date(b.date_started));
-
-        // Take the top 3 events
-        const top3Events = sortedEvents.slice(0, 3);
-
-        // Clear any existing content in `user_top_3` before appending new events
-        userDiv.innerHTML = '';
-
-        top3Events.forEach(event => {
-            const userCard = document.createElement('div');
-            userCard.classList.add('bg-gradient-to-t', 'from-[#E73030]', 'to-[#F2BDBD]', 'shadow', 'rounded-lg', 'relative', 'p-2', 'h-32');
-
-            userCard.innerHTML = `
-                <h1 class="text-xl font-bold text-black overflow-hidden h-fit">${event.event_title}</h1>
-                <div class="flex space-x-2">
-                    <i class="fa-solid fa-circle-user text-white text-2xl"></i>
-                    <h1 class="text-xl text-black font-medium">${event.org_name}</h1>
-                </div>
-            `;
-            userDiv.appendChild(userCard);
-        });
-    } else {
-        console.error('No events or data found for `user_top_3`.');
-    }
-})
-.catch(error => {
-    console.error('Error fetching `user_top_3` data:', error);
-});
-
+        userDiv.innerHTML = '<p>Error loading events.</p>';
+    });
 
     // Fetch and Render Events
 // Fetch and Render Events
@@ -82,7 +99,7 @@ fetch('/src/Server/api/read_event.php')
             const sortedEvents = data.data.sort((a, b) => new Date(a.date_started) - new Date(b.date_started));
 
             // Take the top 5 events
-            const top5Events = sortedEvents.slice(0, 5);
+            const top5Events = sortedEvents.slice(0, 3);
 
             // Render only the top 5 sorted events
             container.innerHTML = top5Events.map(event => `
@@ -123,29 +140,29 @@ fetch('/src/Server/api/read_calendar.php')
       const eventListContainer = document.getElementById('side-event');
       eventListContainer.innerHTML = ''; 
 
-      const topTwoEvents = data.data.slice(0, 2);
+      const topTwoEvents = data.data.slice(0, 1);
 
       const eventCards = topTwoEvents.map(event => {
         return `
             <div class="w-full h-fit p-4 bg-[#D9D9D9] rounded-lg shadow-lg flex flex-col space-y-2">
-                <div>
-                    <h1 class="text-xl font-semibold">${event.event_title}</h1>
+                <div >
+                    <h1 class="text-xl font-semibold text-center">${event.event_title}</h1>
                 </div>
-                <div class="event-box">
+                <div class="event-box bg-white rounded-lg px-4 py-2 flex items-center space-x-2">
                     <i class="fa-solid fa-calendar-days"></i>
                     <h3>${event.date}</h3>
                 </div>
                 <div class="flex space-x-2">
-                    <div class="event-box w-full">
+                    <div class="event-box w-full bg-white rounded-lg px-4 py-2 flex items-center space-x-2">
                         <i class="fa-regular fa-clock"></i>
                         <h1>${event.date_started}</h1>
                     </div>
-                    <div class="event-box w-full">
+                    <div class="event-box w-full bg-white rounded-lg px-4 py-2 flex items-center space-x-2">
                         <i class="fa-regular fa-clock"></i>
                         <h1>${event.date_ended}</h1>
                     </div>
                 </div>
-                <div class="event-box">
+                <div class="event-box bg-white rounded-lg px-4 py-2 flex items-center space-x-2">
                     <i class="fa-solid fa-location-dot"></i>
                     <h3>${event.location}</h3>
                 </div>

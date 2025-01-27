@@ -6,6 +6,68 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = '/login.html';
         return;
     }
+
+    // Debug: Display session info
+    function createDebugPanel() {
+        const debugContainer = document.createElement('div');
+        debugContainer.id = 'session-debug';
+        Object.assign(debugContainer.style, {
+            position: 'fixed',
+            bottom: '10px',
+            right: '10px',
+            background: 'white',
+            padding: '15px',
+            border: '2px solid #800000',
+            borderRadius: '8px',
+            zIndex: '1000',
+            boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+            maxWidth: '400px',
+            fontSize: '14px'
+        });
+
+        const preStyle = {
+            margin: '0',
+            fontSize: '12px',
+            maxHeight: '300px',
+            overflow: 'auto',
+            background: '#f5f5f5',
+            padding: '10px',
+            borderRadius: '4px',
+            whiteSpace: 'pre-wrap',
+            wordWrap: 'break-word'
+        };
+
+        debugContainer.innerHTML = `
+            <h3 style="margin: 0 0 10px 0; color: #800000;">Session Data</h3>
+            <pre style="${Object.entries(preStyle).map(([k,v]) => `${k}:${v}`).join(';')}">
+                ${JSON.stringify(userData, null, 2)}
+            </pre>
+            <button onclick="copySessionData()" style="
+                margin-top: 10px;
+                padding: 4px 8px;
+                background: #800000;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            ">
+                Copy to Clipboard
+            </button>
+        `;
+
+        document.body.appendChild(debugContainer);
+    }
+
+    createDebugPanel();
+
+    // Debug panel toggle hotkey
+    document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+            const debugDiv = document.getElementById('session-debug');
+            debugDiv.style.display = debugDiv.style.display === 'none' ? 'block' : 'none';
+        }
+    });
+
     // Extract `org_id` from userData
     const userOrgId = userData.org_id;
     if (!userOrgId) {
@@ -88,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tableBody.innerHTML = `<tr><td colspan="8" class="text-center py-4">Error loading events. Please try again later.</td></tr>`;
         });
 });
+
 // Popup logic for form
 const newEventBtn = document.getElementById('newEventBtn');
 const eventFormPopup = document.getElementById('eventFormPopup');

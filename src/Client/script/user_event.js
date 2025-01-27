@@ -72,24 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('dashboard-email').textContent = userData.email;
     document.getElementById('profile-initial').textContent = userData.firstname[0];
 
-    // Real-time Clock
-    function updateDateTime() {
-        const dateElement = document.getElementById('current-date');
-        const timeElement = document.getElementById('current-time');
-        const now = new Date();
-        
-        dateElement.innerHTML = `<i class="fa-solid fa-calendar-days"></i> ${now.toLocaleDateString('en-US', { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-        })}`;
-        
-        timeElement.innerHTML = `<i class="fa-solid fa-clock"></i> ${now.toLocaleTimeString()}`;
-    }
-    setInterval(updateDateTime, 1000);
-    updateDateTime();
-
     // Fetch and Render Events
     fetch('/src/Server/api/read_event.php')
     .then(response => response.json())
@@ -112,11 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         <p class="text-lg">Organized by: ${event.org_name}</p>
                     </div>
                     
-                    <div class="flex items-center space-x-4">
-                        <button class="join-event-btn px-4 py-2 font-medium text-white bg-gradient-to-t from-[#1F1616] to-[#EF0F0F] rounded-3xl hover:bg-white hover:text-black">
-                            Join Event
-                        </button>
-                    </div>
+                    <button class=" w-fit join-event-btn px-4 py-2 font-medium text-white bg-gradient-to-t from-[#1F1616] to-[#EF0F0F] rounded-3xl hover:bg-white hover:text-black ">
+                        Join Event
+                    </button>
                 </div>
                 <div class="my-6 text-center">
                     <hr class="border-[#800000] border-t-2">

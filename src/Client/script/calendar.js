@@ -6,6 +6,36 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+
+    // Display user profile information
+    if (userData && userData.firstname) {
+        // Set the first name in the HTML
+        const usernameElement = document.getElementById('username');
+        if (usernameElement) {
+            usernameElement.textContent = userData.firstname;
+        } else {
+            console.warn('Element with ID "username" not found.');
+        }
+
+        // Populate the profile section
+        const dashboardUsernameElement = document.getElementById('dashboard-username');
+        const dashboardEmailElement = document.getElementById('dashboard-email');
+
+        if (dashboardUsernameElement && dashboardEmailElement) {
+            // Set user profile details
+            dashboardUsernameElement.textContent = userData.firstname;
+            dashboardEmailElement.textContent = userData.email;
+        } else {
+            console.warn('One or more profile elements not found in the HTML.');
+        }
+
+        // Optionally, log the user data for debugging
+        console.log('User data loaded from sessionStorage:', userData);
+    } else {
+        console.warn('User data incomplete or missing firstname in sessionStorage.');
+    }
+
+
     let currentMonth = new Date().getMonth();
     let currentYear = new Date().getFullYear();
 
