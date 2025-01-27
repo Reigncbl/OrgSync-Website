@@ -70,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Populate User Info
     document.getElementById('dashboard-username').textContent = `${userData.firstname} ${userData.lastname}`;
     document.getElementById('dashboard-email').textContent = userData.email;
-    document.getElementById('profile-initial').textContent = userData.firstname[0];
 
     // Fetch and Render Events
     fetch('/src/Server/api/read_event.php')
