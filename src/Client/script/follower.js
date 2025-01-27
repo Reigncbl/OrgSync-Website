@@ -99,4 +99,5 @@ document.addEventListener('DOMContentLoaded', () => {
             subLinks.classList.toggle('hidden');
         });
     }
+
 });

@@ -61,7 +61,7 @@ fetch(`/src/Server/api/read_calendar.php?student_id=${studentId}`)
             if (top3Events.length > 0) {
                 top3Events.forEach(event => {
                     const userCard = document.createElement('div');
-                    userCard.classList.add('bg-gradient-to-t', 'from-[#E73030]', 'to-[#F2BDBD]', 'shadow', 'rounded-lg', 'relative', 'p-2', 'h-32');
+                    userCard.classList.add('bg-[#F2BDBD]', 'shadow', 'rounded-lg', 'flex', 'flex-col', 'justify-between', 'p-4', 'h-32');
 
                     userCard.innerHTML = `
                         <h1 class="text-xl font-bold text-black overflow-hidden h-fit">${event.event_title}</h1>
@@ -105,10 +105,10 @@ fetch('/src/Server/api/read_event.php')
             container.innerHTML = top5Events.map(event => `
                 <div class="event-card flex items-start justify-start space-x-6 mb-8" data-event-id="${event.eventid}">
                     <div class="h-[150px] relative flex">
-                        <h1 class="font-medium text-[#800000] text-2xl">${event.date_started}</h1>
+                        <h1 class="font-medium text-[#800000] text-2xl">${event.date}</h1>
                     </div>
                     
-                    <div class="flex flex-col items-center justify-center bg-gradient-to-t from-[#E73030] to-[#F2BDBD] rounded-lg h-36 w-96 shadow-2xl">
+                    <div class="flex flex-col items-center justify-center bg-[gradient-to-t from-[#E73030] to-[#F2BDBD]] rounded-lg h-36 w-96 shadow-2xl">
                         ${event.banner ? `<img src="data:image/png;base64,${event.banner}" class="w-full h-full object-cover rounded-lg">` : ''}
                     </div>
 

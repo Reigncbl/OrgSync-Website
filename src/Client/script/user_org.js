@@ -118,13 +118,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (joinedOrgs.length > 0) {
                     joinedOrgs.forEach(orgData => {
                         const joinOrgCard = document.createElement('div');
-                        joinOrgCard.className = 'w-64 p-4 h-full bg-white rounded-3xl flex flex-col justify-between items-center space-y-4 shadow-md';
+                        joinOrgCard.className = 'w-64 p-4 h-full bg-[#FBF2F2] border border-2 border-[#800000] rounded-3xl flex flex-col justify-between items-center space-y-4 shadow-md';
                         joinOrgCard.innerHTML = `
                             <div class="flex flex-col space-y-4 w-full">
                                 <img src="/src/Client/img/${orgData.org_logo || 'default_logo.png'}" alt="${orgData.org_name}" class="w-full h-48 rounded-2xl bg-gray-200 object-cover">
                                 <h3 class="text-2xl font-semibold text-center">${orgData.org_name || 'Untitled Organization'}</h3>
                             </div>
-                            <button class="w-full p-4 bg-[#F0C9C9] rounded-xl hover:bg-[#ce5a5a] font-semibold follow-btn" data-org-id="${orgData.org_id}">Following</button>
+                            <button class="w-full p-4 border-2 border-[#F0C9C9] rounded-xl hover:bg-[#ce5a5a] font-semibold follow-btn" data-org-id="${orgData.org_id}">Following</button>
                         `;
                         joinOrgContainer.appendChild(joinOrgCard);
                     });
@@ -136,13 +136,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 data.forEach(org => {
                     if (!Array.isArray(userData.org_ids) || !userData.org_ids.includes(org.org_id)) {
                         const orgCard = document.createElement('div');
-                        orgCard.className = 'w-64 p-4 h-full bg-white rounded-3xl flex flex-col justify-between items-center space-y-4 shadow-md';
+                        orgCard.className = 'w-64 p-4 h-full bg-white rounded-3xl border border-2 border-[#800000] flex flex-col justify-between items-center space-y-4 shadow-md';
                         orgCard.innerHTML = `
                             <div class="flex flex-col space-y-4 w-full">
                                 <img src="/src/Client/img/${org.org_logo || 'default_logo.png'}" alt="${org.org_name}" class="w-full h-48 rounded-2xl bg-gray-200 object-cover">
                                 <h3 class="text-2xl font-semibold text-center">${org.org_name || 'Untitled Organization'}</h3>
                             </div>
-                            <button class="w-full p-4 bg-[#F0C9C9] rounded-xl hover:bg-[#ce5a5a] font-semibold follow-btn" data-org-id="${org.org_id}">Follow</button>
+                            <button class="w-full p-4 border-2 border-[#F0C9C9] rounded-xl hover:bg-[#ce5a5a] font-semibold follow-btn" data-org-id="${org.org_id}">Follow</button>
                         `;
                         availOrgContainer.appendChild(orgCard);
                     }

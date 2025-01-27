@@ -7,8 +7,30 @@
     <link href="/src/Client/styles.css" rel="stylesheet">
     <script src="/src/Client/script/register.js" defer></script>
     <script src="/src/Client/script/toggle.js" defer></script>
+    <style>
+        /* Zoom-in and zoom-out animation for the background */
+        @keyframes zoomInOut {
+          0% {
+            background-size: 100%; /* Starting size */
+          }
+          50% {
+            background-size: 120%; /* Zoom-in size */
+          }
+          100% {
+            background-size: 100%; /* Back to original size */
+          }
+        }
+    
+        /* Apply the animation only to the background */
+        .zoom-background {
+          background-image: url('/src/Client/img/login.png');
+          background-size: cover;
+          background-position: center;
+          animation: zoomInOut 10s infinite ease-in-out; /* Animation for zoom effect */
+        }
+      </style>
 </head>
-<body class="flex items-center justify-center min-h-screen font-poppins">
+<body class="flex items-center justify-center min-h-screen font-poppins bg-black/5 zoom-background">
     <div class="w-full max-w-md px-8 pt-16 pb-32 space-y-0 bg-gradient-to-t from-[#E73030] to-[#F2BDBD] rounded-2xl shadow-lg">
         <div class="flex items-center space-x-1">
             <img src="/src/Resources/OrgSync Logo.svg" alt="ORGSYNC" class="w-25 h-20 px-5 ml-2">

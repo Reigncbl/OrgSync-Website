@@ -51,7 +51,7 @@
                 </div>
             </header>
             <div class="bg-slate-400 w-full h-64 mt-4 rounded-lg">
-
+                <img src="/src/Client/img/AWS Banner.png" alt="aws" class="w-full h-full object-cover rounded-lg">
             </div>
             <!-- Overview Section -->
             <h2 class="text-2xl font-bold mt-4">Overview</h2>
@@ -61,10 +61,10 @@
                     <div class="flex items-center justify-between">
                         <i class="fa-regular fa-user text-white text-5xl font-light"></i>
                         <div class="flex flex-col items-center">
-                            <p class="text-4xl font-bold text-white">123</p>
+                            <p class="text-4xl font-bold text-white">00</p>
                             <button class="text-white rounded-lg hover:bg-red-700 transition">Show Details</button>
                         </div>
-                    </div>       
+                    </div>
                 </div>
                 
                 <div class="bg-[#D9D9D9] p-2 px-4 shadow rounded-lg flex flex-col justify-between h-32">
@@ -72,14 +72,15 @@
                     <div class="flex items-center justify-between">
                         <i class="fa-regular fa-calendar text-[#800000] text-5xl font-light"></i>
                         <div class="flex flex-col items-center">
-                            <p class="text-4xl font-bold text-[#800000]">45</p>
+                            <p id="total-event-count" class="text-4xl font-bold text-[#800000]">00</p>
                             <button class="text-[#800000] rounded-lg hover:bg-red-200 transition">Show Details</button>
                         </div>
                     </div>       
                 </div>
                 
+                
                 <div class="bg-[#D9D9D9] p-2 px-4 shadow rounded-lg flex flex-col justify-between h-32">
-                    <h2 class="text-xl font-bold text-black mb-6">Total No. of Organizations</h2>
+                    <h2 class="text-xl font-bold text-black mb-6">Total No. of Participants</h2>
                     <div class="flex items-center justify-between">
                         <i class="fa-solid fa-timeline text-[#800000] text-5xl"></i>
                         <div class="flex flex-col items-center">
@@ -95,9 +96,9 @@
             <section class="mt-6">
                 <div class="flex justify-between items-center">
                     <h2 class="text-2xl font-bold">Events</h2>
-                    <button class="px-4 py-2 bg-[#E73030] text-white rounded-lg hover:bg-red-700 transition">
+                    <a href="/src/Client/scripts/admin_event.html" class="px-4 py-2 bg-[#800000] text-white rounded-lg hover:bg-red-700 transition">
                         Add Event +
-                    </button>
+                    </a>
                 </div>
                 <div id="admin-event" class="mt-6 space-y-4">
                     <!-- Event Card -->
@@ -126,13 +127,13 @@
             <div class="flex items-center w-full h-fit p-2 space-x-4 bg-[#F2BDBD] rounded-lg shadow-lg">
                 <!-- Image Section -->
                 <div class="w-16 h-16 bg-gray-300 rounded-full overflow-hidden ">
-                    <img src="#" alt="username" class="w-full h-full object-cover">
+                    <img src="/src/Client/img/AWS.png" alt="username" class="w-full h-full object-cover">
                 </div>
             
                 <!-- Content Section -->
                 <div>
-                    <h1 class="text-2xl font-semibold">Org Name</h1>
-                    <h3>Details</h3>
+                    <h1 class="text-2xl font-semibold">AWS Cloud Club PUP</h1>
+                    <h3>The AWS Cloud Club aims to...</h3>
                     <button class="text-sm">View Profile</button>
                 </div>
             </div>

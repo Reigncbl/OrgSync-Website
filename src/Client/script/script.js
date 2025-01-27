@@ -98,7 +98,7 @@ function renderEvents(events) {
             </div>
             <div class="w-full flex flex-col items-end">
               <hr class="w-full border-t-2 border-[#800000CC] my-4" />
-              <button class="text-[#800000] pr-4" onclick="window.location.href='/src/Client/scripts/login.html'">
+              <button class="text-[#800000] pr-4 text-end " onclick="window.location.href='/src/Client/scripts/login.html'">
                 Join Event <i class="pl-2 fa-solid fa-arrow-right"></i>
               </button>
             </div>

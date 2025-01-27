@@ -7,8 +7,30 @@
     <link href="/src/Client/styles.css" rel="stylesheet">
     <script src="/src/Client/script/login.js" defer></script>
     <script src="/src/Client/script/toggle.js" defer></script>
+    <style>
+        /* Zoom-in and zoom-out animation for the background */
+        @keyframes zoomInOut {
+          0% {
+            background-size: 100%; /* Starting size */
+          }
+          50% {
+            background-size: 120%; /* Zoom-in size */
+          }
+          100% {
+            background-size: 100%; /* Back to original size */
+          }
+        }
+    
+        /* Apply the animation only to the background */
+        .zoom-background {
+          background-image: url('/src/Client/img/login.png');
+          background-size: cover;
+          background-position: center;
+          animation: zoomInOut 10s infinite ease-in-out; /* Animation for zoom effect */
+        }
+      </style>
 </head>
-<body class="flex items-center justify-center min-h-screen bg-black bg-opacity-5 font-poppins">
+<body class="flex items-center justify-center min-h-screen font-poppins bg-black/5 zoom-background">
     <div class="w-full max-w-md px-8 pt-16 pb-32 space-y-6 bg-gradient-to-t from-[#E73030] to-[#F2BDBD] rounded-2xl shadow-lg">
         <img src="/src/Client/img/logo.png" alt="Logo" class="w-fit mx-auto">
         <h2 class="text-2xl font-bold text-center text-gray-800">Sign in</h2>
